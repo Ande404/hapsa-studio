@@ -2,20 +2,20 @@ import styled from 'styled-components';
 import { Wrapper } from './atoms/Wrapper';
 import { up } from 'styled-breakpoints';
 import { useAuth } from '../lib/auth';
-
 const Featured = () => {
   const auth = useAuth();
 
   return (
     <Wrapper>
-      {/* {auth.user ? (
+      {auth.user ? (
         <div>
           <p>Email: {auth.user.email}</p>
         </div>
       ) : (
         <p>Not signed in</p>
-      )} */}
-      {/* <Grid>
+      )}
+
+      <Grid>
         <Card>
           <p className='num'>Free</p>
 
@@ -26,7 +26,7 @@ const Featured = () => {
           </p>
           <StyledButton>Download Item</StyledButton>
         </Card>
-      </Grid> */}
+      </Grid>
     </Wrapper>
   );
 };
