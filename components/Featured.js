@@ -8,15 +8,14 @@ const Featured = () => {
 
   return (
     <Wrapper>
-      {auth.user ? (
+      {/* {auth.user ? (
         <div>
           <p>Email: {auth.user.email}</p>
-          {JSON.stringify(auth.user.provider)}
         </div>
       ) : (
         <p>Not signed in</p>
-      )}
-      <Grid>
+      )} */}
+      {/* <Grid>
         <Card>
           <p className='num'>Free</p>
 
@@ -27,7 +26,7 @@ const Featured = () => {
           </p>
           <StyledButton>Download Item</StyledButton>
         </Card>
-      </Grid>
+      </Grid> */}
     </Wrapper>
   );
 };

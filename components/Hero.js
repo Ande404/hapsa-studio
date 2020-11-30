@@ -28,7 +28,7 @@ const Title = styled.p`
   font-size: 1.2rem;
   font-weight: 700;
 
-  letter-spacing: -0.8px;
+  letter-spacing: -0.4px;
   line-height: 1.1;
   color: ${({ theme }) => theme.colors.dark};
   ${up('sm')} {
@@ -36,6 +36,10 @@ const Title = styled.p`
     font-size: 2rem;
   }
   ${up('md')} {
+    letter-spacing: -2.5px;
+    font-size: 3rem;
+  }
+  ${up('lg')} {
     letter-spacing: -2.5px;
     font-size: 4rem;
   }

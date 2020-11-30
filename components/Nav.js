@@ -1,6 +1,5 @@
 import { Wrapper } from './atoms/Wrapper';
 import styled from 'styled-components';
-import Logo from './atoms/Logo';
 import { up } from 'styled-breakpoints';
 import { useAuth } from '../lib/auth';
 
@@ -16,17 +15,17 @@ const Nav = () => {
           Studio.
         </TextLogo>
         <LinkWrapper>
-          <a>Work</a>
-          <a>Blog</a>
-          <a>About</a>
+          <StyledLink href='/'>Work</StyledLink>
+          <StyledLink href='/'>Blog</StyledLink>
+          <StyledLink href='/'>About</StyledLink>
           {auth.user ? (
             <div>
-              <StyledButton onClick={(e) => auth.signout()}>
+              <StyledButton onClick={() => auth.signout()}>
                 Sign Out
               </StyledButton>
             </div>
           ) : (
-            <StyledButton onClick={(e) => auth.signinWithGoogle()}>
+            <StyledButton onClick={() => auth.signinWithGoogle()}>
               Sign In
             </StyledButton>
           )}
@@ -42,7 +41,6 @@ const StyledNav = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: left;
-
   ${up('sm')} {
     flex-direction: row;
     align-items: center;
@@ -62,13 +60,14 @@ const StyledLink = styled.a`
   letter-spacing: -0.3px;
   text-decoration: none;
   margin-left: 1rem;
+  color: black;
 `;
 
 const LinkWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-
+  margin-top: 1rem;
   a {
     margin-left: 1rem;
 
@@ -76,7 +75,7 @@ const LinkWrapper = styled.div`
       margin-left: 0rem;
     }
   }
-  margin-top: 1rem;
+
   ${up('sm')} {
     margin-top: 0rem;
   }
@@ -100,7 +99,7 @@ const StyledButton = styled.button`
     background-color: ${({ theme }) => theme.colors.neon};
     color: ${({ theme }) => theme.colors.dark};
   }
-  margin-top: 1rem;
+
   ${up('sm')} {
     margin-top: 0rem;
   }
