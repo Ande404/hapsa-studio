@@ -14,6 +14,6 @@ export const theme = {
     neon: '#c4fb6d',
   },
   fonts: {
-    main: 'Inter',
+    main: 'Manrope',
   },
 };

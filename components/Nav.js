@@ -2,7 +2,11 @@ import { Wrapper } from './atoms/Wrapper';
 import styled from 'styled-components';
 import Logo from './atoms/Logo';
 import { up } from 'styled-breakpoints';
+import { useAuth } from '../lib/auth';
+
 const Nav = () => {
+  const auth = useAuth();
+
   return (
     <Wrapper>
       <StyledNav>
@@ -14,8 +18,18 @@ const Nav = () => {
         <LinkWrapper>
           <a>Work</a>
           <a>Blog</a>
-          <a>Open Source</a>
           <a>About</a>
+          {auth.user ? (
+            <div>
+              <StyledButton onClick={(e) => auth.signout()}>
+                Sign Out
+              </StyledButton>
+            </div>
+          ) : (
+            <StyledButton onClick={(e) => auth.signinWithGoogle()}>
+              Sign In
+            </StyledButton>
+          )}
         </LinkWrapper>
       </StyledNav>
     </Wrapper>
@@ -68,7 +82,7 @@ const LinkWrapper = styled.div`
   }
 `;
 
-const StyledButton = styled.a`
+const StyledButton = styled.button`
   background-color: ${({ theme }) => theme.colors.dark};
   border: none;
   padding: 14px 16px;
@@ -79,6 +93,8 @@ const StyledButton = styled.a`
   cursor: pointer;
   transition: all ease-in 0.18s;
   text-decoration: none;
+
+  margin-left: 1rem;
 
   :hover {
     background-color: ${({ theme }) => theme.colors.neon};

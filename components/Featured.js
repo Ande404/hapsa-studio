@@ -1,10 +1,21 @@
 import styled from 'styled-components';
 import { Wrapper } from './atoms/Wrapper';
 import { up } from 'styled-breakpoints';
+import { useAuth } from '../lib/auth';
 
 const Featured = () => {
+  const auth = useAuth();
+
   return (
     <Wrapper>
+      {auth.user ? (
+        <div>
+          <p>Email: {auth.user.email}</p>
+          {JSON.stringify(auth.user.provider)}
+        </div>
+      ) : (
+        <p>Not signed in</p>
+      )}
       <Grid>
         <Card>
           <p className='num'>Free</p>
