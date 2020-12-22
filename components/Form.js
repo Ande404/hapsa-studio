@@ -4,8 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useMutation } from 'react-query';
 import { gql } from 'graphql-request';
 import * as yup from 'yup';
-import { request } from '../lib/hasuraClient';
-import { down, up } from 'styled-breakpoints';
+import { request } from '../lib/client';
 import { Wrapper } from './atoms/Wrapper';
 const INSERT_PROFILE = gql`
   mutation insertProfile($profile: profile_insert_input!) {

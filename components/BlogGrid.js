@@ -1,11 +1,13 @@
 import React from 'react';
 import { Wrapper } from './atoms/Wrapper';
 import styled from 'styled-components';
-const StoreFront = () => {
+const BlogGrid = () => {
   return (
     <Wrapper>
       <TextBlock>
-        <Title>The latest items from thes store</Title>
+        <Title>
+          Our teams also write about <em>the</em> process
+        </Title>
       </TextBlock>
     </Wrapper>
   );
@@ -18,4 +20,4 @@ const Title = styled.h2`
   font-size: 2rem;
   font-weight: 500;
 `;
-export default StoreFront;
+export default BlogGrid;

@@ -1,59 +1,44 @@
 import styled from 'styled-components';
 import { Wrapper } from './atoms/Wrapper';
 import { up } from 'styled-breakpoints';
-import { useAuth } from '../lib/auth';
+import Image from 'next/image';
+
 const Featured = () => {
-  const auth = useAuth();
-
   return (
-    <Wrapper>
-      {auth.user ? (
-        <div>
-          <p>Email: {auth.user.email}</p>
-        </div>
-      ) : (
-        <p>Not signed in</p>
-      )}
-
+    <div>
       <Grid>
-        <Card>
-          <p className='num'>Free</p>
-
-          <h2 className='title'>Youtube Pack for Developers</h2>
-          <p className='body'>
-            High quality After Effects and Premeire Pro Compatible Motion
-            Graphics. Easily overide all settings and customize to your liking.
-          </p>
-          <StyledButton>Download Item</StyledButton>
-        </Card>
+        <Wrapper>
+          <Flex>
+            <h2 className='title'>Youtube Pack for Developers</h2>
+          </Flex>
+        </Wrapper>
       </Grid>
-    </Wrapper>
+    </div>
   );
 };
 
 const Grid = styled.div`
   margin: 5rem 0;
-  background: linear-gradient(
-    318deg,
-    rgba(224, 251, 180, 0.7469362745098039) 0%,
-    rgba(196, 251, 109, 1) 100%
-  );
-
-  padding: 3rem;
-  display: grid;
-  grid-template-columns: 1fr;
-  border-top: 6px solid black;
-
-  ${up('sm')} {
-    height: 420px;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 6rem;
-  }
+  background: #000;
+  color: white;
 `;
 
+const Flex = styled.div`
+  display: grid;
+  padding: 6rem 0;
+  grid-template-columns: 1fr;
+  row-gap: 6rem;
+
+  ${up('lg')} {
+    grid-template-columns: 1fr 1fr;
+  }
+`;
 const Card = styled.div`
   width: 100%;
 
+  ${up('lg')} {
+    width: 420px;
+  }
   .title {
     margin-top: 1rem;
     font-weight: 600;
@@ -63,12 +48,6 @@ const Card = styled.div`
     ${up('sm')} {
       font-size: 2.8rem;
     }
-  }
-
-  .num {
-    font-size: 1rem;
-    font-style: italic;
-    font-weight: 400;
   }
 
   .body {
@@ -81,10 +60,10 @@ const Card = styled.div`
 `;
 
 const StyledButton = styled.button`
-  background-color: ${({ theme }) => theme.colors.dark};
+  background-color: ${({ theme }) => theme.colors.white};
   border: none;
   padding: 14px 16px;
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.dark};
   font-weight: 600;
   border-radius: 5px;
   font-size: 0.9rem;
@@ -92,10 +71,6 @@ const StyledButton = styled.button`
   transition: all ease-in 0.18s;
   text-decoration: none;
   margin-top: 3rem;
-  /* :hover {
-    background-color: ${({ theme }) => theme.colors.neon};
-    color: ${({ theme }) => theme.colors.dark};
-  } */
 `;
 
 export default Featured;
