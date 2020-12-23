@@ -1,6 +1,7 @@
 import nookies from 'nookies';
+import Form from '../components/Form';
 import { firebaseAdmin } from '../lib/admin';
-import firebase from '../lib/firebase';
+import { firebaseClient } from '../lib/firebase';
 
 export async function getServerSideProps(ctx) {
   try {
@@ -38,6 +39,7 @@ const dashboard = (props) => {
       >
         Sign out
       </button>
+      <Form />
     </div>
   );
 };

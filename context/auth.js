@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
-import firebase from '../lib/firebase';
-import Router from 'next/router';
+import { firebaseClient } from '../lib/firebase';
 import { createUser } from '../lib/db';
 import nookies from 'nookies';
 
@@ -15,7 +14,7 @@ export function AuthProvider({ children }) {
     if (typeof window !== undefined) {
       window.nookies = nookies;
     }
-    return firebase.auth().onIdTokenChanged(async (user) => {
+    return firebaseClient.auth().onIdTokenChanged(async (user) => {
       console.log(`token changed!`);
       if (!user) {
         console.log(`no token found...`);
@@ -39,7 +38,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const handle = setInterval(async () => {
       console.log(`refreshing token...`);
-      const user = firebase.auth().currentUser;
+      const user = firebaseClient.auth().currentUser;
       if (user) await user.getIdToken(true);
     }, 10 * 60 * 1000);
     return () => clearInterval(handle);

@@ -3,8 +3,6 @@ import Cors from 'cors';
 import morgan from 'morgan';
 import { createJob } from '../../lib/db';
 
-const handler = nextConnect({ onError, onNoMatch });
-
 const cors = Cors();
 
 function onError(req, res) {
@@ -15,6 +13,8 @@ function onNoMatch(req, res) {
   res.status(404).end('page is not found... or is it');
 }
 
+const handler = nextConnect({ onError, onNoMatch });
+
 export default handler
   .use(cors)
   .use(morgan(':method :url :status :res[content-length] - :response-time ms'))
@@ -22,9 +22,10 @@ export default handler
     res.send('Hello world');
   })
   .post(async (req, res) => {
+    if (!req.body) {
+      res.status(404).end('request body is not found... or is it');
+    }
     const rawJob = req.body;
-    createJob(rawJob).catch((err) => {
-      res.json(`Error`).status(501);
-    });
-    res.json(`Success`);
+    createJob(rawJob);
+    res.status(200).end('Job created ✅');
   });

@@ -11,7 +11,7 @@ export default function Home() {
     <Layout>
       <Nav />
       <div style={{ padding: '40px' }}>
-        <p>{`User ID: ${user ? user.uid : 'no user signed in'}`}</p>
+        <p>{`User ID: ${user ? user.email : 'no user signed in'}`}</p>
         {/* {JSON.stringify(user, null, 2)} */}
         <p>
           <Link href='/dashboard'>
