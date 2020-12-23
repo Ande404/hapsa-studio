@@ -1,8 +1,15 @@
 import { usState } from 'react';
 import firebase from '../lib/firebase';
 import Link from 'next/link';
+import { useAuth } from '../context/auth';
+import { useRouter } from 'next/router';
 
-const login = (props) => {
+const login = () => {
+  const { user } = useAuth();
+  const router = useRouter();
+  if (user) {
+    router.push('/dashboard');
+  }
   return (
     <div>
       <Link href='/'>
@@ -16,7 +23,17 @@ const login = (props) => {
           window.location.href = '/';
         }}
       >
-        Log in
+        Log in with Google
+      </button>
+      <button
+        onClick={async () => {
+          await firebase
+            .auth()
+            .signInWithPopup(new firebase.auth.GithubAuthProvider());
+          window.location.href = '/';
+        }}
+      >
+        Log in with Github
       </button>
     </div>
   );

@@ -27,6 +27,9 @@ export function AuthProvider({ children }) {
         console.log(`updating token...`);
         const token = await user.getIdToken();
         setUser(user);
+        const saveUser = formatUser(user);
+        createUser(user.uid, saveUser);
+
         nookies.destroy(null, 'token');
         nookies.set(null, 'token', token, {});
       }
@@ -36,7 +39,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const handle = setInterval(async () => {
       console.log(`refreshing token...`);
-      const user = firebaseClient.auth().currentUser;
+      const user = firebase.auth().currentUser;
       if (user) await user.getIdToken(true);
     }, 10 * 60 * 1000);
     return () => clearInterval(handle);
@@ -51,61 +54,12 @@ export const useAuth = () => {
   return useContext(AuthContext);
 };
 
-// function useProvideAuth() {
-//   const [user, setUser] = useState(null);
-//   const [loading, setLoading] = useState(true);
-
-//   const handleUser = (rawUser) => {
-//     if (rawUser) {
-//       const user = formatUser(rawUser);
-//       createUser(user.uid, user);
-//       setLoading(false);
-//       setUser(user);
-//       return user;
-//     } else {
-//       setLoading(false);
-//       setUser(false);
-//       return false;
-//     }
-//   };
-
-//   const signinWithGitHub = () => {
-//     setLoading(true);
-//     return firebase
-//       .auth()
-//       .signInWithPopup(new firebase.auth.GithubAuthProvider())
-//       .then((response) => handleUser(response.user));
-//   };
-
-//   const signinWithGoogle = (redirect) => {
-//     setLoading(true);
-//     return firebase
-//       .auth()
-//       .signInWithPopup(new firebase.auth.GoogleAuthProvider())
-//       .then((response) => {
-//         handleUser(response.user);
-//         if (redirect) {
-//           Router.push(redirect);
-//         }
-//       });
-//   };
-
-//   const signout = () => {
-//     return firebase
-//       .auth()
-//       .signOut()
-//       .then(() => handleUser(false));
-//   };
-
-//   useEffect(() => {
-//     const unsubscribe = firebase.auth().onAuthStateChanged(handleUser);
-//     return () => unsubscribe();
-//   }, []);
-
-// return {
-//   user,
-//   loading,
-//   signinWithGitHub,
-//   signinWithGoogle,
-//   signout,
-// };
+const formatUser = (user) => {
+  return {
+    uid: user.uid,
+    email: user.email,
+    name: user.displayName,
+    provider: user.providerData[0].providerId,
+    photoUrl: user.photoURL,
+  };
+};

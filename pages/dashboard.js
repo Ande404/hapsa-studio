@@ -10,9 +10,7 @@ export async function getServerSideProps(ctx) {
     const { uid, email } = token;
 
     return {
-      props: {
-        props: { message: `Your email is ${email} and your UID is ${uid}.` },
-      },
+      props: { message: `Your email is ${email} and your UID is ${uid}.` },
     };
   } catch (err) {
     ctx.res.writeHead(302, { Location: '/login' });
@@ -23,8 +21,6 @@ export async function getServerSideProps(ctx) {
         permanent: false,
         destination: '/login',
       },
-      // `as never` is required for correct type inference
-      // by InferGetServerSidePropsType below
       props: {},
     };
   }
