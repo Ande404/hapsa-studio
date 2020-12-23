@@ -4,7 +4,7 @@ import { Wrapper } from './atoms/Wrapper';
 import { request } from '../lib/client';
 import { gql } from 'graphql-request';
 import { useQuery } from 'react-query';
-import { useAuth } from '../lib/auth';
+import { AuthProvider } from '../context/auth';
 import Link from 'next/link';
 
 // const GET_BLOG = gql`

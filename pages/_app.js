@@ -4,7 +4,7 @@ import { theme } from '../theme/theme';
 import { ReactQueryCacheProvider, QueryCache } from 'react-query';
 import { ReactQueryDevtools } from 'react-query-devtools';
 import { Reset } from 'styled-reset';
-import { AuthProvider } from '../lib/auth';
+import { AuthProvider } from '../context/auth';
 const queryCache = new QueryCache();
 
 export default function App({ Component, pageProps }) {

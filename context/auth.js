@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
-import firebase from './firebase';
+import firebase from '../lib/firebase';
 import Router from 'next/router';
-import { createUser } from './db';
+import { createUser } from '../lib/db';
 
 const AuthContext = createContext();
 

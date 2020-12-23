@@ -1,7 +1,7 @@
 import { Wrapper } from './atoms/Wrapper';
 import styled from 'styled-components';
 import { up } from 'styled-breakpoints';
-import { useAuth } from '../lib/auth';
+import { useAuth } from '../context/auth';
 import Link from 'next/link';
 const Nav = () => {
   const auth = useAuth();

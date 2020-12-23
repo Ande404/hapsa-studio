@@ -2,7 +2,6 @@ import nextConnect from 'next-connect';
 import Cors from 'cors';
 import morgan from 'morgan';
 import { createJob } from '../../lib/db';
-import runMiddleware from '../../middleware/init';
 
 const handler = nextConnect({ onError, onNoMatch });
 
