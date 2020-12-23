@@ -42,85 +42,79 @@ const Hero = () => {
   // const { title, excerpt, slug } = data.allBlogs[0];
 
   return (
-    <Wrapper>
-      <Flex>
-        <Content>
-          <Title>Find the right talents for your next business venture</Title>
-          <Secondary>
-            We help creatives design and develop their creative business ideas
-          </Secondary>
-
-          <StyledButton>See more</StyledButton>
-        </Content>
-      </Flex>
-    </Wrapper>
+    <Content>
+      <HeroText>
+        <Title>Find the right talents for your next business venture</Title>
+        <Secondary>
+          Prove the ROI of social media, plan more engaging content, and create
+          automated white label analytics reports.
+        </Secondary>
+        <StyledButton>Apply now</StyledButton>
+      </HeroText>
+    </Content>
   );
 };
 
-const Flex = styled.div`
-  padding: 3rem 3rem;
-  display: grid;
-  grid-template-columns: 1fr;
-`;
-
-const ImageWrapper = styled.div`
+const Content = styled.section`
   width: 100%;
-  img {
-    width: 100%;
-    height: 260px;
-    object-fit: cover;
-  }
-  ${up('md')} {
-    img {
-      height: 360px;
-    }
-  }
+  padding: 8rem 1rem;
+  box-sizing: border-box;
+  display: flex;
+  height: 100vh;
+  background-color: #f4f6ff;
 `;
 
-const Content = styled.div`
-  max-width: 320px;
+const HeroText = styled.div`
+  width: 100%;
+  padding: 0;
 
-  text-align: center;
-  margin: 0 auto;
   ${up('md')} {
-    max-width: 620px;
+    padding-left: 6rem;
+    padding-top: 2rem;
+    width: 640px;
   }
 `;
-
 const Title = styled.h1`
-  font-size: 1.6rem;
-  font-weight: 900;
+  font-size: ${({ theme }) => theme.spacing[8]};
+  font-weight: 600;
   line-height: 1.1;
-  letter-spacing: -0.4px;
+  letter-spacing: -0.5px;
   color: ${({ theme }) => theme.colors.dark};
 
   ${up('md')} {
-    letter-spacing: -1.6px;
-    font-size: 2.2rem;
+    letter-spacing: -1.8px;
+    font-size: ${({ theme }) => theme.spacing[14]};
   }
 `;
 
 const Secondary = styled.p`
   font-weight: 400;
-  line-height: 1.1;
+  line-height: 1.6;
   letter-spacing: -0.2px;
   color: ${({ theme }) => theme.colors.dark};
   font-size: ${({ theme }) => theme.spacing[4]};
-  padding-top: 1rem;
+  padding: 3rem 0;
 
   ${up('md')} {
-    letter-spacing: -0.6px;
+    font-size: ${({ theme }) => theme.spacing[5]};
   }
 `;
 
 const StyledButton = styled.button`
-  padding: 12px 22px;
+  padding: 14px 26px;
   border: none;
   background-color: ${({ theme }) => theme.colors.dark};
   color: ${({ theme }) => theme.colors.white};
-  font-weight: 600;
-  margin-top: 2rem;
+  font-weight: 500;
+  font-size: 1rem;
   cursor: pointer;
 `;
 
+const Rect = styled.div`
+  margin-left: 6rem;
+  margin-top: 2rem;
+  background-color: orange;
+  width: 320px;
+  height: 520px;
+`;
 export default Hero;

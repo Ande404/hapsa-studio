@@ -6,6 +6,6 @@ const Layout = ({ children }) => {
 };
 
 const Wrapper = styled.div`
-  font-family: 'Manrope', sans-serif;
+  font-family: 'Inter', sans-serif;
 `;
 export default Layout;
