@@ -16,9 +16,6 @@ export async function getServerSideProps(ctx) {
       },
     };
   } catch (err) {
-    ctx.res.writeHead(302, { Location: '/login' });
-    ctx.res.end();
-
     return {
       redirect: {
         permanent: false,
