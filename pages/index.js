@@ -12,10 +12,9 @@ export default function Home() {
       <Nav />
       <div style={{ padding: '40px' }}>
         <p>{`User ID: ${user ? user.email : 'no user signed in'}`}</p>
-        {/* {JSON.stringify(user, null, 2)} */}
         <p>
           <Link href='/dashboard'>
-            <a>Go to authenticated route</a>
+            <a>Go to dashboard</a>
           </Link>
         </p>
         <p>

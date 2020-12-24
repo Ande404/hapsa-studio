@@ -27,8 +27,8 @@ export function AuthProvider({ children }) {
         const token = await user.getIdToken();
         setUser(user);
         const saveUser = formatUser(user);
-        createUser(user.uid, saveUser);
 
+        createUser(user.uid, saveUser);
         nookies.destroy(null, 'token');
         nookies.set(null, 'token', token, {});
       }

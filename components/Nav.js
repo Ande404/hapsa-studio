@@ -14,6 +14,7 @@ const Nav = () => {
 
 const StyledNav = styled.nav`
   display: flex;
+  padding: 2rem;
   justify-content: space-between;
   align-items: center;
 `;

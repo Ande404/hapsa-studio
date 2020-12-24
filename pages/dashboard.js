@@ -7,11 +7,13 @@ export async function getServerSideProps(ctx) {
   try {
     const cookies = nookies.get(ctx);
     const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
-
-    const { uid, email } = token;
+    const { uid, email, name } = token;
 
     return {
-      props: { message: `Your email is ${email} and your UID is ${uid}.` },
+      props: {
+        message: `Welcome ${name}. Your email is ${email} and your UID is ${uid}.`,
+        token,
+      },
     };
   } catch (err) {
     ctx.res.writeHead(302, { Location: '/login' });
@@ -28,19 +30,20 @@ export async function getServerSideProps(ctx) {
 }
 const dashboard = (props) => {
   return (
-    <div>
+    <>
       Dashboard
-      <p>{props.message}</p>
-      <button
-        onClick={async () => {
-          await firebase.auth().signOut();
-          window.location.href = '/';
-        }}
-      >
-        Sign out
-      </button>
-      <Form />
-    </div>
+      <div style={{ marginTop: '2rem' }}>
+        <p>{props.message}</p>
+        <button
+          onClick={async () => {
+            await firebaseClient.auth().signOut();
+            window.location.href = '/';
+          }}
+        >
+          Sign out
+        </button>
+      </div>
+    </>
   );
 };
 

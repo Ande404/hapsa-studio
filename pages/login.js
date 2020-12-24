@@ -1,5 +1,5 @@
 import { usState } from 'react';
-import firebase from '../lib/firebase';
+import { firebaseClient } from '../lib/firebase';
 import Link from 'next/link';
 import { useAuth } from '../context/auth';
 import { useRouter } from 'next/router';
@@ -17,23 +17,13 @@ const login = () => {
       </Link>
       <button
         onClick={async () => {
-          await firebase
+          await firebaseClient
             .auth()
-            .signInWithPopup(new firebase.auth.GoogleAuthProvider());
+            .signInWithPopup(new firebaseClient.auth.GoogleAuthProvider());
           window.location.href = '/';
         }}
       >
         Log in with Google
-      </button>
-      <button
-        onClick={async () => {
-          await firebase
-            .auth()
-            .signInWithPopup(new firebase.auth.GithubAuthProvider());
-          window.location.href = '/';
-        }}
-      >
-        Log in with Github
       </button>
     </div>
   );
