@@ -13,7 +13,6 @@ const login = () => {
       .signInWithPopup(new firebaseClient.auth.GoogleAuthProvider());
     window.location.href = '/';
   };
-
   useEffect(() => {
     if (user) {
       router.push('/dashboard');
