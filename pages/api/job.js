@@ -1,7 +1,5 @@
-import { createJob, getPublicJobs } from '../../lib/db';
 import Cors from 'cors';
-import { getAllJobs } from '../../lib/db';
-import { firebaseClient } from '../../lib/firebase';
+import { firebaseClient } from '../../lib/firebase-client';
 const firestore = firebaseClient.firestore();
 
 const cors = Cors({

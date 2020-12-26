@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
-import { firebaseClient } from '../lib/firebase';
+import { firebaseClient } from '../lib/firebase-client';
 import { createUser } from '../lib/db';
 import nookies from 'nookies';
 
