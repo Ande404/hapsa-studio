@@ -11,7 +11,6 @@ const login = () => {
     await firebaseClient
       .auth()
       .signInWithPopup(new firebaseClient.auth.GoogleAuthProvider());
-    window.location.href = '/';
   };
   useEffect(() => {
     if (user) {
@@ -26,7 +25,11 @@ const login = () => {
         <Link href='/'>
           <a>Go back to home page</a>
         </Link>
-        <button onClick={() => handeLogin()}>Log in with Google</button>
+        {!user ? (
+          <button onClick={() => handeLogin()}>Log in with Google</button>
+        ) : (
+          'Logged in'
+        )}
       </div>
     </div>
   );
