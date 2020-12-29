@@ -38,8 +38,5 @@ yarn-error.log*
 1ual1-ee3854bc08.json
 
 
-# Sample job post
-sample.json
-
-
-sol.txt
+# Sample schema for db
+sample_schema
