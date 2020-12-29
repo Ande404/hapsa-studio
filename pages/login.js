@@ -11,6 +11,7 @@ const login = () => {
     await firebaseClient
       .auth()
       .signInWithPopup(new firebaseClient.auth.GoogleAuthProvider());
+    window.location.href = '/';
   };
   useEffect(() => {
     if (user) {
