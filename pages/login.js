@@ -1,4 +1,4 @@
-import { usState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { firebaseClient } from '../lib/firebase-client';
 import Link from 'next/link';
 import { useAuth } from '../context/auth';
@@ -13,6 +13,7 @@ const login = () => {
       .signInWithPopup(new firebaseClient.auth.GoogleAuthProvider());
     window.location.href = '/';
   };
+
   useEffect(() => {
     if (user) {
       router.push('/dashboard');
