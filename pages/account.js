@@ -3,20 +3,17 @@ import Form from '../components/Form';
 import { firebaseAdmin } from '../lib/admin';
 import { getPublicJobs } from '../lib/db';
 import { firebaseClient } from '../lib/firebase-client';
-import Link from 'next/link';
+import Link from 'next/Link';
 export async function getServerSideProps(ctx) {
   try {
     const cookies = nookies.get(ctx);
     const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
     const { uid, email, name } = token;
 
-    const publicJobs = await getPublicJobs();
-
     return {
       props: {
         message: `Welcome ${name}. Your email is ${email} and your UID is ${uid}.`,
         token,
-        publicJobs,
       },
     };
   } catch (err) {
@@ -30,9 +27,10 @@ export async function getServerSideProps(ctx) {
   }
 }
 const dashboard = (props) => {
+  const { name, email, picture } = props?.token;
   return (
     <>
-      Dashboard
+      My account
       <div style={{ marginTop: '2rem' }}>
         <p>{props.message}</p>
         <button
@@ -43,18 +41,14 @@ const dashboard = (props) => {
         >
           Sign out
         </button>
-
         <div style={{ marginTop: '3rem' }}>
-          <h3 style={{ marginBottom: '3rem' }}>Jobs</h3>
-          {props.publicJobs.map((el) => (
-            <div key={el.id}>
-              <Link href={`job/${el.id}`}>
-                <a>{el.data.title}</a>
-              </Link>
-            </div>
-          ))}
+          <h2>{name}</h2>
+          <img src={picture} />
         </div>
       </div>
+      <Link href='/dashboard'>
+        <a>← Dashboard</a>
+      </Link>
     </>
   );
 };
