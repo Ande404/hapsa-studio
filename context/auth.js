@@ -18,17 +18,30 @@ export function AuthProvider({ children }) {
       console.log(`token changed!`);
       if (!user) {
         console.log(`no token found...`);
+
         setUser(null);
         nookies.destroy(null, 'token');
         nookies.set(null, 'token', '', {});
+
         return;
       } else {
         console.log(`updating token...`);
+
         const token = await user.getIdToken();
+
         setUser(user);
+
+        // firebaseAdmin
+        //   .auth()
+        //   .currentUser.getIdToken(true)
+        //   .then(function (idToken) {
+        //     console.log(idToken);
+        //   });
+
         const saveUser = formatUser(user);
 
         createUser(user.uid, saveUser);
+
         nookies.destroy(null, 'token');
         nookies.set(null, 'token', token, {});
       }
@@ -38,7 +51,9 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const handle = setInterval(async () => {
       console.log(`refreshing token...`);
+
       const user = firebaseClient.auth().currentUser;
+
       if (user) await user.getIdToken(true);
     }, 10 * 60 * 1000);
     return () => clearInterval(handle);
@@ -57,8 +72,8 @@ const formatUser = (user) => {
   return {
     uid: user.uid,
     email: user.email,
-    name: user.displayName,
-    provider: user.providerData[0].providerId,
-    photoUrl: user.photoURL,
+    name: user?.displayName,
+    provider: user?.providerData[0].providerId,
+    photoUrl: user?.photoURL,
   };
 };

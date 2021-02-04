@@ -3,7 +3,8 @@ import Form from '../components/Form';
 import { firebaseAdmin } from '../lib/admin';
 import { getPublicJobs } from '../lib/db';
 import { firebaseClient } from '../lib/firebase-client';
-import Link from 'next/Link';
+import Nav from '../components/Nav';
+import NextLink from 'next/Link';
 export async function getServerSideProps(ctx) {
   try {
     const cookies = nookies.get(ctx);
@@ -26,11 +27,17 @@ export async function getServerSideProps(ctx) {
     };
   }
 }
-const dashboard = (props) => {
+const account = (props) => {
+  const logout = async () => {
+    await firebaseClient.auth().signOut();
+    window.location.href = '/';
+  };
   const { name, email, picture } = props?.token;
   return (
     <>
-      My account
+      <Nav status={props.token} logout={logout} />
+
+      {/* My account
       <div style={{ marginTop: '2rem' }}>
         <p>{props.message}</p>
         <button
@@ -48,9 +55,9 @@ const dashboard = (props) => {
       </div>
       <Link href='/dashboard'>
         <a>← Dashboard</a>
-      </Link>
+      </Link> */}
     </>
   );
 };
 
-export default dashboard;
+export default account;

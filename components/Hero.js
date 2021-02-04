@@ -5,7 +5,7 @@ import { request } from '../lib/client';
 import { gql } from 'graphql-request';
 import { useQuery } from 'react-query';
 import { AuthProvider } from '../context/auth';
-import Link from 'next/link';
+import NextLink from 'next/link';
 
 // const GET_BLOG = gql`
 //   query allBlog {

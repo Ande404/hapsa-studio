@@ -1,11 +1,19 @@
+import { Box, Heading, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { getPublicJobs } from '../../lib/db';
-
-const Job = () => {
+import Nav from '../../components/Nav';
+const Job = (props) => {
   const router = useRouter();
-  const { jobId } = router.query;
-
-  return <p>Job: {jobId}</p>;
+  const job = props.publicJobs[0].data;
+  return (
+    <div>
+      <Nav />
+      <Box mx={{ base: '24px', md: '40px', lg: '124px' }}>
+        <Heading letterSpacing='-1'>{job.title}</Heading>
+        <Text>{job.governorate}</Text>
+      </Box>
+    </div>
+  );
 };
 
 export async function getStaticProps(context) {

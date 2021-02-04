@@ -1,20 +1,19 @@
 import nookies from 'nookies';
-import Form from '../components/Form';
 import { firebaseAdmin } from '../lib/admin';
 import { getPublicJobs } from '../lib/db';
 import { firebaseClient } from '../lib/firebase-client';
-import Link from 'next/link';
+import Nav from '../components/Nav';
+import fetch from 'node-fetch';
+import { Box, Heading, Link, SimpleGrid } from '@chakra-ui/react';
+import NextLink from 'next/link';
 export async function getServerSideProps(ctx) {
   try {
     const cookies = nookies.get(ctx);
     const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
     const { uid, email, name } = token;
-
     const publicJobs = await getPublicJobs();
-
     return {
       props: {
-        message: `Welcome ${name}. Your email is ${email} and your UID is ${uid}.`,
         token,
         publicJobs,
       },
@@ -30,31 +29,40 @@ export async function getServerSideProps(ctx) {
   }
 }
 const dashboard = (props) => {
+  const logout = async () => {
+    await firebaseClient.auth().signOut();
+    window.location.href = '/';
+  };
   return (
     <>
-      Dashboard
-      <div style={{ marginTop: '2rem' }}>
-        <p>{props.message}</p>
-        <button
-          onClick={async () => {
-            await firebaseClient.auth().signOut();
-            window.location.href = '/';
-          }}
+      <Nav status={props.token} logout={logout} />
+      <Box px={{ base: '24px', md: '40px' }} mt='20'>
+        <Heading
+          as='h2'
+          fontWeight='bold'
+          size='md'
+          letterSpacing='-0.8px'
+          mb='6'
         >
-          Sign out
-        </button>
-
-        <div style={{ marginTop: '3rem' }}>
-          <h3 style={{ marginBottom: '3rem' }}>Jobs</h3>
+          Recently posted
+        </Heading>
+        <SimpleGrid columns={{ base: 1, sm: 2, md: 4 }} spacing='40px' mt='8'>
           {props.publicJobs.map((el) => (
-            <div key={el.id}>
-              <Link href={`job/${el.id}`}>
-                <a>{el.data.title}</a>
+            <NextLink href={`job/${el.id}`} passHref key={el.id}>
+              <Link _hover={{ textDecoration: 'none' }}>
+                <Box key={el.id}>
+                  <Heading as='h3' size='md'>
+                    {el.data.title}
+                  </Heading>
+                  <p>{el.data.career_level}</p>
+                  <p>{el.data.governorate}</p>
+                  <p>{el.data.descripton}</p>
+                </Box>
               </Link>
-            </div>
+            </NextLink>
           ))}
-        </div>
-      </div>
+        </SimpleGrid>
+      </Box>
     </>
   );
 };
