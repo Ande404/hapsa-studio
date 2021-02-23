@@ -4,7 +4,13 @@ import { Button, Box, Flex, Spacer, Image, Heading } from '@chakra-ui/react';
 import { FiTriangle } from 'react-icons/fi';
 import { FaArrowRight } from 'react-icons/fa';
 import NextLink from 'next/link';
-const Nav = (props) => {
+import { useAuth } from '../context/auth';
+const Nav = () => {
+  const { user } = useAuth();
+
+  if (user) {
+    console.log(user);
+  }
   const router = useRouter();
 
   const handleClick = (e) => {
@@ -29,23 +35,23 @@ const Nav = (props) => {
       </Box>
       <Spacer />
       <Box>
-        {props.status?.uid ? (
-          <Flex>
+        {user.uid ? (
+          <Box>
             <NextLink href='/account'>
               <a>
                 <Image
                   borderRadius='full'
                   boxSize='30px'
-                  src={props.status.picture}
-                  alt={props.status.name}
+                  src={user.photoUrl}
+                  alt={user.name}
                 />
               </a>
             </NextLink>
-          </Flex>
-        ) : router.pathname !== '/login' ? (
+          </Box>
+        ) : (
           <div>
             <Button size='sm' bg='none' mr='4' onClick={handleClick}>
-              Log in
+              Sign up
             </Button>
             <Button
               size='sm'
@@ -57,17 +63,9 @@ const Nav = (props) => {
               }}
               onClick={handleClick}
             >
-              Sign up
+              Dashboard
             </Button>
           </div>
-        ) : (
-          <Button
-            bg='brand.600'
-            rightIcon={<FaArrowRight />}
-            onClick={() => router.push('/dashboard')}
-          >
-            Dashboard
-          </Button>
         )}
       </Box>
     </Flex>

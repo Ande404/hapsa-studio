@@ -28,8 +28,9 @@ export function AuthProvider({ children }) {
         console.log(`updating token...`);
 
         const token = await user.getIdToken();
+        const saveUser = formatUser(user);
 
-        setUser(user);
+        setUser(saveUser);
 
         // firebaseAdmin
         //   .auth()
@@ -37,8 +38,6 @@ export function AuthProvider({ children }) {
         //   .then(function (idToken) {
         //     console.log(idToken);
         //   });
-
-        const saveUser = formatUser(user);
 
         createUser(user.uid, saveUser);
 

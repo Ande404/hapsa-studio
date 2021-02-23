@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { firebaseClient } from '../lib/firebase-client';
-import NextLink from 'next/link';
 import { useAuth } from '../context/auth';
 import { useRouter } from 'next/router';
-import Nav from '../components/Nav';
 import { FcGoogle } from 'react-icons/fc';
 import { FaGithub } from 'react-icons/fa';
+import Nav from '../components/Nav';
+
 import {
   Heading,
   Button,
@@ -15,11 +15,9 @@ import {
   FormControl,
   Box,
   Link,
-  FormLabel,
-  InputGroup,
-  InputRightElement,
   Spinner,
-  background,
+  FormLabel,
+  InputRightElement,
   SimpleGrid,
 } from '@chakra-ui/react';
 
@@ -30,19 +28,16 @@ const login = () => {
   const { user } = useAuth();
   const router = useRouter();
 
-  const handeLogin = async () => {
+  const handleGoogleLogin = async () => {
     await firebaseClient
       .auth()
       .signInWithPopup(new firebaseClient.auth.GoogleAuthProvider());
   };
 
-  const customLogin = async () => {
-    // await firebase
-    //   .auth()
-    //   .createUserWithEmailAndPassword(email, password)
-    //   .then((userCredential) => {
-    //     console.log(userCredential);
-    //   });
+  const handleGithubLogin = async () => {
+    await firebaseClient
+      .auth()
+      .signInWithRedirect(new firebaseClient.auth.GithubAuthProvider());
   };
 
   useEffect(() => {
@@ -58,7 +53,7 @@ const login = () => {
       <Flex
         textAlign='center'
         px={{ base: '24px', md: '40px', lg: '560px' }}
-        my='12'
+        py='12'
         direction='column'
         justify='center'
       >
@@ -68,35 +63,40 @@ const login = () => {
         <form>
           <FormControl id='email' isRequired>
             <FormLabel>Email address</FormLabel>
-            <Input placeholder='John@doe.com' />
-            <Box mt='6'>
-              <FormLabel>Password</FormLabel>
-              <InputGroup size='md'>
-                <Input
-                  pr='4.5rem'
-                  type={show ? 'text' : 'password'}
-                  placeholder='Enter password'
-                />
-                <InputRightElement width='4.5rem'>
-                  <Button h='1.75rem' size='sm' onClick={handleClick}>
-                    {show ? 'Hide' : 'Show'}
-                  </Button>
-                </InputRightElement>
-              </InputGroup>
-              <Box textAlign='left' mt='3'>
-                <Link size='xs' color='gray.500'>
-                  Trouble signing in?
-                </Link>
-              </Box>
-              <Button w='100%' onClick={() => customLogin()} mt='6'>
-                Sign up
-              </Button>
-            </Box>
-            <Box py='12'>
-              <hr style={{ border: '1px solid #edf2f7' }} />
-            </Box>
+            <Input
+              id='email'
+              type='email'
+              name='Email'
+              placeholder='Email Address'
+            />
           </FormControl>
+          <FormControl mt='6' id='password' isRequired>
+            <FormLabel>Password</FormLabel>
+            <Input
+              pr='4.5rem'
+              name='password'
+              type={show ? 'text' : 'password'}
+              placeholder='Enter password'
+            />
+            <InputRightElement width='4.5rem'>
+              <Button h='1.75rem' size='sm' onClick={handleClick}>
+                {show ? 'Hide' : 'Show'}
+              </Button>
+            </InputRightElement>
+          </FormControl>
+
+          <Box textAlign='left' mt='3'>
+            <Link size='xs' color='gray.500'>
+              Trouble signing in?
+            </Link>
+          </Box>
+          <Button type='submit' w='100%' mt='10'>
+            Sign up
+          </Button>
         </form>
+        <Box py='12'>
+          <hr style={{ border: '1px solid #edf2f7' }} />
+        </Box>
 
         {/* <Divider orientation='horizontal' my='6' /> */}
         {!user ? (
@@ -106,7 +106,7 @@ const login = () => {
               bg='white'
               _hover={{ backgroundColor: 'gray.50' }}
               boxShadow='xs'
-              onClick={handeLogin}
+              onClick={handleGoogleLogin}
             >
               Continue with Google
             </Button>
@@ -117,7 +117,7 @@ const login = () => {
               bg='gray.800'
               _hover={{ backgroundColor: 'black' }}
               boxShadow='xs'
-              onClick={handeLogin}
+              onClick={handleGithubLogin}
             >
               Continue with Github
             </Button>
