@@ -1,10 +1,19 @@
 import nookies from 'nookies';
-import Form from '../components/Form';
 import { firebaseAdmin } from '../lib/admin';
-import { getPublicJobs } from '../lib/db';
 import { firebaseClient } from '../lib/firebase-client';
 import Nav from '../components/Nav';
-import NextLink from 'next/Link';
+import NextLink from 'next/link';
+import {
+  Box,
+  Heading,
+  Flex,
+  Link,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbSeparator,
+} from '@chakra-ui/react';
+import { AccountMenu } from '../components/AccountMenu';
 export async function getServerSideProps(ctx) {
   try {
     const cookies = nookies.get(ctx);
@@ -35,27 +44,41 @@ const account = (props) => {
   const { name, email, picture } = props?.token;
   return (
     <>
-      <Nav status={props.token} logout={logout} />
+      <Nav status={props.token} />
 
-      {/* My account
-      <div style={{ marginTop: '2rem' }}>
-        <p>{props.message}</p>
-        <button
-          onClick={async () => {
-            await firebaseClient.auth().signOut();
-            window.location.href = '/';
-          }}
-        >
-          Sign out
-        </button>
-        <div style={{ marginTop: '3rem' }}>
-          <h2>{name}</h2>
-          <img src={picture} />
-        </div>
-      </div>
-      <Link href='/dashboard'>
-        <a>← Dashboard</a>
-      </Link> */}
+      <Box px={{ base: '24px', md: '40px', lg: '340px' }}>
+        <Breadcrumb fontWeight='medium' fontSize='sm' mb='12'>
+          <BreadcrumbItem isCurrentPage>
+            <NextLink href='/' passHref>
+              <BreadcrumbLink as={Link} _hover={{ textDecoration: 'none' }}>
+                Dashboard
+              </BreadcrumbLink>
+            </NextLink>
+          </BreadcrumbItem>
+
+          <BreadcrumbItem isCurrentPage>
+            <NextLink href='/' passHref>
+              <BreadcrumbLink as={Link} _hover={{ textDecoration: 'none' }}>
+                Account
+              </BreadcrumbLink>
+            </NextLink>
+          </BreadcrumbItem>
+        </Breadcrumb>
+        <Flex>
+          <Box mt='2'>
+            <Heading
+              size='lg'
+              letterSpacing='-.8px'
+              fontWeight='700'
+              lineHeight='1.1'
+            >
+              {name}
+            </Heading>
+          </Box>
+
+          <AccountMenu logout={logout} />
+        </Flex>
+      </Box>
     </>
   );
 };

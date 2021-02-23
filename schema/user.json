@@ -1,0 +1,7 @@
+{
+    "email": "john@doe.com",
+    "name": "John Doe",
+    "photoUrl": "user-photo-url-from-provider",
+    "provider": "google.com",
+    "uid": "user-uid-from-firebase"
+}

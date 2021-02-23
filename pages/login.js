@@ -10,8 +10,7 @@ import {
   Heading,
   Button,
   Flex,
-  Divider,
-  Text,
+  Center,
   Input,
   FormControl,
   Box,
@@ -21,6 +20,7 @@ import {
   InputRightElement,
   Spinner,
   background,
+  SimpleGrid,
 } from '@chakra-ui/react';
 
 const login = () => {
@@ -37,8 +37,6 @@ const login = () => {
   };
 
   const customLogin = async () => {
-    event.preventDefault();
-    console.log('clicked me');
     // await firebase
     //   .auth()
     //   .createUserWithEmailAndPassword(email, password)
@@ -64,11 +62,11 @@ const login = () => {
         direction='column'
         justify='center'
       >
-        <Heading size='md' textTransform='uppercase'>
+        <Heading size='md' py='6'>
           Sign up
         </Heading>
-        {/* <form>
-          <FormControl id='email' isRequired my='8'>
+        <form>
+          <FormControl id='email' isRequired>
             <FormLabel>Email address</FormLabel>
             <Input placeholder='John@doe.com' />
             <Box mt='6'>
@@ -87,21 +85,22 @@ const login = () => {
               </InputGroup>
               <Box textAlign='left' mt='3'>
                 <Link size='xs' color='gray.500'>
-                  <NextLink href='/'>
-                    <a>Trouble signing in?</a>
-                  </NextLink>
+                  Trouble signing in?
                 </Link>
               </Box>
               <Button w='100%' onClick={() => customLogin()} mt='6'>
                 Sign up
               </Button>
             </Box>
+            <Box py='12'>
+              <hr style={{ border: '1px solid #edf2f7' }} />
+            </Box>
           </FormControl>
-        </form> */}
+        </form>
 
-        <Divider orientation='horizontal' my='6' />
+        {/* <Divider orientation='horizontal' my='6' /> */}
         {!user ? (
-          <div>
+          <SimpleGrid>
             <Button
               leftIcon={<FcGoogle />}
               bg='white'
@@ -122,11 +121,11 @@ const login = () => {
             >
               Continue with Github
             </Button>
-          </div>
+          </SimpleGrid>
         ) : (
-          <Button onClick={() => router.push('/dashboard')}>
-            Continue to dashboard
-          </Button>
+          <Center>
+            <Spinner />
+          </Center>
         )}
       </Flex>
     </div>

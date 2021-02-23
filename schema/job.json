@@ -1,0 +1,26 @@
+{
+	"id": "auto-generated-by-firebase",
+	"status": "public",
+	"industry_tags": ["Health", "Information Technology & Services"],
+	"recruiter": "id",
+	"title": "Frontend Software Engineer",
+	"city": "South Plainfield",
+	"state": "New Jersey",
+	"company_id": "id",
+	"salary": {
+		"base": "50,000",
+		"upper": "55,000"
+	},
+	"job_type": "Full-time",
+	"number of hires": "10",
+	"schedule": "Monday to Friday / 8 hr shift",
+	"qualifications": "Some more qualifications here",
+	"descripton": "The job description will go here to detail the ins and outs of the new opportunity yay",
+	"benefits": "Some more benefits will come up here",
+	"recruiter_notes": "The recruiter can add more notes here",
+	"applicants": ["id-1", "id-2"],
+	"covid_19_precations": "Company warnings goes here",
+	"career_level": "Entry",
+	"created_at": "3/2/2020",
+	"updated": "3/2/2020"
+}

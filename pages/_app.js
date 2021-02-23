@@ -1,15 +1,7 @@
-import { ThemeProvider } from 'styled-components';
-import GlobalStyle from '../theme/globalStyle';
-import { theme } from '../theme/theme';
 import { ReactQueryCacheProvider, QueryCache } from 'react-query';
 import { ReactQueryDevtools } from 'react-query-devtools';
-import { Reset } from 'styled-reset';
 import { AuthProvider } from '../context/auth';
-
-import { ChakraProvider } from '@chakra-ui/react';
-import { extendTheme } from '@chakra-ui/react';
-
-//unpkg.com/pdfjs-dist@2.5.207/build/pdf.worker.min.js
+import { ChakraProvider, CSSReset, extendTheme } from '@chakra-ui/react';
 
 // 2. Extend the theme to include custom colors, fonts, etc
 const queryCache = new QueryCache();
@@ -23,17 +15,22 @@ export default function App({ Component, pageProps }) {
     },
   };
 
-  const theme = extendTheme({ colors });
+  const theme = extendTheme({
+    colors,
+    fonts: {
+      heading: 'Inter',
+      body: 'Inter',
+    },
+  });
   return (
-    <AuthProvider>
-      <ReactQueryCacheProvider queryCache={queryCache}>
-        <ReactQueryDevtools initialIsOpen={false} />
-
-        <ChakraProvider theme={theme}>
-          {' '}
+    <ChakraProvider theme={theme}>
+      <CSSReset />
+      <AuthProvider>
+        <ReactQueryCacheProvider queryCache={queryCache}>
+          <ReactQueryDevtools initialIsOpen={false} />
           <Component {...pageProps} />
-        </ChakraProvider>
-      </ReactQueryCacheProvider>
-    </AuthProvider>
+        </ReactQueryCacheProvider>
+      </AuthProvider>
+    </ChakraProvider>
   );
 }

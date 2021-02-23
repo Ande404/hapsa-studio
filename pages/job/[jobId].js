@@ -5,13 +5,17 @@ import Nav from '../../components/Nav';
 const Job = (props) => {
   const router = useRouter();
   const job = props.publicJobs[0].data;
+  const { industry_tags, descripton, benefits } = job;
+
   return (
     <div>
       <Nav />
-      <Box mx={{ base: '24px', md: '40px', lg: '124px' }}>
+      <Box px={{ base: '24px', md: '40px', lg: '260px' }}>
         <Heading letterSpacing='-1'>{job.title}</Heading>
         <Text>{job.governorate}</Text>
+        <Text>{descripton}</Text>
       </Box>
+      {JSON.stringify(job)}
     </div>
   );
 };
