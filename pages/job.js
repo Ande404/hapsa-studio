@@ -1,5 +1,5 @@
-const tofiq = () => {
+const job = () => {
   return <div>all jobs here</div>;
 };
 
-export default tofiq;
+export default job;

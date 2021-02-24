@@ -40,3 +40,6 @@ yarn-error.log*
 
 # Sample schema for db
 sample_schema
+
+# omit mdx data
+.mdx-data

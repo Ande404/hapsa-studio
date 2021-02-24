@@ -1,6 +1,6 @@
 import nookies from 'nookies';
 import { firebaseAdmin } from '../lib/admin';
-import { getPublicJobs } from '../lib/firestore';
+import { getAllJobId, getPublicJobs } from '../lib/firestore';
 import { firebaseClient } from '../lib/firebase-client';
 import Nav from '../components/Nav';
 import fetch from 'node-fetch';
@@ -22,11 +22,14 @@ export async function getServerSideProps(ctx) {
   try {
     const cookies = nookies.get(ctx);
     const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
+
+    const jobs = await getAllJobId();
     const { uid, email, name } = token;
 
     return {
       props: {
         token,
+        jobs,
       },
     };
   } catch (err) {
@@ -39,38 +42,36 @@ export async function getServerSideProps(ctx) {
     };
   }
 }
-const dashboard = (props) => {
+const dashboard = ({ token, jobs }) => {
+  console.log(jobs);
+
   const logout = async () => {
     await firebaseClient.auth().signOut();
     window.location.href = '/';
   };
 
-  console.log(props.publicJobs);
   return (
     <>
-      <Nav status={props.token} logout={logout} />
+      <Nav status={token} logout={logout} />
 
       <Flex
         mt='16'
         px={{ base: '24px', md: '40px', lg: '340px' }}
         direction='column'
       >
-        {props.publicJobs.map((el) => (
-          <Box mt='12' key={el.id}>
-            <Link
-              _hover={{ textDecoration: 'none' }}
-              href='/job/systems-engineeroo-ObZ-28JZAbt_TvTKNp'
-            >
+        {jobs.map((job) => (
+          <Box mt='12' key={job.id}>
+            <Link _hover={{ textDecoration: 'none' }} href={`job/${job.id}`}>
               <Box>
                 <Heading as='h3' size='lg' letterSpacing='-1.2px'>
-                  {el.data.title}
+                  {job.data.title}
                 </Heading>
                 <Box mt='4'>
                   <Tag size='md' variant='solid' colorScheme='gray'>
-                    <TagLabel>{el.data.career_level}</TagLabel>
+                    <TagLabel>{job.data.career_level}</TagLabel>
                   </Tag>
                   <Tag size='md' variant='solid' colorScheme='gray' ml='3'>
-                    <TagLabel>{el.data.governorate}</TagLabel>
+                    <TagLabel>{job.data.governorate}</TagLabel>
                   </Tag>
                 </Box>
               </Box>

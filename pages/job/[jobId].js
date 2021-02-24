@@ -20,6 +20,8 @@ import Nav from '../../components/Nav';
 const Job = (props) => {
   const router = useRouter();
 
+  console.log(props);
+
   return (
     <div>
       <Nav />
@@ -32,7 +34,7 @@ const Job = (props) => {
         mx={{ base: '24px', md: '40px', lg: '340px' }}
         gap='20'
       >
-        {JSON.stringify(props.job)}
+        {JSON.stringify(props.job.title)}
         {/* <Box>
           <Heading letterSpacing='-1.2px'>{job.title}</Heading>
           <HStack spacing={4} py='2'>
@@ -55,7 +57,7 @@ const Job = (props) => {
 };
 
 export async function getStaticProps({ params }) {
-  // get job by id
+  const job = await getJobById(params.jobId);
 
   if (!job) {
     return {
@@ -71,13 +73,13 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  // get job ith params id
+  const allJobs = await getAllJobId();
 
   return {
-    paths: posts.map((post) => {
+    paths: allJobs.map((job) => {
       return {
         params: {
-          jobId: post,
+          jobId: job.id,
         },
       };
     }),
