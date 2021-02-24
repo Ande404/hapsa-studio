@@ -14,27 +14,30 @@ import {
 } from '@chakra-ui/react';
 import { FiBriefcase } from 'react-icons/fi';
 import { useRouter } from 'next/router';
-import { getPublicJobs } from '../../lib/db';
+import { getAllJobId, getJobById } from '../../lib/firestore';
+import NextLink from 'next/link';
 import Nav from '../../components/Nav';
 const Job = (props) => {
   const router = useRouter();
-  const job = props.publicJobs[0].data;
-  const { industry_tags, descripton, benefits } = job;
 
   return (
     <div>
       <Nav />
+      <NextLink href='/dashboard'>
+        <a>dashboard</a>
+      </NextLink>
       <SimpleGrid
         mt='16'
         columns={{ base: 1, lg: 2 }}
         mx={{ base: '24px', md: '40px', lg: '340px' }}
         gap='20'
       >
-        <Box>
+        {JSON.stringify(props.job)}
+        {/* <Box>
           <Heading letterSpacing='-1.2px'>{job.title}</Heading>
           <HStack spacing={4} py='2'>
             {industry_tags.map((tag) => (
-              <Tag size='md' key={tag} variant='solid' colorScheme='blackAlpha'>
+              <Tag size='md' key={tag} variant='solid' colorScheme='blue'>
                 <TagLeftIcon as={FiBriefcase} />
                 <TagLabel> {tag}</TagLabel>
               </Tag>
@@ -45,17 +48,16 @@ const Job = (props) => {
         </Box>
         <Box borderWidth='1px' p='4' rounded='lg'>
           <Button>Apply Now</Button>
-        </Box>
+        </Box> */}
       </SimpleGrid>
-      {/* {JSON.stringify(job)} */}
     </div>
   );
 };
 
-export async function getStaticProps(context) {
-  const publicJobs = await getPublicJobs();
+export async function getStaticProps({ params }) {
+  // get job by id
 
-  if (!publicJobs) {
+  if (!job) {
     return {
       redirect: {
         destination: '/',
@@ -64,18 +66,18 @@ export async function getStaticProps(context) {
     };
   }
   return {
-    props: { publicJobs },
+    props: { job },
   };
 }
 
 export async function getStaticPaths() {
-  const publicJobs = await getPublicJobs();
+  // get job ith params id
 
   return {
-    paths: publicJobs.map((el) => {
+    paths: posts.map((post) => {
       return {
         params: {
-          jobId: el.id,
+          jobId: post,
         },
       };
     }),

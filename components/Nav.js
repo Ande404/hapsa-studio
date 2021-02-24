@@ -7,10 +7,6 @@ import NextLink from 'next/link';
 import { useAuth } from '../context/auth';
 const Nav = () => {
   const { user } = useAuth();
-
-  if (user) {
-    console.log(user);
-  }
   const router = useRouter();
 
   const handleClick = (e) => {
@@ -35,7 +31,7 @@ const Nav = () => {
       </Box>
       <Spacer />
       <Box>
-        {user.uid ? (
+        {user?.uid && router.pathname !== '/' ? (
           <Box>
             <NextLink href='/account'>
               <a>

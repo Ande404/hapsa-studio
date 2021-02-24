@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
 import { firebaseClient } from '../lib/firebase-client';
-import { createUser } from '../lib/db';
+import { createUser } from '../lib/firestore';
 import nookies from 'nookies';
 
 const AuthContext = createContext({
@@ -31,13 +31,6 @@ export function AuthProvider({ children }) {
         const saveUser = formatUser(user);
 
         setUser(saveUser);
-
-        // firebaseAdmin
-        //   .auth()
-        //   .currentUser.getIdToken(true)
-        //   .then(function (idToken) {
-        //     console.log(idToken);
-        //   });
 
         createUser(user.uid, saveUser);
 
