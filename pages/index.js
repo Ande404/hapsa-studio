@@ -8,23 +8,9 @@ import { Box, Tag, TagLabel, Heading, Text, Link } from '@chakra-ui/react';
 import { useQuery } from 'react-query';
 import Feature from '../components/Feature';
 export default function Home() {
-  // let url = 'http://localhost:8080/api/v1/product';
-
-  // let options = {
-  //   method: 'GET',
-  // };
-
-  // const { isLoading, error, data, isFetching } = useQuery('status', () =>
-  //   fetch(url, options).then((res) => res.json())
-  // );
-
-  // if (isLoading) return 'Loading...';
-
-  // if (error) return 'An error has occurred: ' + error.message;
   return (
     <Layout>
       <Nav />
-      {/* {JSON.stringify(data)} */}
       <Box px={{ base: '24px', md: '40px', lg: '340px' }} rounded='lg' py='12'>
         <Tag
           size='sm'
@@ -35,7 +21,9 @@ export default function Home() {
           p='2'
           mb='4'
         >
-          <TagLabel textDecor='uppercase'>We are in Beta!</TagLabel>
+          <TagLabel textDecor='uppercase'>
+            Something like we are in Beta!
+          </TagLabel>
         </Tag>
         <Heading
           size='2xl'

@@ -16,8 +16,8 @@ export const Newsletter = () => {
   const onSubmit = (data) => alert(JSON.stringify(data));
 
   return (
-    <Box py='4' pt='12' columns={[1, 1, 2]}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Box py='4' pt='12'>
         <FormControl isInvalid={errors.name} id='email'>
           <Input
             name='email'
@@ -49,7 +49,7 @@ export const Newsletter = () => {
             Get notified
           </Button>
         </FormControl>
-      </form>
-    </Box>
+      </Box>
+    </form>
   );
 };

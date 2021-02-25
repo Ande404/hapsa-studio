@@ -17,10 +17,10 @@ import { useRouter } from 'next/router';
 import { getAllJobId, getJobById } from '../../lib/firestore';
 import NextLink from 'next/link';
 import Nav from '../../components/Nav';
-const Job = (props) => {
+const Job = ({ job }) => {
   const router = useRouter();
 
-  console.log(props);
+  console.log(job);
 
   return (
     <div>
@@ -34,11 +34,10 @@ const Job = (props) => {
         mx={{ base: '24px', md: '40px', lg: '340px' }}
         gap='20'
       >
-        {JSON.stringify(props.job.title)}
-        {/* <Box>
+        <Box>
           <Heading letterSpacing='-1.2px'>{job.title}</Heading>
           <HStack spacing={4} py='2'>
-            {industry_tags.map((tag) => (
+            {job.industry_tags.map((tag) => (
               <Tag size='md' key={tag} variant='solid' colorScheme='blue'>
                 <TagLeftIcon as={FiBriefcase} />
                 <TagLabel> {tag}</TagLabel>
@@ -46,11 +45,12 @@ const Job = (props) => {
             ))}
           </HStack>
           <Text>{job.governorate}</Text>
-          <Text>{descripton}</Text>
+          <Text>{job.descripton}</Text>
+          <Text>{job.recruiter}</Text>
         </Box>
         <Box borderWidth='1px' p='4' rounded='lg'>
           <Button>Apply Now</Button>
-        </Box> */}
+        </Box>
       </SimpleGrid>
     </div>
   );
