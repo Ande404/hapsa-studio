@@ -52,7 +52,12 @@ const Nav = () => {
         </NextLink>
         <NextLink href='/job'>
           <Link fontWeight='semibold' ml='6' letterSpacing='-.5px'>
-            Applicants
+            Career Advice
+          </Link>
+        </NextLink>
+        <NextLink href='/job'>
+          <Link fontWeight='semibold' ml='6' letterSpacing='-.5px'>
+            About
           </Link>
         </NextLink>
       </Box>

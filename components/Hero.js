@@ -1,21 +1,14 @@
 import styled from 'styled-components';
 import { up } from 'styled-breakpoints';
 import { Container } from './atoms/Container';
-import {
-  Box,
-  Heading,
-  Text,
-  SimpleGrid,
-  Image,
-  Flex,
-  Divider,
-  Spacer,
-  Center,
-} from '@chakra-ui/react';
+import { Box, Heading, Text, Flex, Divider, Button } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import TextLoop from 'react-text-loop';
+import { useRouter } from 'next/router';
 
 export const Hero = () => {
+  const router = useRouter();
+
   return (
     <Flex
       px={{ base: '16px', md: '40px', lg: '80px' }}
@@ -23,7 +16,7 @@ export const Hero = () => {
       py='12'
       bg='rgb(15,29,123)'
       justify='space-between'
-      direction='column'
+      direction={{ base: 'column', lg: 'row' }}
       position='relative'
       minHeight='280px'
     >
@@ -49,11 +42,26 @@ export const Hero = () => {
           Hapsa simplies the job hunting process. Tell us your preference and we
           will match you with the right recruiters to start your next job.
         </Text>
+        <Button
+          w='auto'
+          size='md'
+          rounded='none'
+          color='gray.900'
+          bg='gray.200'
+          color='gray.900'
+          _hover={{
+            color: 'gray.100',
+            bg: 'gray.400',
+          }}
+          onClick={() => router.push('/job')}
+        >
+          View all jobs
+        </Button>
       </Flex>
 
       <Box
-        position='absolute'
-        bottom='-52'
+        transform='translateY(45%)'
+        position='sticky'
         right={{ base: '16px', md: '40px', lg: '80px' }}
         boxShadow='sm'
         bg='gray.500'

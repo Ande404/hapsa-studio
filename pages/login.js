@@ -10,15 +10,19 @@ import {
   Heading,
   Button,
   Flex,
-  Center,
   Input,
   FormControl,
   Box,
   Link,
+  Grid,
+  GridItem,
+  Center,
   Spinner,
   FormLabel,
   InputRightElement,
   SimpleGrid,
+  InputGroup,
+  Image,
 } from '@chakra-ui/react';
 
 const login = () => {
@@ -50,84 +54,95 @@ const login = () => {
   return (
     <div>
       <Nav />
-      <Flex
-        textAlign='center'
-        px={{ base: '24px', md: '40px', lg: '560px' }}
-        py='12'
-        direction='column'
-        justify='center'
-      >
-        <Heading size='md' py='6'>
-          Sign up
-        </Heading>
-        <form>
-          <FormControl id='email' isRequired>
-            <FormLabel>Email address</FormLabel>
-            <Input
-              id='email'
-              type='email'
-              name='Email'
-              placeholder='Email Address'
-            />
-          </FormControl>
-          <FormControl mt='6' id='password' isRequired>
-            <FormLabel>Password</FormLabel>
-            <Input
-              pr='4.5rem'
-              name='password'
-              type={show ? 'text' : 'password'}
-              placeholder='Enter password'
-            />
-            <InputRightElement width='4.5rem'>
-              <Button h='1.75rem' size='sm' onClick={handleClick}>
-                {show ? 'Hide' : 'Show'}
-              </Button>
-            </InputRightElement>
-          </FormControl>
-
-          <Box textAlign='left' mt='3'>
-            <Link size='xs' color='gray.500'>
-              Trouble signing in?
-            </Link>
-          </Box>
-          <Button type='submit' w='100%' mt='10'>
+      <Center bg='gray.100' py={{ base: 0, md: 6, lg: 8 }}>
+        <Flex
+          w={{ base: '100%', lg: '420px' }}
+          bg='white'
+          textAlign='center'
+          p='8'
+          direction='column'
+          justify='center'
+          maxWidth='420px'
+          margin='0 auto'
+        >
+          <Heading size='lg' letterSpacing='-.8px' py='8'>
             Sign up
-          </Button>
-        </form>
-        <Box py='12'>
-          <hr style={{ border: '1px solid #edf2f7' }} />
-        </Box>
+          </Heading>
+          <form>
+            <FormControl id='email' isRequired>
+              <FormLabel>Email address</FormLabel>
+              <Input
+                rounded='none'
+                id='email'
+                type='email'
+                name='Email'
+                placeholder='Email Address'
+              />
+            </FormControl>
+            <FormControl mt='6' id='password' isRequired>
+              <FormLabel>Password</FormLabel>
+              <InputGroup size='md'>
+                <Input
+                  rounded='none'
+                  pr='4.5rem'
+                  name='password'
+                  type={show ? 'text' : 'password'}
+                  placeholder='Enter password'
+                />
+                <InputRightElement width='4.5rem'>
+                  <Button h='1.75rem' size='sm' onClick={handleClick}>
+                    {show ? 'Hide' : 'Show'}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+            </FormControl>
 
-        {/* <Divider orientation='horizontal' my='6' /> */}
-        {!user ? (
-          <SimpleGrid>
-            <Button
-              leftIcon={<FcGoogle />}
-              bg='white'
-              _hover={{ backgroundColor: 'gray.50' }}
-              boxShadow='xs'
-              onClick={handleGoogleLogin}
-            >
-              Continue with Google
+            <Box textAlign='left' mt='3'>
+              <Link size='xs' color='gray.500'>
+                Trouble signing in?
+              </Link>
+            </Box>
+            <Button rounded='none' type='submit' w='100%' mt='10'>
+              Sign up
             </Button>
-            <Button
-              color='white'
-              mt='6'
-              leftIcon={<FaGithub />}
-              bg='gray.800'
-              _hover={{ backgroundColor: 'black' }}
-              boxShadow='xs'
-              onClick={handleGithubLogin}
-            >
-              Continue with Github
-            </Button>
-          </SimpleGrid>
-        ) : (
-          <Center>
-            <Spinner />
-          </Center>
-        )}
-      </Flex>
+          </form>
+          <Box py='12'>
+            <hr style={{ border: '1px solid #edf2f7' }} />
+          </Box>
+
+          {/* <Divider orientation='horizontal' my='6' /> */}
+          {!user ? (
+            <SimpleGrid>
+              <Button
+                rounded='none'
+                leftIcon={<FcGoogle />}
+                bg='white'
+                _hover={{ backgroundColor: 'gray.50' }}
+                boxShadow='xs'
+                onClick={handleGoogleLogin}
+              >
+                Login with Google
+              </Button>
+              <Button
+                rounded='none'
+                color='white'
+                mt='6'
+                leftIcon={<FaGithub />}
+                bg='gray.800'
+                _hover={{ backgroundColor: 'black' }}
+                boxShadow='xs'
+                onClick={handleGithubLogin}
+              >
+                Login with Github
+              </Button>
+            </SimpleGrid>
+          ) : (
+            <Center>
+              <Spinner />
+            </Center>
+          )}
+        </Flex>
+      </Center>
     </div>
   );
 };

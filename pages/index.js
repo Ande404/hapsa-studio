@@ -10,6 +10,19 @@ export default function Home() {
     <>
       <Nav />
       <Hero />
+      <Box
+        px={{ base: '16px', md: '40px', lg: '80px' }}
+        pt={{ base: 32, lg: 16 }}
+      >
+        <Heading
+          size='lg'
+          letterSpacing='-.8px'
+          fontWeight='semibold'
+          lineHeight='1.1'
+        >
+          Opportunity at no cost
+        </Heading>
+      </Box>
     </>
   );
 }

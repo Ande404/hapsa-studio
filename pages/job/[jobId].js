@@ -9,27 +9,27 @@ import {
   TagRightIcon,
   TagCloseButton,
   HStack,
-  SimpleGrid,
+  GridItem,
   Button,
+  Grid,
 } from '@chakra-ui/react';
 import { FiBriefcase } from 'react-icons/fi';
 import { useRouter } from 'next/router';
 import { getAllJobId, getJobById } from '../../lib/firestore';
 import NextLink from 'next/link';
 import Nav from '../../components/Nav';
-const Job = ({ job }) => {
-  console.log(job);
 
+const Job = ({ job }) => {
   return (
     <div>
       <Nav />
-      <SimpleGrid
+      <Grid
         mt='16'
-        columns={{ base: 1, lg: 2 }}
-        mx={{ base: '24px', md: '40px', lg: '340px' }}
+        templateColumns={{ base: '1fr', lg: '2fr 1fr' }}
+        mx={{ base: '24px', md: '40px', lg: '80px' }}
         gap='20'
       >
-        <Box>
+        <GridItem rowSpan={2}>
           <Heading letterSpacing='-1.2px'>{job.title}</Heading>
           <HStack spacing={4} py='2'>
             {job.industry_tags.map((tag) => (
@@ -42,11 +42,17 @@ const Job = ({ job }) => {
           <Text>{job.governorate}</Text>
           <Text>{job.descripton}</Text>
           <Text>{job.recruiter}</Text>
-        </Box>
-        <Box borderWidth='1px' p='4' rounded='lg'>
+        </GridItem>
+        <GridItem borderWidth='1px' p='4' rounded='lg'>
+          <Text fontSize='sm' pb='2'>
+            Recruiter
+          </Text>
+          <Heading size='md' letterSpacing='-.6px'>
+            Angela Cosmos
+          </Heading>
           <Button>Apply Now</Button>
-        </Box>
-      </SimpleGrid>
+        </GridItem>
+      </Grid>
     </div>
   );
 };
