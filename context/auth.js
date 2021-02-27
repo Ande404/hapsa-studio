@@ -15,11 +15,12 @@ export function AuthProvider({ children }) {
       window.nookies = nookies;
     }
     return firebaseClient.auth().onIdTokenChanged(async (user) => {
-      console.log(`token changed!`);
+      console.log(`token updated!`);
       if (!user) {
         console.log(`no token found...`);
 
         setUser(null);
+
         nookies.destroy(null, 'token');
         nookies.set(null, 'token', '', {});
 

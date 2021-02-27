@@ -11,6 +11,7 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
+  Button,
   BreadcrumbSeparator,
 } from '@chakra-ui/react';
 import { AccountMenu } from '../components/AccountMenu';
@@ -49,7 +50,7 @@ const account = (props) => {
       <Box px={{ base: '24px', md: '40px', lg: '340px' }}>
         <Breadcrumb fontWeight='medium' fontSize='sm' mb='12'>
           <BreadcrumbItem isCurrentPage>
-            <NextLink href='/' passHref>
+            <NextLink href='/dashboard' passHref>
               <BreadcrumbLink as={Link} _hover={{ textDecoration: 'none' }}>
                 Dashboard
               </BreadcrumbLink>
@@ -57,7 +58,7 @@ const account = (props) => {
           </BreadcrumbItem>
 
           <BreadcrumbItem isCurrentPage>
-            <NextLink href='/' passHref>
+            <NextLink href='/account' passHref>
               <BreadcrumbLink as={Link} _hover={{ textDecoration: 'none' }}>
                 Account
               </BreadcrumbLink>
@@ -75,8 +76,7 @@ const account = (props) => {
               {name}
             </Heading>
           </Box>
-
-          <AccountMenu logout={logout} />
+          <Button onClick={logout}>Log out</Button>x
         </Flex>
       </Box>
     </>

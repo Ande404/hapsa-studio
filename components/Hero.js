@@ -1,120 +1,82 @@
 import styled from 'styled-components';
 import { up } from 'styled-breakpoints';
-import { Wrapper } from './atoms/Wrapper';
-import { request } from '../lib/client';
-import { gql } from 'graphql-request';
-import { useQuery } from 'react-query';
-import { AuthProvider } from '../context/auth';
+import { Container } from './atoms/Container';
+import {
+  Box,
+  Heading,
+  Text,
+  SimpleGrid,
+  Image,
+  Flex,
+  Divider,
+  Spacer,
+  Center,
+} from '@chakra-ui/react';
 import NextLink from 'next/link';
+import TextLoop from 'react-text-loop';
 
-// const GET_BLOG = gql`
-//   query allBlog {
-//     allBlogs(filter: {}) {
-//       id
-//       title
-//       createdAt
-//       excerpt(markdown: false)
-//       slug
-//       featuredImage {
-//         alt
-//         size
-//       }
-//     }
-//   }
-// `;
-
-// const getBlog = async () => {
-//   const result = await request(
-//     'dato',
-//     'https://graphql.datocms.com/',
-//     GET_BLOG
-//   );
-//   return result;
-// };
-
-const Hero = () => {
-  // const auth = useAuth();
-  // const { status, data, error } = useQuery('blog', getBlog);
-
-  // if (status === 'loading') return <div>Loading...</div>;
-  // if (status === 'error') return <div>Error: {error.message}(</div>;
-
-  // const { title, excerpt, slug } = data.allBlogs[0];
-
+export const Hero = () => {
   return (
-    <Content>
-      <HeroText>
-        <Title>Find the right talents for your next business venture</Title>
-        <Secondary>
-          Prove the ROI of social media, plan more engaging content, and create
-          automated white label analytics reports.
-        </Secondary>
-        <StyledButton>Apply now</StyledButton>
-      </HeroText>
-    </Content>
+    <Flex
+      px={{ base: '16px', md: '40px', lg: '80px' }}
+      rounded='none'
+      py='12'
+      bg='rgb(15,29,123)'
+      justify='space-between'
+      direction='column'
+      position='relative'
+      minHeight='280px'
+    >
+      <Flex direction='column' w={{ base: '100%', lg: '720px' }}>
+        <Heading
+          color='rgb(216,236,241)'
+          size='2xl'
+          letterSpacing='-2px'
+          fontWeight='semibold'
+          lineHeight='1.1'
+        >
+          Tired of painful job applications? We will deliever an offer to you
+        </Heading>
+        <Text
+          color='rgb(216,236,241)'
+          py='8'
+          fontSize='lg'
+          letterSpacing='-.2px'
+          fontWeight='500'
+          lineHeight='1.5'
+          fontSize='md'
+        >
+          Hapsa simplies the job hunting process. Tell us your preference and we
+          will match you with the right recruiters to start your next job.
+        </Text>
+      </Flex>
+
+      <Box
+        position='absolute'
+        bottom='-52'
+        right={{ base: '16px', md: '40px', lg: '80px' }}
+        boxShadow='sm'
+        bg='gray.500'
+        // bg='rgb(216,236,241)'
+        p={{ base: 4, lg: 8 }}
+        w={{ base: '100%', md: '420px' }}
+        color='rgb(216,236,241)'
+      >
+        <TextLoop interval='5500'>
+          <Text fontWeight='semibold' letterSpacing='-.4px'>
+            Software Engineer
+          </Text>
+          <Text fontWeight='semibold' letterSpacing='-.4px'>
+            Marketing Summer Internship
+          </Text>
+        </TextLoop>
+        <Divider py={{ base: 1, lg: 2 }} />
+        <Box pt='4'>more text here</Box>
+        <Box pt='4'>more text here</Box>
+        <Box pt='4'>more text here</Box>
+        <Box pt='4'>more text here</Box>
+        <Box pt='4'>more text here</Box>
+      </Box>
+    </Flex>
   );
 };
-
-const Content = styled.section`
-  width: 100%;
-  padding: 8rem 1rem;
-  box-sizing: border-box;
-  display: flex;
-  height: 100vh;
-  background-color: #f4f6ff;
-`;
-
-const HeroText = styled.div`
-  width: 100%;
-  padding: 0;
-
-  ${up('md')} {
-    padding-left: 6rem;
-    padding-top: 2rem;
-    width: 640px;
-  }
-`;
-const Title = styled.h1`
-  font-size: ${({ theme }) => theme.spacing[8]};
-  font-weight: 600;
-  line-height: 1.1;
-  letter-spacing: -0.5px;
-  color: ${({ theme }) => theme.colors.dark};
-
-  ${up('md')} {
-    letter-spacing: -1.8px;
-    font-size: ${({ theme }) => theme.spacing[14]};
-  }
-`;
-
-const Secondary = styled.p`
-  font-weight: 400;
-  line-height: 1.6;
-  letter-spacing: -0.2px;
-  color: ${({ theme }) => theme.colors.dark};
-  font-size: ${({ theme }) => theme.spacing[4]};
-  padding: 3rem 0;
-
-  ${up('md')} {
-    font-size: ${({ theme }) => theme.spacing[5]};
-  }
-`;
-
-const StyledButton = styled.button`
-  padding: 14px 26px;
-  border: none;
-  background-color: ${({ theme }) => theme.colors.dark};
-  color: ${({ theme }) => theme.colors.white};
-  font-weight: 500;
-  font-size: 1rem;
-  cursor: pointer;
-`;
-
-const Rect = styled.div`
-  margin-left: 6rem;
-  margin-top: 2rem;
-  background-color: orange;
-  width: 320px;
-  height: 520px;
-`;
-export default Hero;

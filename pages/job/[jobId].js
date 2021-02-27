@@ -18,16 +18,11 @@ import { getAllJobId, getJobById } from '../../lib/firestore';
 import NextLink from 'next/link';
 import Nav from '../../components/Nav';
 const Job = ({ job }) => {
-  const router = useRouter();
-
   console.log(job);
 
   return (
     <div>
       <Nav />
-      <NextLink href='/dashboard'>
-        <a>dashboard</a>
-      </NextLink>
       <SimpleGrid
         mt='16'
         columns={{ base: 1, lg: 2 }}

@@ -1,10 +1,17 @@
 import { useRouter } from 'next/router';
-import { Button, Box, Flex, Spacer, Image, Heading } from '@chakra-ui/react';
-
-import { FiTriangle } from 'react-icons/fi';
-import { FaArrowRight } from 'react-icons/fa';
 import NextLink from 'next/link';
 import { useAuth } from '../context/auth';
+import { FiTriangle } from 'react-icons/fi';
+import {
+  Button,
+  Box,
+  Flex,
+  Spacer,
+  Image,
+  Heading,
+  Link,
+} from '@chakra-ui/react';
+
 const Nav = () => {
   const { user } = useAuth();
   const router = useRouter();
@@ -16,28 +23,47 @@ const Nav = () => {
   return (
     <Flex
       py='4'
-      px={{ base: '24px', md: '40px', lg: '340px' }}
+      px={{ base: '16px', md: '40px', lg: '80px' }}
       justify='space-between'
       align='center'
+      bg='rgb(15,29,123)'
+      color='white'
     >
       <Box p='2'>
-        <Heading size='md' color='white'>
-          <NextLink href='/'>
-            <a>
-              <FiTriangle stroke='black' />
-            </a>
-          </NextLink>
-        </Heading>
+        <NextLink href='/'>
+          <Link>
+            <Heading size='md' fontWeight='bold' letterSpacing='-1px'>
+              Hapsa
+            </Heading>
+          </Link>
+        </NextLink>
       </Box>
-      <Spacer />
-      <Box>
+
+      <Box display={{ base: 'none', lg: 'inherit' }}>
+        <NextLink href='/job'>
+          <Link fontWeight='semibold' letterSpacing='-.5px'>
+            Jobs
+          </Link>
+        </NextLink>
+        <NextLink href='/job'>
+          <Link fontWeight='semibold' ml='6' letterSpacing='-.5px'>
+            Recruiters
+          </Link>
+        </NextLink>
+        <NextLink href='/job'>
+          <Link fontWeight='semibold' ml='6' letterSpacing='-.5px'>
+            Applicants
+          </Link>
+        </NextLink>
+      </Box>
+      <Box display={{ base: 'none', lg: 'inherit' }}>
         {user?.uid && router.pathname !== '/' ? (
           <Box>
             <NextLink href='/account'>
               <a>
                 <Image
                   borderRadius='full'
-                  boxSize='30px'
+                  boxSize='45px'
                   src={user.photoUrl}
                   alt={user.name}
                 />
@@ -46,16 +72,26 @@ const Nav = () => {
           </Box>
         ) : (
           <div>
-            <Button size='sm' bg='none' mr='4' onClick={handleClick}>
+            <Button
+              size='md'
+              _hover={{
+                bg: 'none',
+              }}
+              bg='none'
+              mr='4'
+              onClick={handleClick}
+            >
               Sign up
             </Button>
             <Button
-              size='sm'
-              bg='gray.700'
-              color='gray.100'
+              size='md'
+              rounded='none'
+              color='gray.900'
+              bg='gray.200'
+              color='gray.900'
               _hover={{
                 color: 'gray.100',
-                bg: 'gray.900',
+                bg: 'gray.400',
               }}
               onClick={handleClick}
             >

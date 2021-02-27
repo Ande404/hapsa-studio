@@ -42,7 +42,7 @@ export const AccountMenu = (props) => {
                 FAQ
               </MenuItem>
             </NextLink>
-            <MenuItem onClick={() => console.log('logout')}>Log out</MenuItem>
+            <MenuItem onClick={() => props.logout}>Log out</MenuItem>
           </MenuGroup>
         </MenuList>
       </Menu>

@@ -12,6 +12,8 @@ const Feature = () => {
           rounded='lg'
           transition='.08s background-color ease-in'
           height='170px'
+          bg='blue.200'
+          p='8'
         >
           <svg
             width='22'
