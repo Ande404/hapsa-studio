@@ -46,9 +46,8 @@ const login = () => {
 
   useEffect(() => {
     if (user) {
-      router.push('/dashboard');
+      router.push('dashboard');
     }
-    return () => {};
   }, [user]);
 
   return (

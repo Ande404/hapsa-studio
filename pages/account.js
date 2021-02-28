@@ -20,6 +20,11 @@ import {
   TabPanel,
   Image,
   Badge,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+  Text,
 } from '@chakra-ui/react';
 import { AccountMenu } from '../components/AccountMenu';
 import { AccountTab } from '../components/AccountTab';
@@ -77,9 +82,30 @@ const account = (props) => {
       <Box
         px={{ base: '24px', md: '40px', lg: '80px' }}
         bg='gray.100'
-        py='12'
         h='620px'
       >
+        <Box py='6'>
+          {!props.token.email_verified && (
+            <Alert status='warning'>
+              <AlertIcon />
+              Please verify your email address through your
+              <Text textDecoration='underline' fontWeight='semibold'>
+                <Link
+                  isExternal
+                  // feels good to be a gangsta
+                  ml='1'
+                  href={
+                    props.token.firebase.sign_in_provider === 'google.com'
+                      ? 'https://mail.google.com/mail/u/0/#'
+                      : 'noop'
+                  }
+                >
+                  provider
+                </Link>
+              </Text>
+            </Alert>
+          )}
+        </Box>
         <Breadcrumb fontSize='sm' fontWeight='medium'>
           <BreadcrumbItem isCurrentPage>
             <NextLink href='/dashboard' passHref>
@@ -101,7 +127,7 @@ const account = (props) => {
         {/* <AccountTab data={tabData} /> */}
 
         <Flex>
-          <Box mt='6' bg='white' w='100%' p='8'>
+          <Box mt='6' bg='white' w='100%' p='8' h='100%'>
             <Box mb='4'>
               <Image
                 borderRadius='full'
@@ -119,10 +145,16 @@ const account = (props) => {
             >
               {name}
             </Heading>
+            <Button
+              mt='12'
+              onClick={logout}
+              bg='gray.900'
+              color='gray.100'
+              mb='12'
+            >
+              Log out
+            </Button>
           </Box>
-          <Button onClick={logout} bg='gray.900' color='gray.100'>
-            Log out
-          </Button>
         </Flex>
       </Box>
     </>

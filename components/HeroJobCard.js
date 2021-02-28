@@ -1,7 +1,15 @@
 import React from 'react';
-import { Box, Heading, Text, Flex, Divider, Button } from '@chakra-ui/react';
+import {
+  Box,
+  Heading,
+  Text,
+  Flex,
+  Link,
+  Divider,
+  Button,
+} from '@chakra-ui/react';
 import TextLoop from 'react-text-loop';
-
+import NextLink from 'next/link';
 export const HeroJobCard = ({ jobs }) => {
   return (
     <div>
@@ -21,15 +29,17 @@ export const HeroJobCard = ({ jobs }) => {
         <TextLoop interval='5500'>
           {jobs.map(({ data: job }) => {
             return (
-              <div>
-                {' '}
-                <Text
-                  fontWeight='semibold'
-                  letterSpacing='-.4px'
-                  key={job.jobId}
-                >
-                  {job.title}
-                </Text>
+              <div key={job.jobId}>
+                <NextLink href={`job/${job.jobId}`}>
+                  <Link
+                    fontWeight='semibold'
+                    letterSpacing='-.4px'
+                    ml='6'
+                    letterSpacing='-.5px'
+                  >
+                    {job.title}
+                  </Link>
+                </NextLink>
               </div>
             );
           })}
@@ -38,7 +48,7 @@ export const HeroJobCard = ({ jobs }) => {
         <TextLoop interval='5500' delay='75'>
           {jobs.map(({ data: job }) => {
             return (
-              <div>
+              <div key={job.jobId}>
                 {' '}
                 <Text fontWeight='semibold' letterSpacing='-.4px'>
                   {job.governorate}

@@ -41,3 +41,7 @@ export default function App({ Component, pageProps }) {
     </ChakraProvider>
   );
 }
+
+// export function reportWebVitals(metric) {
+//   console.log(metric);
+// }

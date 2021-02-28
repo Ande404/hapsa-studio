@@ -6,7 +6,9 @@ import { NewApplication } from '../../lib/firestore';
 const handler = nc()
   .use(cors())
   .get((req, res) => {
-    res.send('Hello no');
+    res.status(200).json({
+      status: 'applicant',
+    });
   })
   .post(async (req, res) => {
     if ((!req.body && !req.body.user) || !req.body.job) {

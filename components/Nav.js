@@ -11,15 +11,10 @@ import {
   Heading,
   Link,
 } from '@chakra-ui/react';
-
 const Nav = () => {
   const { user } = useAuth();
   const router = useRouter();
 
-  const handleClick = (e) => {
-    e.preventDefault();
-    router.push('/login');
-  };
   return (
     <Flex
       py='4'
@@ -69,7 +64,7 @@ const Nav = () => {
               <a>
                 <Image
                   borderRadius='full'
-                  boxSize='45px'
+                  boxSize='35px'
                   src={user.photoUrl}
                   alt={user.name}
                 />
@@ -85,7 +80,7 @@ const Nav = () => {
               }}
               bg='none'
               mr='4'
-              onClick={handleClick}
+              onClick={() => router.push('login')}
             >
               Sign up
             </Button>
@@ -99,7 +94,7 @@ const Nav = () => {
                 color: 'gray.100',
                 bg: 'gray.400',
               }}
-              onClick={handleClick}
+              onClick={() => router.push('dashboard')}
             >
               Dashboard
             </Button>
