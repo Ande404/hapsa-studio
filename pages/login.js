@@ -110,7 +110,6 @@ const login = () => {
             <hr style={{ border: '1px solid #edf2f7' }} />
           </Box>
 
-          {/* <Divider orientation='horizontal' my='6' /> */}
           {!user ? (
             <SimpleGrid>
               <Button

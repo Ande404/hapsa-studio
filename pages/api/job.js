@@ -1,7 +1,6 @@
 import nc from 'next-connect';
 import morgan from 'morgan';
 import Cors from 'cors';
-import { nanoid } from 'nanoid/async';
 import { createJob } from '../../lib/firestore';
 
 const cors = Cors({

@@ -28,6 +28,7 @@ const Nav = () => {
       align='center'
       bg='rgb(15,29,123)'
       color='white'
+      borderBottom='1px solid rgba(216,236,241, .1)'
     >
       <Box p='2'>
         <NextLink href='/'>

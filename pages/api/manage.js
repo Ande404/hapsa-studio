@@ -2,18 +2,28 @@ import nc from 'next-connect';
 import cors from 'cors';
 import fetch from 'node-fetch';
 import { firebaseAdmin } from '../../lib/admin';
-
+import { NewApplication } from '../../lib/firestore';
 const handler = nc()
   .use(cors())
   .get((req, res) => {
     res.send('Hello no');
   })
   .post(async (req, res) => {
-    if (!req.body) {
+    if ((!req.body && !req.body.user) || !req.body.job) {
       res.status(404).end('request body is not found... or is it');
     }
+
+    const { user, job } = req.body;
+
+    const application = {
+      user,
+      job,
+    };
+
+    await NewApplication(application);
+
     res.status(200).json({
-      msg: 'hello',
+      payload: 'working',
     });
     // firebaseAdmin.admin
     //   .auth()

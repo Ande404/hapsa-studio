@@ -3,7 +3,6 @@ import { firebaseAdmin } from '../lib/admin';
 import { firebaseClient } from '../lib/firebase-client';
 import Nav from '../components/Nav';
 import { Box } from '@chakra-ui/react';
-import NextLink from 'next/link';
 export async function getServerSideProps(ctx) {
   try {
     const cookies = nookies.get(ctx);

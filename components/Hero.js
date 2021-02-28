@@ -13,14 +13,14 @@ export const Hero = () => {
     <Flex
       px={{ base: '16px', md: '40px', lg: '80px' }}
       rounded='none'
-      py='12'
+      py='16'
       bg='rgb(15,29,123)'
       justify='space-between'
       direction={{ base: 'column', lg: 'row' }}
       position='relative'
       minHeight='280px'
     >
-      <Flex direction='column' w={{ base: '100%', lg: '720px' }}>
+      <Flex direction='column' w={{ base: '100%', lg: '620px' }} mr='6'>
         <Heading
           color='rgb(216,236,241)'
           size='2xl'
@@ -67,7 +67,7 @@ export const Hero = () => {
         bg='gray.500'
         // bg='rgb(216,236,241)'
         p={{ base: 4, lg: 8 }}
-        w={{ base: '100%', md: '420px' }}
+        w={{ base: '100%', lg: '420px' }}
         color='rgb(216,236,241)'
       >
         <TextLoop interval='5500'>

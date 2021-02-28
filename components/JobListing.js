@@ -17,7 +17,7 @@ const JobListing = ({ jobs }) => {
         align='stretch'
       >
         {jobs.map((job) => (
-          <Box key={job.id}>
+          <Box key={job.id} rounded='none'>
             <Link _hover={{ textDecoration: 'none' }} href={`job/${job.id}`}>
               <Box>
                 <Heading as='h3' size='lg' letterSpacing='-1.2px'>
