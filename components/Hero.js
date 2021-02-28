@@ -5,10 +5,9 @@ import { Box, Heading, Text, Flex, Divider, Button } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import TextLoop from 'react-text-loop';
 import { useRouter } from 'next/router';
-
-export const Hero = () => {
+import { HeroJobCard } from './HeroJobCard';
+export const Hero = ({ jobs }) => {
   const router = useRouter();
-
   return (
     <Flex
       px={{ base: '16px', md: '40px', lg: '80px' }}
@@ -59,32 +58,7 @@ export const Hero = () => {
         </Button>
       </Flex>
 
-      <Box
-        transform='translateY(45%)'
-        position='sticky'
-        right={{ base: '16px', md: '40px', lg: '80px' }}
-        boxShadow='sm'
-        bg='gray.500'
-        // bg='rgb(216,236,241)'
-        p={{ base: 4, lg: 8 }}
-        w={{ base: '100%', lg: '420px' }}
-        color='rgb(216,236,241)'
-      >
-        <TextLoop interval='5500'>
-          <Text fontWeight='semibold' letterSpacing='-.4px'>
-            Software Engineer
-          </Text>
-          <Text fontWeight='semibold' letterSpacing='-.4px'>
-            Marketing Summer Internship
-          </Text>
-        </TextLoop>
-        <Divider py={{ base: 1, lg: 2 }} />
-        <Box pt='4'>more text here</Box>
-        <Box pt='4'>more text here</Box>
-        <Box pt='4'>more text here</Box>
-        <Box pt='4'>more text here</Box>
-        <Box pt='4'>more text here</Box>
-      </Box>
+      <HeroJobCard jobs={jobs} />
     </Flex>
   );
 };

@@ -5,11 +5,13 @@ import { Newsletter } from '../components/Newsletter';
 import { Box, Tag, TagLabel, Heading, Text, Link } from '@chakra-ui/react';
 import { Hero } from '../components/Hero';
 import Feature from '../components/Feature';
-export default function Home() {
+import { ActiveJobsHero } from '../lib/firestore';
+
+export default function Home({ jobs }) {
   return (
     <>
       <Nav />
-      <Hero />
+      <Hero jobs={jobs} />
       <Box
         px={{ base: '16px', md: '40px', lg: '80px' }}
         pt={{ base: 32, lg: 16 }}
@@ -25,4 +27,14 @@ export default function Home() {
       </Box>
     </>
   );
+}
+
+export async function getStaticProps() {
+  const jobs = await ActiveJobsHero();
+
+  return {
+    props: {
+      jobs,
+    },
+  };
 }
