@@ -79,6 +79,7 @@ const Nav = () => {
                 bg: 'none',
               }}
               bg='none'
+              rounded='none'
               mr='4'
               onClick={() => router.push('login')}
             >

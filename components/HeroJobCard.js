@@ -34,7 +34,6 @@ export const HeroJobCard = ({ jobs }) => {
                   <Link
                     fontWeight='semibold'
                     letterSpacing='-.4px'
-                    ml='6'
                     letterSpacing='-.5px'
                   >
                     {job.title}
@@ -50,7 +49,7 @@ export const HeroJobCard = ({ jobs }) => {
             return (
               <div key={job.jobId}>
                 {' '}
-                <Text fontWeight='semibold' letterSpacing='-.4px'>
+                <Text fontWeight='semibold' letterSpacing='-.4px' mt='3'>
                   {job.governorate}
                 </Text>
               </div>

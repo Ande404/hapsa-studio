@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react';
 import { firebaseClient } from '../lib/firebase-client';
 import { useAuth } from '../context/auth';
 import { useRouter } from 'next/router';
-import { FcGoogle } from 'react-icons/fc';
-import { FaGithub } from 'react-icons/fa';
+import { FaFacebook, FaGoogle, FaTwitter } from 'react-icons/fa';
 import Nav from '../components/Nav';
 
 import {
@@ -23,6 +22,7 @@ import {
   SimpleGrid,
   InputGroup,
   Image,
+  VisuallyHidden,
 } from '@chakra-ui/react';
 
 const login = () => {
@@ -32,16 +32,24 @@ const login = () => {
   const { user } = useAuth();
   const router = useRouter();
 
+  console.log(user);
+
   const handleGoogleLogin = async () => {
     await firebaseClient
       .auth()
       .signInWithPopup(new firebaseClient.auth.GoogleAuthProvider());
   };
 
-  const handleGithubLogin = async () => {
+  const handleTwitterLogin = async () => {
     await firebaseClient
       .auth()
-      .signInWithRedirect(new firebaseClient.auth.GithubAuthProvider());
+      .signInWithRedirect(new firebaseClient.auth.TwitterAuthProvider());
+  };
+
+  const handleFacebookLogin = async () => {
+    await firebaseClient
+      .auth()
+      .signInWithRedirect(new firebaseClient.auth.FacebookAuthProvider());
   };
 
   useEffect(() => {
@@ -109,36 +117,68 @@ const login = () => {
             <hr style={{ border: '1px solid #edf2f7' }} />
           </Box>
 
-          {!user ? (
-            <SimpleGrid>
-              <Button
-                rounded='none'
-                leftIcon={<FcGoogle />}
-                bg='white'
-                _hover={{ backgroundColor: 'gray.50' }}
-                boxShadow='xs'
-                onClick={handleGoogleLogin}
-              >
-                Login with Google
-              </Button>
-              <Button
-                rounded='none'
-                color='white'
-                mt='6'
-                leftIcon={<FaGithub />}
-                bg='gray.800'
-                _hover={{ backgroundColor: 'black' }}
-                boxShadow='xs'
-                onClick={handleGithubLogin}
-              >
-                Login with Github
-              </Button>
-            </SimpleGrid>
-          ) : (
-            <Center>
-              <Spinner />
-            </Center>
-          )}
+          {/* <SimpleGrid>
+            <Button
+              rounded='none'
+              leftIcon={<FcGoogle />}
+              bg='white'
+              _hover={{ backgroundColor: 'gray.50' }}
+              boxShadow='xs'
+              onClick={handleGoogleLogin}
+            >
+              Login with Google
+            </Button>
+            <Button
+              rounded='none'
+              color='white'
+              mt='6'
+              leftIcon={<FaGithub />}
+              bg='gray.800'
+              _hover={{ backgroundColor: 'black' }}
+              boxShadow='xs'
+              onClick={handleGithubLogin}
+            >
+              Login with Github
+            </Button>
+            <Button
+              colorScheme='facebook'
+              rounded='none'
+              mt='6'
+              leftIcon={<FaFacebook />}
+              _hover={{ backgroundColor: 'black' }}
+              boxShadow='xs'
+              onClick={handleFacebookLogin}
+            >
+              Login with Facebook
+            </Button>
+          </SimpleGrid> */}
+
+          <SimpleGrid mt='6' columns={3} spacing='3'>
+            <Button
+              color='currentColor'
+              variant='outline'
+              onClick={handleFacebookLogin}
+            >
+              <VisuallyHidden>Login with Facebook</VisuallyHidden>
+              <FaFacebook />
+            </Button>
+            <Button
+              color='currentColor'
+              variant='outline'
+              onClick={handleGoogleLogin}
+            >
+              <VisuallyHidden>Login with Google</VisuallyHidden>
+              <FaGoogle />
+            </Button>
+            <Button
+              color='currentColor'
+              variant='outline'
+              onClick={handleTwitterLogin}
+            >
+              <VisuallyHidden>Login with Twitter</VisuallyHidden>
+              <FaTwitter />
+            </Button>
+          </SimpleGrid>
         </Flex>
       </Center>
     </div>
