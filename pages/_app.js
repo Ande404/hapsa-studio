@@ -42,6 +42,7 @@ export default function App({ Component, pageProps }) {
   );
 }
 
+// logs app metrics, useful later
 // export function reportWebVitals(metric) {
 //   console.log(metric);
 // }

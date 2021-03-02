@@ -22,25 +22,11 @@ const handler = nc()
       job,
     };
 
-    await NewApplication(application);
+    const newApp = await NewApplication(application);
 
     res.status(200).json({
       payload: 'working',
     });
-    // firebaseAdmin.admin
-    //   .auth()
-    //   .verifyIdToken(req.body.user)
-    //   .then((decodedToken) => {
-    //     res.status(200).json({
-    //       token: decodedToken,
-    //     });
-    //   })
-    //   .catch((error) => {
-    //     res.status(400).json({
-    //       token: 'none hoe',
-    //       err: error,
-    //     });
-    //   });
   })
   .put(async (req, res) => {
     res.end('async/await is also supported!');

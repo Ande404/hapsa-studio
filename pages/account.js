@@ -96,8 +96,11 @@ const account = (props) => {
                   ml='1'
                   href={
                     props.token.firebase.sign_in_provider === 'google.com'
-                      ? 'https://mail.google.com/mail/u/0/#'
-                      : 'noop'
+                      ? 'https://www.google.com/gmail/about/#'
+                      : props.token.firebase.sign_in_provider === 'twitter.com'
+                      ? 'https://twitter.com/login'
+                      : // this should also handle email, pass login
+                        '/'
                   }
                 >
                   provider
