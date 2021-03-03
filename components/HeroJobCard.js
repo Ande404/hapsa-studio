@@ -14,7 +14,7 @@ export const HeroJobCard = ({ jobs }) => {
   return (
     <div>
       <Box
-        transform='translateY(90%)'
+        transform='translateY(25%)'
         position='sticky'
         right={{ base: '16px', md: '40px', lg: '80px' }}
         boxShadow='sm'

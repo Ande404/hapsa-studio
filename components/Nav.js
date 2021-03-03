@@ -32,7 +32,7 @@ const Nav = () => {
     >
       <Box>
         <NextLink href='/'>
-          <Link>
+          <Link _hover={{ textDecor: 'none' }}>
             <Heading size='sm' fontWeight='bold' letterSpacing='-1px'>
               Hapsa
             </Heading>

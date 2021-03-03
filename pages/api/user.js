@@ -1,7 +1,7 @@
 import nc from 'next-connect';
 import morgan from 'morgan';
 import Cors from 'cors';
-import { firebaseAdmin } from '../../lib/admin';
+import { firebaseAdmin } from '../../lib/firebase-admin';
 
 const cors = Cors({
   methods: ['GET', 'POST', 'HEAD', 'PUT'],

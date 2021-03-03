@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-
+import { ChakraContainer } from '../../components/atoms/Container';
 import fetch from 'node-fetch';
 import { useAuth } from '../../context/auth';
 import { getAllJobId, getJobById } from '../../lib/firestore';
@@ -17,7 +17,6 @@ import {
   ButtonGroup,
   useClipboard,
 } from '@chakra-ui/react';
-import router from 'next/router';
 
 const Job = ({ job }) => {
   const router = useRouter();

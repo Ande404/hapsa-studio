@@ -1,6 +1,4 @@
-import styled from 'styled-components';
-import { up } from 'styled-breakpoints';
-import { ChakraContainer, Container } from './atoms/Container';
+import { ChakraContainer } from './atoms/Container';
 import {
   Box,
   Heading,
@@ -9,26 +7,19 @@ import {
   Link,
   Image,
   Center,
-  Button,
-  Input,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import TextLoop from 'react-text-loop';
-import { useRouter } from 'next/router';
-import { HeroJobCard } from './HeroJobCard';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import { Newsletter } from './Newsletter';
 
 export const Hero = ({ jobs }) => {
-  const router = useRouter();
-
   return (
     <ChakraContainer mt='20'>
       <Flex
         rounded='sm'
         bg='gray.100'
-        mt='6'
-        p='12'
+        p='8'
         justify='space-between'
         direction={{ base: 'column', lg: 'row' }}
         position='relative'
@@ -44,7 +35,7 @@ export const Hero = ({ jobs }) => {
                 fontWeight='semibold'
                 mb='4'
               >
-                Understand the basics of design and studying{' '}
+                Join our online career advice conference
                 <ArrowForwardIcon ml='2' />
               </Heading>
             </NextLink>
@@ -58,22 +49,23 @@ export const Hero = ({ jobs }) => {
             <Heading
               mt='6'
               size='2xl'
-              letterSpacing='-2px'
+              letterSpacing='-1px'
               fontWeight='bolder'
               lineHeight='1.1'
               color='gray.900'
             >
               Tired of painful job applications? We connect you with{' '}
               <TextLoop>
-                <Text color='blue.600'>ventures</Text>
+                <Text color='blue.600'>agencies</Text>
                 <Text color='blue.600'>recruiters</Text>
+                <Text color='blue.600'>business partners</Text>
               </TextLoop>
             </Heading>
 
             <Newsletter />
           </Flex>
         </Box>
-        <Center p={{ base: 8, lg: 0 }}>
+        <Center p={{ base: 8, lg: 0 }} position='relative'>
           <Image src='16.png' h={{ base: '220px', md: '280px', lg: '360px' }} />
         </Center>
 

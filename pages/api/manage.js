@@ -1,7 +1,7 @@
 import nc from 'next-connect';
 import cors from 'cors';
 import fetch from 'node-fetch';
-import { firebaseAdmin } from '../../lib/admin';
+import { firebaseAdmin } from '../../lib/firebase-admin';
 import { NewApplication } from '../../lib/firestore';
 const handler = nc()
   .use(cors())

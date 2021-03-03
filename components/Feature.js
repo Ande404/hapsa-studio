@@ -9,7 +9,7 @@ const cardsData = [
     bg: 'gray.900',
     header: 'Privacy-focused',
     info:
-      "We don't collect or share any information. We take that very seriously",
+      'We take that user privacy seriously. We do not collect or share any information',
   },
   {
     icon: <AtSignIcon size='20' />,
@@ -27,8 +27,8 @@ const cardsData = [
 ];
 const Feature = () => {
   return (
-    <ChakraContainer>
-      <SimpleGrid pt='10' columns={[1, 1, 3]} spacing='40px'>
+    <ChakraContainer mt='6'>
+      <SimpleGrid columns={[1, 1, 3]} spacing='40px'>
         {cardsData.map(({ icon, bg, header, info }) => {
           return (
             <Box key={header} rounded='lg' bg={bg} color='white' p='8'>
