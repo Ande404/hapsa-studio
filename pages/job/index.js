@@ -24,8 +24,7 @@ const Jobs = ({ jobs }) => {
         bg='gray.200'
         h='320px'
         mx={{ base: '24px', md: '40px', lg: '80px' }}
-        mt='8'
-        mb='16'
+        my='16'
       ></Box>
       <Grid
         px={{ base: '24px', md: '40px', lg: '80px' }}
@@ -39,7 +38,7 @@ const Jobs = ({ jobs }) => {
           maxH='420px'
           borderWidth='1px'
           w='100%'
-          rounded='none'
+          rounded='sm'
         >
           <Box p='4' w='100%'>
             <Text fontWeight='semibold' fontSize='lg'>
@@ -50,6 +49,7 @@ const Jobs = ({ jobs }) => {
               variant='outline'
               my='6'
               size='md'
+              fontSize='sm'
             />
           </Box>
         </GridItem>

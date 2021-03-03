@@ -115,7 +115,6 @@ const Nav = () => {
                 bg: 'gray.300',
               }}
               rounded='sm'
-              lt
               onClick={() => router.push('dashboard')}
             >
               Dashboard

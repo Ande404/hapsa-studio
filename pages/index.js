@@ -12,19 +12,8 @@ export default function Home({ jobs }) {
     <>
       <Nav />
       <Hero jobs={jobs} />
-      <Box
-        px={{ base: '16px', md: '40px', lg: '160px' }}
-        pt={{ base: 32, lg: 16 }}
-      >
-        <Heading
-          size='md'
-          letterSpacing='-.4px'
-          fontWeight='semibold'
-          lineHeight='1.1'
-        >
-          Opportunity at no cost
-        </Heading>
-      </Box>
+
+      <Feature />
     </>
   );
 }

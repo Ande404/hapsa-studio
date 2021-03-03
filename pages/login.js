@@ -16,13 +16,12 @@ import {
   Grid,
   GridItem,
   Center,
-  Spinner,
   FormLabel,
   InputRightElement,
   SimpleGrid,
   InputGroup,
-  Image,
   VisuallyHidden,
+  Text,
 } from '@chakra-ui/react';
 
 const login = () => {
@@ -59,7 +58,7 @@ const login = () => {
   return (
     <div>
       <Nav />
-      <Center bg='gray.100' py={{ base: 0, md: 6, lg: 8 }}>
+      <Center bg='gray.100' py={{ base: 0, md: 6, lg: 8 }} height='100vh'>
         <Flex
           w={{ base: '100%', lg: '420px' }}
           bg='white'
@@ -107,55 +106,20 @@ const login = () => {
                 Trouble signing in?
               </Link>
             </Box>
-            <Button rounded='none' type='submit' w='100%' mt='10'>
+            <Button rounded='sm' type='submit' w='100%' mt='10'>
               Sign up
             </Button>
           </form>
           <Box py='12'>
             <hr style={{ border: '1px solid #edf2f7' }} />
           </Box>
-
-          {/* <SimpleGrid>
-            <Button
-              rounded='none'
-              leftIcon={<FcGoogle />}
-              bg='white'
-              _hover={{ backgroundColor: 'gray.50' }}
-              boxShadow='xs'
-              onClick={handleGoogleLogin}
-            >
-              Login with Google
-            </Button>
-            <Button
-              rounded='none'
-              color='white'
-              mt='6'
-              leftIcon={<FaGithub />}
-              bg='gray.800'
-              _hover={{ backgroundColor: 'black' }}
-              boxShadow='xs'
-              onClick={handleGithubLogin}
-            >
-              Login with Github
-            </Button>
-            <Button
-              colorScheme='facebook'
-              rounded='none'
-              mt='6'
-              leftIcon={<FaFacebook />}
-              _hover={{ backgroundColor: 'black' }}
-              boxShadow='xs'
-              onClick={handleFacebookLogin}
-            >
-              Login with Facebook
-            </Button>
-          </SimpleGrid> */}
-
+          <Text>Or continue with</Text>
           <SimpleGrid mt='6' columns={3} spacing='3'>
             <Button
               color='currentColor'
               variant='outline'
               onClick={handleFacebookLogin}
+              rounded='sm'
             >
               <VisuallyHidden>Login with Facebook</VisuallyHidden>
               <FaFacebook />
