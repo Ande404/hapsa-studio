@@ -7,7 +7,9 @@ import {
   SimpleGrid,
   GridItem,
   Tag,
+  Text,
   TagLabel,
+  Input,
 } from '@chakra-ui/react';
 import Nav from '../../components/Nav';
 import { getAllJobId } from '../../lib/firestore';
@@ -28,11 +30,27 @@ const Jobs = ({ jobs }) => {
       <Grid
         px={{ base: '24px', md: '40px', lg: '80px' }}
         templateRows='repeat(1, 1fr)'
-        templateColumns={{ base: 'inherit', lg: 'repeat(5, 1fr)' }}
+        templateColumns={{ base: 'inherit', lg: 'repeat(8, 1fr)' }}
+        py='16'
+        gridRowGap='16'
       >
-        <GridItem colSpan={1} bg='gray.400' maxH='420px'>
-          <Box p='6' w='100%'>
-            hi
+        <GridItem
+          colSpan={2}
+          maxH='420px'
+          borderWidth='1px'
+          w='100%'
+          rounded='none'
+        >
+          <Box p='4' w='100%'>
+            <Text fontWeight='semibold' fontSize='lg'>
+              Filter
+            </Text>
+            <Input
+              placeholder='Search by title or company'
+              variant='outline'
+              my='6'
+              size='md'
+            />
           </Box>
         </GridItem>
         <GridItem
@@ -40,11 +58,14 @@ const Jobs = ({ jobs }) => {
           mt={{ base: '16', lg: 0 }}
           ml={{ base: 0, lg: 16 }}
         >
-          <Heading letterSpacing='-1px' pb='12' size='lg'>
+          <Heading letterSpacing='-1px' pb='12' size='md' fontWeight='semibold'>
             Recently Posted
           </Heading>
 
           <JobListing jobs={jobs} />
+        </GridItem>
+        <GridItem colSpan={2}>
+          <Box>hello</Box>
         </GridItem>
       </Grid>
     </div>

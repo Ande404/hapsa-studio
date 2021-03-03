@@ -1,26 +1,17 @@
 import { useState, useEffect } from 'react';
+import fetch from 'node-fetch';
+import { useAuth } from '../../context/auth';
+import { getAllJobId, getJobById } from '../../lib/firestore';
+import Nav from '../../components/Nav';
+import { FaFacebook, FaTwitter } from 'react-icons/fa';
 import {
-  Box,
   Heading,
   Text,
-  Flex,
-  Tag,
-  TagLabel,
-  TagLeftIcon,
-  TagRightIcon,
-  TagCloseButton,
-  HStack,
   GridItem,
   Button,
   Grid,
+  ButtonGroup,
 } from '@chakra-ui/react';
-import { FiBriefcase } from 'react-icons/fi';
-import { useRouter } from 'next/router';
-import { getAllJobId, getJobById } from '../../lib/firestore';
-import NextLink from 'next/link';
-import Nav from '../../components/Nav';
-import { useAuth } from '../../context/auth';
-import fetch from 'node-fetch';
 
 const Job = ({ job }) => {
   const [applyPayload, setApplyPayload] = useState({});
@@ -52,6 +43,7 @@ const Job = ({ job }) => {
   return (
     <div>
       <Nav />
+
       <Grid
         mt='16'
         templateColumns={{ base: '1fr', lg: '2fr 1fr' }}
@@ -60,14 +52,15 @@ const Job = ({ job }) => {
       >
         <GridItem rowSpan={2}>
           <Heading letterSpacing='-1.2px'>{job?.title}</Heading>
-          <HStack spacing={4} py='2'>
-            {job?.industry_tags.map((tag) => (
-              <Tag size='md' key={tag} variant='solid' colorScheme='blue'>
-                <TagLeftIcon as={FiBriefcase} />
-                <TagLabel> {tag}</TagLabel>
-              </Tag>
-            ))}
-          </HStack>
+
+          <ButtonGroup variant='outline' spacing='6' my='6'>
+            <Button colorScheme='facebook' size='sm' leftIcon={<FaFacebook />}>
+              Share on Facebook
+            </Button>
+            <Button size='sm' colorScheme='twitter' leftIcon={<FaTwitter />}>
+              Share on Twitter
+            </Button>
+          </ButtonGroup>
           <Text>{job?.governorate}</Text>
           <Text>{job?.descripton}</Text>
           <Text>{job?.recruiter}</Text>
@@ -79,7 +72,9 @@ const Job = ({ job }) => {
           <Heading size='md' letterSpacing='-.6px'>
             Angela Cosmos
           </Heading>
-          <Button onClick={() => sendApplication()}>Apply Now</Button>
+          <Button onClick={() => sendApplication()} my='4'>
+            Apply Now
+          </Button>
         </GridItem>
       </Grid>
     </div>

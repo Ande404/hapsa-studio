@@ -1,8 +1,9 @@
 import nookies from 'nookies';
-import { firebaseAdmin } from '../lib/admin';
+import { firebaseAdmin } from '../lib/firebase-admin';
 import { firebaseClient } from '../lib/firebase-client';
 import Nav from '../components/Nav';
-import { Box } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
+import Form from '../components/Form';
 export async function getServerSideProps(ctx) {
   try {
     const cookies = nookies.get(ctx);
@@ -32,7 +33,10 @@ const dashboard = ({ token }) => {
   return (
     <>
       <Nav status={token} logout={logout} />
-      <Box px={{ base: '24px', md: '40px', lg: '80px' }}></Box>
+      <Box px={{ base: '24px', md: '40px', lg: '80px' }}>
+        <Text>Applied Jobs:</Text>
+      </Box>
+      <Form />
     </>
   );
 };

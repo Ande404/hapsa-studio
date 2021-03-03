@@ -1,5 +1,5 @@
 import nookies from 'nookies';
-import { firebaseAdmin } from '../lib/admin';
+import { firebaseAdmin } from '../lib/firebase-admin';
 import { firebaseClient } from '../lib/firebase-client';
 import Nav from '../components/Nav';
 import NextLink from 'next/link';
@@ -12,19 +12,12 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   Button,
-  BreadcrumbSeparator,
-  Tabs,
-  TabList,
-  TabPanels,
-  Tab,
-  TabPanel,
   Image,
-  Badge,
   Alert,
   AlertIcon,
-  AlertTitle,
-  AlertDescription,
   Text,
+  VStack,
+  HStack,
 } from '@chakra-ui/react';
 import { AccountMenu } from '../components/AccountMenu';
 import { AccountTab } from '../components/AccountTab';
@@ -32,13 +25,11 @@ import { AccountTab } from '../components/AccountTab';
 export async function getServerSideProps(ctx) {
   try {
     const cookies = nookies.get(ctx);
-    const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
-    const { uid, email, name } = token;
+    const user = await firebaseAdmin.auth().verifyIdToken(cookies.token);
 
     return {
       props: {
-        message: `Welcome ${name}. Your email is ${email} and your UID is ${uid}.`,
-        token,
+        user,
       },
     };
   } catch (err) {
@@ -69,23 +60,23 @@ const tabData = [
   },
 ];
 
-const account = (props) => {
+const account = ({ user }) => {
   const logout = async () => {
     await firebaseClient.auth().signOut();
     window.location.href = '/';
   };
-  const { name, email, picture } = props?.token;
+  const { name, picture } = user;
   return (
     <>
-      <Nav status={props.token} />
+      {/* <Nav status={props.token} /> */}
 
       <Box
         px={{ base: '24px', md: '40px', lg: '80px' }}
         bg='gray.100'
-        h='620px'
+        h='100vh'
       >
         <Box py='6'>
-          {!props.token.email_verified && (
+          {!user.email_verified && (
             <Alert status='warning'>
               <AlertIcon />
               Please verify your email address through your
@@ -95,12 +86,11 @@ const account = (props) => {
                   // feels good to be a gangsta
                   ml='1'
                   href={
-                    props.token.firebase.sign_in_provider === 'google.com'
+                    user.firebase.sign_in_provider === 'google.com'
                       ? 'https://www.google.com/gmail/about/#'
-                      : props.token.firebase.sign_in_provider === 'twitter.com'
+                      : user.firebase.sign_in_provider === 'twitter.com'
                       ? 'https://twitter.com/login'
-                      : // this should also handle email, pass login
-                        '/'
+                      : 'https://fb.com/login'
                   }
                 >
                   provider
@@ -126,15 +116,12 @@ const account = (props) => {
             </NextLink>
           </BreadcrumbItem>
         </Breadcrumb>
-
-        {/* <AccountTab data={tabData} /> */}
-
         <Flex>
-          <Box mt='6' bg='white' w='100%' p='8' h='100%'>
-            <Box mb='4'>
+          <Box mt='6' bg='white' w='100%' p='8' h='100%' rounded='lg'>
+            <Box>
               <Image
                 borderRadius='full'
-                boxSize='80px'
+                boxSize='65px'
                 src={picture}
                 alt={name}
               />
@@ -145,20 +132,21 @@ const account = (props) => {
               letterSpacing='-.8px'
               fontWeight='700'
               lineHeight='1.1'
+              my='4'
             >
               {name}
             </Heading>
             <Button
-              mt='12'
               onClick={logout}
               bg='gray.900'
               color='gray.100'
-              mb='12'
+              _hover={{ bg: 'gray.300', color: 'gray.900' }}
             >
               Log out
             </Button>
           </Box>
         </Flex>
+        {/* <AccountTab data={tabData} /> */}
       </Box>
     </>
   );

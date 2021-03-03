@@ -14,16 +14,16 @@ export const HeroJobCard = ({ jobs }) => {
   return (
     <div>
       <Box
-        transform='translateY(45%)'
+        transform='translateY(90%)'
         position='sticky'
         right={{ base: '16px', md: '40px', lg: '80px' }}
         boxShadow='sm'
-        bg='gray.500'
-        // bg='rgb(216,236,241)'
+        bg='linear-gradient(202deg, rgba(2,0,36,1) 0%, rgba(19,19,71,1) 60%, rgba(0,0,0,1) 100%)'
         p={{ base: 4, lg: 8 }}
         w={{ base: '100%', lg: '420px' }}
         minHeight='320px'
         color='rgb(216,236,241)'
+        rounded='sm'
       >
         {/* this is a sin but it will do for now */}
         <TextLoop interval='5500'>

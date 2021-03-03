@@ -32,8 +32,6 @@ const login = () => {
   const { user } = useAuth();
   const router = useRouter();
 
-  console.log(user);
-
   const handleGoogleLogin = async () => {
     await firebaseClient
       .auth()
