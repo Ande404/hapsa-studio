@@ -19,7 +19,7 @@ export const Hero = ({ jobs }) => {
       <Flex
         rounded='sm'
         bg='gray.100'
-        p='8'
+        p={{ base: 4, lg: 8 }}
         justify='space-between'
         direction={{ base: 'column', lg: 'row' }}
         position='relative'
@@ -27,29 +27,9 @@ export const Hero = ({ jobs }) => {
       >
         <Box>
           <Flex direction='column' w={{ base: '100%', lg: '620px' }}>
-            <NextLink href='/career-advice'>
-              <Heading
-                as={Link}
-                size='md'
-                letterSpacing='-.8px'
-                fontWeight='semibold'
-                mb='4'
-              >
-                Join our online career advice conference
-                <ArrowForwardIcon ml='2' />
-              </Heading>
-            </NextLink>
-            <hr
-              style={{
-                borderTop: '2px solid black',
-                marginBottom: '2rem',
-              }}
-            />
-
             <Heading
-              mt='6'
               size='2xl'
-              letterSpacing='-1px'
+              letterSpacing='-1.6px'
               fontWeight='bolder'
               lineHeight='1.1'
               color='gray.900'

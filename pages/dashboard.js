@@ -13,10 +13,11 @@ import {
   Heading,
 } from '@chakra-ui/react';
 import { StatCard } from '../components/StatCard';
+
 const data = [
   { label: 'Submitted Applications', value: '19' },
   { label: 'Response Rate', value: '56.87%' },
-  { label: 'Profiel Views', value: '2,152' },
+  { label: 'Profile Views', value: '2,152' },
 ];
 
 export async function getServerSideProps(ctx) {
@@ -50,17 +51,22 @@ const dashboard = ({ token }) => {
       <Nav status={token} logout={logout} />
       <Box px={{ base: '16px', md: '40px', lg: '160px' }} mt='20'>
         <Heading size='md'>Dashboard</Heading>
-        <Box as='section' bg='gray.50' p='10' mt='4'>
-          <Box maxW='7xl' mx='auto' px={{ base: '6', md: '8' }}>
-            <SimpleGrid columns={{ base: 1, md: 3 }} spacing='6'>
-              {data.map((stat, idx) => (
-                <StatCard key={idx} data={stat} />
-              ))}
-            </SimpleGrid>
-          </Box>
-        </Box>
+
+        <SimpleGrid
+          as='section'
+          p='10'
+          mt='4'
+          columns={{ base: 1, md: 3 }}
+          spacing='6'
+          maxW='7xl'
+          bg='gray.50'
+          px={{ base: '6', md: '8' }}
+        >
+          {data.map((stat, idx) => (
+            <StatCard key={idx} data={stat} />
+          ))}
+        </SimpleGrid>
       </Box>
-      {/* <Form /> */}
     </>
   );
 };

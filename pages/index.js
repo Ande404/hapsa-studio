@@ -6,9 +6,13 @@ import Head from 'next/head';
 import { Hero } from '../components/Hero';
 import Feature from '../components/Feature';
 import { ActiveJobsHero } from '../lib/firestore';
+
 export default function Home({ jobs }) {
   return (
     <>
+      <Head>
+        <title>Hapsa Studio</title>
+      </Head>
       <Nav />
       <Hero jobs={jobs} />
       <Feature />

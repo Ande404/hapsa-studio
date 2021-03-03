@@ -20,7 +20,7 @@ export const Newsletter = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormControl isInvalid={errors.name} id='email'>
-        <Flex py='4' pt='12'>
+        <Flex py='4' pt='12' direction={{ base: 'column', lg: 'row' }}>
           <Box>
             <Input
               name='email'
@@ -44,13 +44,14 @@ export const Newsletter = () => {
             type='submit'
             size='md'
             fontSize='sm'
-            bg='gray.700'
+            bg='gray.900'
             color='gray.100'
             _hover={{
               color: 'gray.100',
-              bg: 'gray.900',
+              bg: 'gray.700',
             }}
-            ml='4'
+            ml={{ base: 0, lg: 4 }}
+            mt={{ base: 8, lg: 0 }}
             isLoading={formState.isSubmitting}
           >
             Get notified
