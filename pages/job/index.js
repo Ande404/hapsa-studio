@@ -1,19 +1,6 @@
-import {
-  Box,
-  Heading,
-  Link,
-  Grid,
-  Flex,
-  SimpleGrid,
-  GridItem,
-  Tag,
-  Text,
-  TagLabel,
-  Input,
-} from '@chakra-ui/react';
+import { Box, Heading, Grid, GridItem, Text, Input } from '@chakra-ui/react';
 import Nav from '../../components/Nav';
 import { getAllJobId } from '../../lib/firestore';
-import NextLink from 'next/link';
 import JobListing from '../../components/JobListing';
 
 const Jobs = ({ jobs }) => {
@@ -24,7 +11,7 @@ const Jobs = ({ jobs }) => {
         bg='gray.200'
         h='320px'
         mx={{ base: '24px', md: '40px', lg: '80px' }}
-        my='16'
+        mb='16'
       ></Box>
       <Grid
         px={{ base: '24px', md: '40px', lg: '80px' }}

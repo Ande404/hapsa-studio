@@ -1,5 +1,4 @@
 import { useForm } from 'react-hook-form';
-
 import {
   Input,
   Button,
@@ -8,6 +7,9 @@ import {
   FormErrorMessage,
   FormHelperText,
   Alert,
+  InputGroup,
+  InputRightElement,
+  Flex,
 } from '@chakra-ui/react';
 
 export const Newsletter = () => {
@@ -17,39 +19,44 @@ export const Newsletter = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Box py='4' pt='12'>
-        <FormControl isInvalid={errors.name} id='email'>
-          <Input
-            name='email'
-            w={{ base: '100%', md: '65%' }}
-            type='email'
-            placeholder='Email Address'
-            ref={register({ required: true })}
-          />
-          <FormErrorMessage>
-            {errors.name && errors.name.message}
-          </FormErrorMessage>
-          <FormHelperText>
-            New job offers - are the only emails you will recieve!
-          </FormHelperText>
+      <FormControl isInvalid={errors.name} id='email'>
+        <Flex py='4' pt='12'>
+          <Box>
+            <Input
+              name='email'
+              variant='flushed'
+              w={{ base: '100%', md: '320px' }}
+              type='email'
+              placeholder='Email Address'
+              ref={register({ required: true })}
+            />
+
+            <FormErrorMessage>
+              {errors.name && errors.name.message}
+            </FormErrorMessage>
+            <FormHelperText fontSize='xs' mt='4'>
+              New job offers - are the only emails you will recieve!
+            </FormHelperText>
+          </Box>
 
           <Button
             w={{ base: '100%', md: 'auto' }}
             type='submit'
             size='md'
+            fontSize='sm'
             bg='gray.700'
             color='gray.100'
             _hover={{
               color: 'gray.100',
               bg: 'gray.900',
             }}
-            mt='6'
+            ml='4'
             isLoading={formState.isSubmitting}
           >
             Get notified
           </Button>
-        </FormControl>
-      </Box>
+        </Flex>
+      </FormControl>
     </form>
   );
 };

@@ -33,7 +33,7 @@ const dashboard = ({ token }) => {
   return (
     <>
       <Nav status={token} logout={logout} />
-      <Box px={{ base: '24px', md: '40px', lg: '80px' }}>
+      <Box px={{ base: '16px', md: '40px', lg: '160px' }}>
         <Text>Applied Jobs:</Text>
       </Box>
       <Form />
