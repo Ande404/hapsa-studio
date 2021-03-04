@@ -8,8 +8,7 @@ const cardsData = [
     icon: <FiShield size='20' />,
     bg: 'gray.900',
     header: 'Privacy-focused',
-    info:
-      'We take that user privacy seriously. We do not collect or share any information',
+    info: 'We do not collect or share any information',
   },
   {
     icon: <AtSignIcon size='20' />,
@@ -21,13 +20,12 @@ const cardsData = [
     icon: <FiFeather size='20' />,
     bg: 'gray.900',
     header: 'Career Advice',
-    info:
-      'Learn from industry professional and recruiters to increase your chance',
+    info: 'Learn from industry professional and recruiters',
   },
 ];
 const Feature = () => {
   return (
-    <ChakraContainer mt='10'>
+    <ChakraContainer mt='8'>
       <SimpleGrid columns={[1, 1, 3]} spacing='40px'>
         {cardsData.map(({ icon, bg, header, info }) => {
           return (

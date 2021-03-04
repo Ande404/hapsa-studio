@@ -5,7 +5,9 @@ import { Button, Box, Flex, Image, Heading, Link } from '@chakra-ui/react';
 
 const Nav = () => {
   const { user } = useAuth();
+
   const router = useRouter();
+  console.log(router);
 
   return (
     <Flex
@@ -87,18 +89,19 @@ const Nav = () => {
           <div>
             <Button
               size='sm'
+              bg='rgb(92,52,226)'
+              color='gray.100'
               _hover={{
-                bg: 'none',
-                color: 'gray.300',
+                bg: 'rgb(90,42,200)',
               }}
-              bg='none'
-              rounded='none'
+              rounded='sm'
               mr='4'
               onClick={() => router.push('login')}
             >
               Sign up
             </Button>
             <Button
+              display={router.asPath !== 'login' ? 'none' : 'inherit'}
               size='sm'
               color='gray.900'
               bg='gray.200'

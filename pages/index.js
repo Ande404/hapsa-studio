@@ -1,5 +1,4 @@
 import Nav from '../components/Nav';
-
 import Head from 'next/head';
 import { Hero } from '../components/Hero';
 import Feature from '../components/Feature';
@@ -20,7 +19,6 @@ export default function Home({ jobs }) {
 
 export async function getStaticProps() {
   const jobs = await ActiveJobsHero();
-
   return {
     props: {
       jobs,

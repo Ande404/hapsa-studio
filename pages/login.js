@@ -76,7 +76,7 @@ const login = () => {
             <FormControl id='email' isRequired>
               <FormLabel>Email address</FormLabel>
               <Input
-                rounded='none'
+                rounded='sm'
                 id='email'
                 type='email'
                 name='Email'
@@ -87,7 +87,7 @@ const login = () => {
               <FormLabel>Password</FormLabel>
               <InputGroup size='md'>
                 <Input
-                  rounded='none'
+                  rounded='sm'
                   pr='4.5rem'
                   name='password'
                   type={show ? 'text' : 'password'}

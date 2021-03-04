@@ -18,7 +18,7 @@ export const Hero = ({ jobs }) => {
     <ChakraContainer mt='20'>
       <Flex
         rounded='sm'
-        bg='gray.100'
+        bg='rgb(216,236,241)'
         p={{ base: 4, lg: 8 }}
         justify='space-between'
         direction={{ base: 'column', lg: 'row' }}
@@ -46,15 +46,19 @@ export const Hero = ({ jobs }) => {
               letterSpacing='-1.6px'
               fontWeight='bolder'
               lineHeight='1.1'
-              color='gray.900'
+              color='black'
             >
               Tired of painful job applications? We connect you with{' '}
               <TextLoop>
-                <Text color='blue.600'>agencies</Text>
-                <Text color='blue.600'>recruiters</Text>
-                <Text color='blue.600'>business partners</Text>
+                <Text color='rgb(92,52,226)'>agencies</Text>
+                <Text color='rgb(92,52,226)'>recruiters</Text>
+                <Text color='rgb(92,52,226)'>business partners</Text>
               </TextLoop>
             </Heading>
+
+            <Box mt='8'>
+              <Text>Get notified when we lauch our beta program</Text>
+            </Box>
 
             <Newsletter />
           </Flex>

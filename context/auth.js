@@ -3,7 +3,7 @@ import { firebaseClient } from '../lib/firebase-client';
 import { createUser } from '../lib/firestore';
 import nookies from 'nookies';
 import { timestampAuth } from '../util/time';
-// const fetch = require('node-fetch');
+const fetch = require('node-fetch');
 
 const AuthContext = createContext({
   user: null,
@@ -35,6 +35,12 @@ export function AuthProvider({ children }) {
 
         setUser(saveUser);
 
+        // fetch('http://127.0.0.1:8080/api/v1/auth', {
+        //   method: 'get',
+        //   headers: { Authorization: token },
+        // })
+        //   .then((res) => res.json())
+        //   .then((json) => console.log(json));
         createUser(idToken.uid, saveUser);
 
         nookies.destroy(null, 'token');
@@ -51,9 +57,9 @@ export function AuthProvider({ children }) {
 
       if (user) await user.getIdToken(true);
     }, 10 * 60 * 1000);
+
     return () => clearInterval(handle);
   }, []);
-
   return (
     <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
   );
