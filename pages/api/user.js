@@ -19,9 +19,9 @@ const handler = nc({ onError, onNoMatch })
   .use(morgan('tiny'), cors)
 
   .post(async (req, res) => {
-    if (!req.body) {
-      res.status(404).end('request body is not found... or is it');
-    }
+    // if (!req.body) {
+    //   res.status(404).end('request body is not found... or is it');
+    // }
 
     await firebaseAdmin
       .auth()

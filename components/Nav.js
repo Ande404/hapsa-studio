@@ -1,16 +1,8 @@
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 import { useAuth } from '../context/auth';
-import { FiTriangle } from 'react-icons/fi';
-import {
-  Button,
-  Box,
-  Flex,
-  Spacer,
-  Image,
-  Heading,
-  Link,
-} from '@chakra-ui/react';
+import { Button, Box, Flex, Image, Heading, Link } from '@chakra-ui/react';
+
 const Nav = () => {
   const { user } = useAuth();
   const router = useRouter();

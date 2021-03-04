@@ -79,7 +79,7 @@ const Jobs = ({ jobs }) => {
                   _hover={{
                     bg: 'gray.300',
                   }}
-                  rounded='sm'
+                  rounded='md'
                   onClick={() => alert('beep')}
                 >
                   Filter
@@ -90,7 +90,7 @@ const Jobs = ({ jobs }) => {
           <GridItem
             colSpan={6}
             mt={{ base: '16', lg: 0 }}
-            ml={{ base: 0, lg: 16 }}
+            ml={{ base: 0, lg: 10 }}
           >
             <Heading
               letterSpacing='-1px'

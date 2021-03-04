@@ -1,28 +1,14 @@
 import NextLink from 'next/link';
-
-const Banner = () => {
+export const Banner = ({ children, arrow }) => {
   return (
     <div>
-      <NextLink href='/career-advice'>
-        <Heading
-          as={Link}
-          size='md'
-          letterSpacing='-.8px'
-          fontWeight='semibold'
-          mb='4'
-        >
-          Join our online career advice conference
-          <ArrowForwardIcon ml='2' />
-        </Heading>
-      </NextLink>
+      <NextLink href='/career-advice'>{children}</NextLink>
       <hr
         style={{
           borderTop: '2px solid black',
-          marginBottom: '2rem',
+          marginTop: '10px',
         }}
       />
     </div>
   );
 };
-
-export default Banner;

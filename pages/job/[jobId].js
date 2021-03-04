@@ -16,6 +16,8 @@ import {
   Flex,
   ButtonGroup,
   useClipboard,
+  Image,
+  Spacer,
 } from '@chakra-ui/react';
 
 const Job = ({ job }) => {
@@ -63,12 +65,16 @@ const Job = ({ job }) => {
       <Nav />
 
       <ChakraContainer>
-        <Grid mt='20' templateColumns={{ base: '1fr', lg: '2fr 1fr' }} gap='20'>
+        <Grid mt='28' templateColumns={{ base: '1fr', lg: '2fr 1fr' }} gap='20'>
           <GridItem rowSpan={2}>
             <Heading letterSpacing='-1.2px'>{job?.title}</Heading>
 
-            <ButtonGroup variant='outline' spacing='6' my='6'>
-              <Flex direction={{ base: 'column', lg: 'row' }}>
+            <ButtonGroup variant='outline' spacing='6' my='8'>
+              <Flex
+                direction={{ base: 'column', lg: 'row' }}
+                justify='center'
+                align={{ base: 'start', lg: 'center' }}
+              >
                 <Button
                   colorScheme='facebook'
                   size='sm'
@@ -76,16 +82,17 @@ const Job = ({ job }) => {
                 >
                   Share on Facebook
                 </Button>
+
                 <Button
-                  ml='3'
                   size='sm'
                   colorScheme='twitter'
                   leftIcon={<FaTwitter />}
+                  mx={{ base: 0, lg: 2 }}
+                  my={{ base: 2, lg: 0 }}
                 >
                   Share on Twitter
                 </Button>
                 <Button
-                  ml='3'
                   size='sm'
                   colorScheme='black'
                   leftIcon={<CopyIcon />}
@@ -96,18 +103,59 @@ const Job = ({ job }) => {
               </Flex>
             </ButtonGroup>
 
-            <Text>{job?.governorate}</Text>
             <Text>{job?.descripton}</Text>
-            <Text>{job?.recruiter}</Text>
           </GridItem>
           <GridItem borderWidth='1px' p='4' rounded='lg'>
-            <Text fontSize='sm' pb='2'>
+            <Image
+              borderRadius='full'
+              boxSize='65px'
+              src='https://logos-download.com/wp-content/uploads/2016/11/EA_logo_black.png'
+              alt='some-alt'
+            />
+            <Text fontSize='sm' mt='4'>
               Recruiter
             </Text>
-            <Heading size='md' letterSpacing='-.6px'>
-              Angela Cosmos
+            <Heading size='md' letterSpacing='-.2px' mt='2'>
+              {job?.recruiter}
             </Heading>
-            <Button onClick={() => sendApplication()} my='4'>
+
+            <Text fontSize='sm' pt='4'>
+              Job Type
+            </Text>
+
+            <Heading size='md' letterSpacing='-.2px' mt='2'>
+              {job?.job_type}
+            </Heading>
+
+            <Text fontSize='sm' pt='4'>
+              Location
+            </Text>
+
+            <Heading size='md' letterSpacing='-.2px' mt='2'>
+              {job?.governorate}
+            </Heading>
+
+            <Text fontSize='sm' pt='4'>
+              Career level
+            </Text>
+
+            <Heading size='md' letterSpacing='-.2px' mt='2'>
+              {job?.career_level}
+            </Heading>
+
+            <Button
+              onClick={() => sendApplication()}
+              w={{ base: '100%', md: 'auto' }}
+              type='submit'
+              size='md'
+              bg='gray.900'
+              color='gray.100'
+              _hover={{
+                color: 'gray.100',
+                bg: 'gray.700',
+              }}
+              mt='8'
+            >
               Apply Now
             </Button>
           </GridItem>

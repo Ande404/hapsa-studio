@@ -12,7 +12,7 @@ import NextLink from 'next/link';
 import TextLoop from 'react-text-loop';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 import { Newsletter } from './Newsletter';
-
+import { Banner } from './Banner';
 export const Hero = ({ jobs }) => {
   return (
     <ChakraContainer mt='20'>
@@ -26,7 +26,21 @@ export const Hero = ({ jobs }) => {
         rounded='lg'
       >
         <Box>
-          <Flex direction='column' w={{ base: '100%', lg: '620px' }}>
+          <Banner arrow='right'>
+            <div>
+              <Heading
+                as={Link}
+                size='md'
+                letterSpacing='-.8px'
+                fontWeight='semibold'
+                mb='4'
+              >
+                Join our first online hackathon with friends
+              </Heading>
+              <ArrowForwardIcon ml='2' />
+            </div>
+          </Banner>
+          <Flex mt='14' direction='column' w={{ base: '100%', lg: '620px' }}>
             <Heading
               size='2xl'
               letterSpacing='-1.6px'

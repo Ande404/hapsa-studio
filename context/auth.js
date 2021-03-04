@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext, createContext } from 'react';
 import { firebaseClient } from '../lib/firebase-client';
 import { createUser } from '../lib/firestore';
 import nookies from 'nookies';
+import { timestampAuth } from '../util/time';
+// const fetch = require('node-fetch');
 
 const AuthContext = createContext({
   user: null,
@@ -14,9 +16,9 @@ export function AuthProvider({ children }) {
     if (typeof window !== undefined) {
       window.nookies = nookies;
     }
-    return firebaseClient.auth().onIdTokenChanged(async (user) => {
+    return firebaseClient.auth().onIdTokenChanged(async (idToken) => {
       console.log(`token updated!`);
-      if (!user) {
+      if (!idToken) {
         console.log(`no token found...`);
 
         setUser(null);
@@ -28,12 +30,12 @@ export function AuthProvider({ children }) {
       } else {
         console.log(`updating token...`);
 
-        const token = await user.getIdToken();
-        const saveUser = formatUser(user);
+        const token = await idToken.getIdToken();
+        const saveUser = formatUser(idToken);
 
         setUser(saveUser);
 
-        createUser(user.uid, saveUser);
+        createUser(idToken.uid, saveUser);
 
         nookies.destroy(null, 'token');
         nookies.set(null, 'token', token, {});

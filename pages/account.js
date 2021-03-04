@@ -25,7 +25,9 @@ import {
   Tr,
   Th,
   Td,
+  Badge,
   TableCaption,
+  Spacer,
 } from '@chakra-ui/react';
 import { AccountMenu } from '../components/AccountMenu';
 import { AccountTab } from '../components/AccountTab';
@@ -104,7 +106,7 @@ const account = ({ user }) => {
               </Alert>
             )}
           </Box>
-          {/* <Breadcrumb fontSize='sm' fontWeight='medium'>
+          <Breadcrumb fontSize='sm' fontWeight='medium' mt='6'>
             <BreadcrumbItem isCurrentPage>
               <NextLink href='/dashboard' passHref>
                 <BreadcrumbLink as={Link} _hover={{ textDecoration: 'none' }}>
@@ -120,36 +122,95 @@ const account = ({ user }) => {
                 </BreadcrumbLink>
               </NextLink>
             </BreadcrumbItem>
-          </Breadcrumb> */}
+          </Breadcrumb>
+
           <Flex>
             <Box mt='8' bg='gray.50' w='100%' p='8' h='100%' rounded='lg'>
-              <Box mb='6'>
-                <Image
-                  borderRadius='full'
-                  boxSize='65px'
-                  src={picture}
-                  alt={name}
-                />
-              </Box>
+              <Flex direction='row' mb='6'>
+                <Box>
+                  <Image
+                    borderRadius='full'
+                    boxSize='65px'
+                    src={picture}
+                    alt={name}
+                  />
+                </Box>
 
-              <Heading
-                size='lg'
-                letterSpacing='-.8px'
-                fontWeight='700'
-                lineHeight='1.1'
-                my='4'
-              >
-                {name}
-              </Heading>
+                <Box flex='1' ml='4'>
+                  <Heading
+                    size='lg'
+                    letterSpacing='-.8px'
+                    fontWeight='700'
+                    lineHeight='1.1'
+                    my='2'
+                  >
+                    {name}
+                  </Heading>
+                  <Badge colorScheme='green'>Applicant</Badge>
+                </Box>
+              </Flex>
 
-              <Button
-                onClick={logout}
-                bg='gray.900'
-                color='gray.100'
-                _hover={{ bg: 'gray.300', color: 'gray.900' }}
+              <Table
+                variant='simple'
+                mt='12'
+                variant='striped'
+                colorScheme='gray.50'
               >
-                Log out
-              </Button>
+                <TableCaption>
+                  Please check your email after each decision to confirm
+                </TableCaption>
+                <Thead>
+                  <Tr>
+                    <Th>Offer</Th>
+                    <Th>into</Th>
+                    <Th isNumeric>multiply by</Th>
+                  </Tr>
+                </Thead>
+                <Tbody>
+                  <Tr>
+                    <Td>inches</Td>
+                    <Td>millimetres (mm)</Td>
+                    <Td isNumeric>25.4</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>feet</Td>
+                    <Td>centimetres (cm)</Td>
+                    <Td isNumeric>30.48</Td>
+                  </Tr>
+                  <Tr>
+                    <Td>yards</Td>
+                    <Td>metres (m)</Td>
+                    <Td isNumeric>0.91444</Td>
+                  </Tr>
+                </Tbody>
+                {/* <Tfoot>
+                  <Tr>
+                    <Th>To convert</Th>
+                    <Th>into</Th>
+                    <Th isNumeric>multiply by</Th>
+                  </Tr>
+                </Tfoot> */}
+              </Table>
+
+              <Flex mt='14'>
+                <Button
+                  onClick={logout}
+                  bg='gray.900'
+                  color='gray.100'
+                  _hover={{ bg: 'gray.700' }}
+                >
+                  Log out
+                </Button>
+
+                <Button
+                  variant='delete'
+                  colorScheme='red'
+                  ml='12'
+                  onClick={logout}
+                >
+                  Log out
+                </Button>
+              </Flex>
             </Box>
           </Flex>
           {/* <AccountTab data={tabData} /> */}

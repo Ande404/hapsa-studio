@@ -37,9 +37,6 @@ yarn-error.log*
 # Key
 1ual1-ee3854bc08.json
 
-
 # Sample schema for db
 sample_schema
 
-# omit mdx data
-.mdx-data

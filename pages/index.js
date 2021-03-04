@@ -1,7 +1,5 @@
-import Layout from '../components/Layout';
 import Nav from '../components/Nav';
-import Block from '../components/Block';
-import { Newsletter } from '../components/Newsletter';
+
 import Head from 'next/head';
 import { Hero } from '../components/Hero';
 import Feature from '../components/Feature';
