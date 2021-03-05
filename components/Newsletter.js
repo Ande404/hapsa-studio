@@ -24,9 +24,10 @@ export const Newsletter = () => {
           <Box>
             <Input
               name='email'
-              variant='flushed'
+              borderBottom={`.6px solid gray`}
               w={{ base: '100%', md: '320px' }}
               type='email'
+              rounded='none'
               placeholder='Email Address'
               ref={register({ required: true })}
             />

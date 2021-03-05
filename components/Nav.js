@@ -1,13 +1,34 @@
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 import { useAuth } from '../context/auth';
-import { Button, Box, Flex, Image, Heading, Link } from '@chakra-ui/react';
+import {
+  Button,
+  Box,
+  Flex,
+  Text,
+  Heading,
+  Link,
+  Stack,
+} from '@chakra-ui/react';
+import { AccountMenu } from './AccountMenu';
 
+const navLink = [
+  {
+    page: '/job',
+    title: 'Jobs',
+  },
+  {
+    page: '/recruiter',
+    title: 'Recruiters',
+  },
+  {
+    page: '/why',
+    title: 'Why Hapsa?',
+  },
+];
 const Nav = () => {
-  const { user } = useAuth();
-
+  const { user, signOut } = useAuth();
   const router = useRouter();
-  console.log(router);
 
   return (
     <Flex
@@ -34,60 +55,32 @@ const Nav = () => {
         </NextLink>
       </Box>
 
-      <Box display={{ base: 'none', lg: 'inherit' }}>
-        <NextLink href='/job'>
-          <Link fontWeight='semibold' letterSpacing='-.5px' fontSize='sm'>
-            Jobs
-          </Link>
-        </NextLink>
-        <NextLink href='/job'>
-          <Link
-            fontWeight='semibold'
-            ml='6'
-            letterSpacing='-.5px'
-            fontSize='sm'
-          >
-            Recruiters
-          </Link>
-        </NextLink>
-        <NextLink href='/job'>
-          <Link
-            fontWeight='semibold'
-            ml='6'
-            letterSpacing='-.5px'
-            fontSize='sm'
-          >
-            Career Advice
-          </Link>
-        </NextLink>
-        <NextLink href='/job'>
-          <Link
-            fontWeight='semibold'
-            ml='6'
-            letterSpacing='-.5px'
-            fontSize='sm'
-          >
-            About
-          </Link>
-        </NextLink>
-      </Box>
+      <Stack
+        direction={{ base: 'column', lg: 'row' }}
+        display={{ base: 'none', lg: 'inherit' }}
+        spacing='6'
+      >
+        {navLink.map(({ page, title }) => {
+          return (
+            <div key={page}>
+              <NextLink href={page}>
+                <Link fontWeight='semibold' letterSpacing='-.5px' fontSize='sm'>
+                  {title}
+                </Link>
+              </NextLink>
+            </div>
+          );
+        })}
+      </Stack>
       <Box display={{ base: 'inherit', lg: 'inherit' }}>
         {user?.uid && router.pathname !== '/' ? (
           <Box>
-            <NextLink href='/account'>
-              <a>
-                <Image
-                  borderRadius='full'
-                  boxSize='35px'
-                  src={user.photoUrl}
-                  alt={user.name}
-                />
-              </a>
-            </NextLink>
+            <AccountMenu user={user} signOut={signOut} />
           </Box>
         ) : (
           <div>
             <Button
+              display={router.asPath == '/login' ? 'none' : 'inherit'}
               size='sm'
               bg='rgb(92,52,226)'
               color='gray.100'
@@ -98,10 +91,11 @@ const Nav = () => {
               mr='4'
               onClick={() => router.push('login')}
             >
-              Sign up
+              Sign in
             </Button>
             <Button
-              display={router.asPath !== 'login' ? 'none' : 'inherit'}
+              display={router.asPath !== '/login' ? 'none' : 'inherit'}
+              disabled={router.asPath !== '/login' ? false : true}
               size='sm'
               color='gray.900'
               bg='gray.200'

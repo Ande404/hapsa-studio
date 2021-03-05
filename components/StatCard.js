@@ -6,7 +6,13 @@ export const StatCard = (props) => {
       <StatLabel fontWeight='medium' color='gray.500' fontSize='md'>
         {label}
       </StatLabel>
-      <StatNumber fontSize='3xl' fontWeight='medium' color='gray.900' mt='1'>
+      <StatNumber
+        fontSize='3xl'
+        fontWeight='semibold'
+        letterSpacing='-1px'
+        color='gray.900'
+        mt='1'
+      >
         {value}
       </StatNumber>
     </Stat>

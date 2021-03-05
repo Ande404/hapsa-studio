@@ -2,6 +2,7 @@ import nc from 'next-connect';
 import morgan from 'morgan';
 import Cors from 'cors';
 import { firebaseAdmin } from '../../lib/firebase-admin';
+import { firebaseClient } from '../../lib/firebase-client';
 
 const cors = Cors({
   methods: ['GET', 'POST', 'HEAD', 'PUT'],
@@ -19,24 +20,25 @@ const handler = nc({ onError, onNoMatch })
   .use(morgan('tiny'), cors)
 
   .post(async (req, res) => {
-    // if (!req.body) {
-    //   res.status(404).end('request body is not found... or is it');
-    // }
+    if (!req.body) {
+      res.status(404).end('request body is not found... or is it');
+    }
 
-    await firebaseAdmin
+    const user = await firebaseAdmin
       .auth()
-      .verifyIdToken(req.body.user)
+      .verifyIdToken(req.body.token)
       .then((decodedToken) => {
-        res.status(200).json({
-          token: decodedToken,
-        });
+        return decodedToken.applicant;
       })
       .catch((error) => {
         res.status(400).json({
-          token: 'none hoe',
-          err: error,
+          message: 'Error processing request',
         });
       });
+
+    // firebaseAdmin.auth().setCustomUserClaims(user.uid, { applicant: true });
+
+    res.status(200).json(user);
   });
 
 export default handler;

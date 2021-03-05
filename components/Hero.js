@@ -1,3 +1,7 @@
+import TextLoop from 'react-text-loop';
+import { ArrowForwardIcon } from '@chakra-ui/icons';
+import { Newsletter } from './Newsletter';
+import { Banner } from './Banner';
 import { ChakraContainer } from './atoms/Container';
 import {
   Box,
@@ -8,17 +12,13 @@ import {
   Image,
   Center,
 } from '@chakra-ui/react';
-import NextLink from 'next/link';
-import TextLoop from 'react-text-loop';
-import { ArrowForwardIcon } from '@chakra-ui/icons';
-import { Newsletter } from './Newsletter';
-import { Banner } from './Banner';
+
 export const Hero = ({ jobs }) => {
   return (
-    <ChakraContainer mt='20'>
+    <ChakraContainer mt='65px'>
       <Flex
         rounded='sm'
-        bg='rgb(216,236,241)'
+        bg='brand.800'
         p={{ base: 4, lg: 8 }}
         justify='space-between'
         direction={{ base: 'column', lg: 'row' }}
@@ -50,9 +50,9 @@ export const Hero = ({ jobs }) => {
             >
               Tired of painful job applications? We connect you with{' '}
               <TextLoop>
-                <Text color='rgb(92,52,226)'>agencies</Text>
-                <Text color='rgb(92,52,226)'>recruiters</Text>
-                <Text color='rgb(92,52,226)'>business partners</Text>
+                <Text color='brand.900'>agencies</Text>
+                <Text color='brand.900'>recruiters</Text>
+                <Text color='brand.900'>business partners</Text>
               </TextLoop>
             </Heading>
 
@@ -66,8 +66,6 @@ export const Hero = ({ jobs }) => {
         <Center p={{ base: 8, lg: 0 }} position='relative'>
           <Image src='16.png' h={{ base: '220px', md: '280px', lg: '360px' }} />
         </Center>
-
-        {/* <HeroJobCard jobs={jobs} /> */}
       </Flex>
     </ChakraContainer>
   );

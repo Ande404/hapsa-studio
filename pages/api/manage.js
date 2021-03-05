@@ -2,7 +2,7 @@ import nc from 'next-connect';
 import cors from 'cors';
 import fetch from 'node-fetch';
 import { firebaseAdmin } from '../../lib/firebase-admin';
-import { NewApplication } from '../../lib/firestore';
+import { newApplication } from '../../lib/firestore';
 const handler = nc()
   .use(cors())
   .get((req, res) => {
@@ -22,7 +22,7 @@ const handler = nc()
       job,
     };
 
-    const newApp = await NewApplication(application);
+    const newApp = await newApplication(application);
 
     res.status(200).json({
       payload: 'working',

@@ -1,3 +1,5 @@
+import NextLink from 'next/link';
+import { FiChevronDown } from 'react-icons/fi';
 import {
   Box,
   MenuButton,
@@ -9,21 +11,28 @@ import {
   MenuGroup,
   Link,
 } from '@chakra-ui/react';
-import { FiChevronDown } from 'react-icons/fi';
-import NextLink from 'next/link';
-export const AccountMenu = (props) => {
+
+export const AccountMenu = ({ user, signOut }) => {
+  const handleSignout = async () => {
+    signOut();
+    window.location.href = '/';
+  };
   return (
     <Box>
-      <Menu>
+      <Menu bg='gray.50' color='gray.900'>
         <MenuButton
+          size='sm'
+          bg='none'
           ml='4'
+          rounded='sm'
           as={Button}
-          _hover={{ backgroundColor: 'none' }}
+          bg='gray.100'
+          color='black'
           rightIcon={<FiChevronDown />}
         >
-          Account
+          {user.name}
         </MenuButton>
-        <MenuList>
+        <MenuList bg='gray.50' mt='3' color='gray.900'>
           <NextLink href='/account' passHref>
             <MenuItem as={Link} _hover={{ textDecoration: 'none' }}>
               Account
@@ -42,7 +51,7 @@ export const AccountMenu = (props) => {
                 FAQ
               </MenuItem>
             </NextLink>
-            <MenuItem onClick={() => props.logout}>Log out</MenuItem>
+            <MenuItem onClick={handleSignout}>Log out</MenuItem>
           </MenuGroup>
         </MenuList>
       </Menu>

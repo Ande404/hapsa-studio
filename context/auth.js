@@ -2,8 +2,6 @@ import React, { useState, useEffect, useContext, createContext } from 'react';
 import { firebaseClient } from '../lib/firebase-client';
 import { createUser } from '../lib/firestore';
 import nookies from 'nookies';
-import { timestampAuth } from '../util/time';
-const fetch = require('node-fetch');
 
 const AuthContext = createContext({
   user: null,
@@ -11,6 +9,70 @@ const AuthContext = createContext({
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState();
+
+  const signIn = (email, password) => {
+    return firebaseClient
+      .signInWithEmailAndPassword(email, password)
+      .then((response) => {
+        setUser(response.user);
+        return response.user;
+      });
+  };
+
+  const signUp = (email, password) => {
+    return firebaseClient
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((response) => {
+        setUser(response.user);
+        return response.user;
+      });
+  };
+
+  const signOut = () => {
+    return firebaseClient
+      .auth()
+      .signOut()
+      .then(() => {
+        setUser(false);
+      });
+  };
+
+  const sendPasswordResetEmail = (email) => {
+    return firebaseClient
+      .auth()
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        return true;
+      });
+  };
+
+  const confirmPasswordReset = (code, password) => {
+    return firebaseClient
+      .auth()
+      .confirmPasswordReset(code, password)
+      .then(() => {
+        return true;
+      });
+  };
+
+  const googleLogin = async () => {
+    await firebaseClient
+      .auth()
+      .signInWithPopup(new firebaseClient.auth.GoogleAuthProvider());
+  };
+
+  const twitterLogin = async () => {
+    await firebaseClient
+      .auth()
+      .signInWithRedirect(new firebaseClient.auth.TwitterAuthProvider());
+  };
+
+  const facebookLogin = async () => {
+    await firebaseClient
+      .auth()
+      .signInWithRedirect(new firebaseClient.auth.FacebookAuthProvider());
+  };
 
   useEffect(() => {
     if (typeof window !== undefined) {
@@ -30,20 +92,13 @@ export function AuthProvider({ children }) {
       } else {
         console.log(`updating token...`);
 
-        const token = await idToken.getIdToken();
         const saveUser = formatUser(idToken);
 
         setUser(saveUser);
 
-        // fetch('http://127.0.0.1:8080/api/v1/auth', {
-        //   method: 'get',
-        //   headers: { Authorization: token },
-        // })
-        //   .then((res) => res.json())
-        //   .then((json) => console.log(json));
         createUser(idToken.uid, saveUser);
 
-        nookies.destroy(null, 'token');
+        const token = await idToken.getIdToken();
         nookies.set(null, 'token', token, {});
       }
     });
@@ -61,7 +116,20 @@ export function AuthProvider({ children }) {
     return () => clearInterval(handle);
   }, []);
   return (
-    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider
+      value={{
+        user,
+        signIn,
+        signOut,
+        sendPasswordResetEmail,
+        confirmPasswordReset,
+        googleLogin,
+        facebookLogin,
+        twitterLogin,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
   );
 }
 

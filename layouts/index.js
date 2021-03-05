@@ -1,39 +1,78 @@
 import { ChakraContainer } from '../components/atoms/Container';
 import { MDXProvider } from '@mdx-js/react';
-import { Text, Heading, Flex, Box } from '@chakra-ui/react';
+import {
+  Text,
+  Heading,
+  Flex,
+  Box,
+  Center,
+  Spacer,
+  Divider,
+} from '@chakra-ui/react';
+import Nav from '../components/Nav';
 
 const components = {
   h1: (props) => (
-    <Text fontWeight='bold' fontSize='3xl' mb={3}>
+    <Heading fontWeight='bold' fontSize='3xl' textAlign='center'>
       {props.children}
-    </Text>
+    </Heading>
   ),
   h2: (props) => (
-    <Heading fontSize='xl' my={3}>
+    <Heading fontSize='xl' mt='12' mb='6' textAlign='center'>
       {props.children}
     </Heading>
   ),
 
-  p: (props) => <Text my={2}>{props.children}</Text>,
+  p: (props) => (
+    <Text mb={6} fontSize='18px' fontWeight='normal'>
+      {props.children}
+    </Text>
+  ),
 };
-const index = (props) => {
-  console.log(props);
+const index = ({ children, frontMatter }) => {
   return (
-    <ChakraContainer mt='28'>
-      <MDXProvider components={components}>
-        <Flex
-          textAlign='center'
-          flexDirection='column'
-          maxWidth='620px'
-          margin='0 auto'
-        >
-          <Heading color='blue.400' size='xl' letterSpacing='-1px'>
-            {props.frontMatter.title}
-          </Heading>
-          <section>{props.children}</section>
-        </Flex>
-      </MDXProvider>
-    </ChakraContainer>
+    <div>
+      <Nav />
+      <ChakraContainer mt='28'>
+        <MDXProvider components={components}>
+          <Flex
+            textAlign='center'
+            flexDirection='column'
+            px={{ base: 4, md: 12, lg: 60 }}
+            margin='0 auto'
+          >
+            <Heading
+              color='rgb(92,52,226)'
+              size='xl'
+              letterSpacing='-1px'
+              mb='4'
+            >
+              {frontMatter.title}
+            </Heading>
+            <Flex
+              textAlign='center'
+              justify='center'
+              align='center'
+              direction='column'
+            >
+              <Text fontSize='lg' textAlign='center'>
+                {' '}
+                {frontMatter.author}
+              </Text>
+              <Text mt='2' fontSize='sm' color='gray.600' textAlign='center'>
+                {frontMatter.timestamp}
+              </Text>
+            </Flex>
+
+            <Divider my='12' />
+
+            <Box textAlign='left' lineHeight='28px'>
+              {children}
+            </Box>
+          </Flex>
+        </MDXProvider>
+      </ChakraContainer>
+    </div>
   );
 };
 

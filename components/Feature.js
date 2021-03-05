@@ -25,7 +25,7 @@ const cardsData = [
 ];
 const Feature = () => {
   return (
-    <ChakraContainer mt='8'>
+    <ChakraContainer mt='4'>
       <SimpleGrid columns={[1, 1, 3]} spacing='40px'>
         {cardsData.map(({ icon, bg, header, info }) => {
           return (

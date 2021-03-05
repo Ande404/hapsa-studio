@@ -18,9 +18,13 @@ import {
   useClipboard,
   Image,
   Spacer,
+  useDisclosure,
 } from '@chakra-ui/react';
+import JobModal from '../../components/JobModal';
 
 const Job = ({ job }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const router = useRouter();
 
   const url =
@@ -63,6 +67,8 @@ const Job = ({ job }) => {
   return (
     <div>
       <Nav />
+
+      <JobModal isOpen={isOpen} onClose={onClose} onOpen={onOpen} job={job} />
 
       <ChakraContainer>
         <Grid mt='28' templateColumns={{ base: '1fr', lg: '2fr 1fr' }} gap='20'>
@@ -144,7 +150,7 @@ const Job = ({ job }) => {
             </Heading>
 
             <Button
-              onClick={() => sendApplication()}
+              onClick={onOpen}
               w={{ base: '100%', md: 'auto' }}
               type='submit'
               size='md'
