@@ -1,7 +1,7 @@
 import { ReactQueryCacheProvider, QueryCache } from 'react-query';
 import { ReactQueryDevtools } from 'react-query-devtools';
-import { AuthProvider } from '../context/auth';
 import { ChakraProvider, CSSReset } from '@chakra-ui/react';
+import { AuthProvider } from '../context/auth';
 import { customTheme } from '../theme/theme';
 
 const queryCache = new QueryCache();

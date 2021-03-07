@@ -31,7 +31,7 @@ const schema = yup.object().shape({
 });
 
 
-const login = () => {
+const signup = () => {
   const [userExists, setUserExists] = useState(false)
   const handleClick = () => setShow(!show);
   const [show, setShow] = useState(false);
@@ -79,7 +79,7 @@ const login = () => {
           w="420px"
         >
           <Heading size="lg" letterSpacing="-.8px" mb="12">
-            Log in
+            Sign up
           </Heading>
           <form onSubmit={handleSubmit(onSubmit)}>
             <FormControl id="email" isRequired>
@@ -132,13 +132,13 @@ const login = () => {
               }}
               color="white"
             >
-              Log in 
+              Sign up
             </Button>
             <Box mt="8">
-            <NextLink href="/signup" passHref>
+            <NextLink href="/login">
               <Link>
                 <Text size="sm"  letterSpacing="-.4px">
-                Don't have an account yet? Sign up
+                Already have an account? Log in
                 </Text>
               </Link>
             </NextLink>
@@ -182,4 +182,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default signup;

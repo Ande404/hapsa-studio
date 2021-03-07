@@ -1,7 +1,4 @@
 import nookies from 'nookies';
-import { firebaseAdmin } from '../lib/firebase-admin';
-import { firebaseClient } from '../lib/firebase-client';
-import Nav from '../components/Nav';
 import NextLink from 'next/link';
 import {
   Box,
@@ -22,10 +19,13 @@ import {
   Badge,
   TableCaption,
 } from '@chakra-ui/react';
+import { firebaseClient } from '../lib/firebase-client';
+import Nav from '../components/Nav';
 import { EmailAlert } from '../components/EmailAlert';
 import { AccountMenu } from '../components/AccountMenu';
 import { AccountTab } from '../components/AccountTab';
 import { ChakraContainer } from '../components/atoms/Container';
+
 export async function getServerSideProps(ctx) {
   try {
     const cookies = nookies.get(ctx);
@@ -40,7 +40,7 @@ export async function getServerSideProps(ctx) {
     return {
       redirect: {
         permanent: false,
-        destination: '/login',
+        destination: '/signup',
       },
       props: {},
     };
@@ -75,11 +75,11 @@ const account = ({ user }) => {
       <Nav status={user} />
       {!user.email_verified && <EmailAlert user={user} />}
 
-      <ChakraContainer pt='20'>
-        <Box h='100vh'>
-          <Breadcrumb fontSize='sm' fontWeight='medium' mt='6'>
+      <ChakraContainer pt="20">
+        <Box h="100vh">
+          <Breadcrumb fontSize="sm" fontWeight="medium" mt="6">
             <BreadcrumbItem isCurrentPage>
-              <NextLink href='/dashboard' passHref>
+              <NextLink href="/dashboard" passHref>
                 <BreadcrumbLink as={Link} _hover={{ textDecoration: 'none' }}>
                   Dashboard
                 </BreadcrumbLink>
@@ -87,7 +87,7 @@ const account = ({ user }) => {
             </BreadcrumbItem>
 
             <BreadcrumbItem isCurrentPage>
-              <NextLink href='/account' passHref>
+              <NextLink href="/account" passHref>
                 <BreadcrumbLink as={Link} _hover={{ textDecoration: 'none' }}>
                   Account
                 </BreadcrumbLink>
@@ -96,36 +96,36 @@ const account = ({ user }) => {
           </Breadcrumb>
 
           <Flex>
-            <Box mt='8' bg='gray.50' w='100%' p='8' h='100%' rounded='lg'>
-              <Flex direction='row' mb='6'>
+            <Box mt="8" bg="gray.50" w="100%" p="8" h="100%" rounded="lg">
+              <Flex direction="row" mb="6">
                 <Box>
                   <Image
-                    borderRadius='full'
-                    boxSize='65px'
+                    borderRadius="full"
+                    boxSize="65px"
                     src={picture}
                     alt={name}
                   />
                 </Box>
 
-                <Box flex='1' ml='4'>
+                <Box flex="1" ml="4">
                   <Heading
-                    size='lg'
-                    letterSpacing='-.8px'
-                    fontWeight='700'
-                    lineHeight='1.1'
-                    my='2'
+                    size="lg"
+                    letterSpacing="-.8px"
+                    fontWeight="700"
+                    lineHeight="1.1"
+                    my="2"
                   >
                     {name}
                   </Heading>
-                  <Badge colorScheme='green'>Applicant</Badge>
+                  <Badge colorScheme="green">Applicant</Badge>
                 </Box>
               </Flex>
 
               <Table
-                variant='simple'
-                mt='12'
-                variant='striped'
-                colorScheme='gray.50'
+                variant="simple"
+                mt="12"
+                variant="striped"
+                colorScheme="gray.50"
               >
                 <TableCaption>
                   Please check your email after each decision to confirm
@@ -163,11 +163,11 @@ const account = ({ user }) => {
                 </Tfoot> */}
               </Table>
 
-              <Flex mt='14'>
+              <Flex mt="14">
                 <Button
                   onClick={logout}
-                  bg='gray.900'
-                  color='gray.100'
+                  bg="gray.900"
+                  color="gray.100"
                   _hover={{ bg: 'gray.700' }}
                 >
                   Log out

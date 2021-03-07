@@ -1,6 +1,7 @@
 import { Box } from '@chakra-ui/react';
-export const ChakraContainer = (props) => {
-  return props.margin ? (
+
+export const ChakraContainer = (props) =>
+  props.margin ? (
     <Box mx={{ base: '16px', md: '40px', lg: '160px' }} {...props}>
       {props.children}
     </Box>
@@ -10,4 +11,3 @@ export const ChakraContainer = (props) => {
       {props.children}
     </Box>
   );
-};

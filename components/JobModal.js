@@ -9,9 +9,18 @@ import {
   ModalOverlay,
 } from '@chakra-ui/react';
 
-const JobModal = ({ onClose, isOpen, onOpen, job }) => {
+const JobModal = ({
+  onClose,
+  isOpen,
+  onOpen,
+  job,
+  sendApplication,
+  user,
+  token,
+}) => {
   const submitApplication = () => {
-    alert('confirmed');
+    sendApplication();
+    alert('job submitted');
     onClose();
   };
   return (
@@ -19,12 +28,14 @@ const JobModal = ({ onClose, isOpen, onOpen, job }) => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>{job.title}</ModalHeader>
+          <ModalHeader>{job?.title || 'no title'}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>Hello</ModalBody>
 
           <ModalFooter>
-            <Button onClick={submitApplication}>Submit</Button>
+            <Button onClick={submitApplication} disabled={!user && !token}>
+              Submit
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
+import nookies from 'nookies';
 import { firebaseClient } from '../lib/firebase-client';
 import { createUser } from '../lib/firestore';
-import nookies from 'nookies';
+import { formatUser } from "../lib/firebase-helpers"
+
 
 const AuthContext = createContext({
   user: null,
@@ -10,51 +12,46 @@ const AuthContext = createContext({
 export function AuthProvider({ children }) {
   const [user, setUser] = useState();
 
-  const signIn = (email, password) => {
-    return firebaseClient
+  const signIn = (email, password) =>
+    firebaseClient
       .signInWithEmailAndPassword(email, password)
       .then((response) => {
         setUser(response.user);
         return response.user;
       });
-  };
 
-  const signUp = (email, password) => {
-    return firebaseClient
+  const signUp = (email, password) =>
+    firebaseClient
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then((response) => {
         setUser(response.user);
         return response.user;
+      }).catch(err => {
+        if (err.code === "auth/email-already-in-use") {
+          return err
+        }
       });
-  };
 
-  const signOut = () => {
-    return firebaseClient
+  const signOut = () =>
+    firebaseClient
       .auth()
       .signOut()
       .then(() => {
         setUser(false);
       });
-  };
 
-  const sendPasswordResetEmail = (email) => {
-    return firebaseClient
+  const sendPasswordResetEmail = (email) =>
+    firebaseClient
       .auth()
       .sendPasswordResetEmail(email)
-      .then(() => {
-        return true;
-      });
-  };
+      .then(() => true);
 
-  const confirmPasswordReset = (code, password) => {
-    return firebaseClient
+  const confirmPasswordReset = (code, password) =>
+    firebaseClient
       .auth()
       .confirmPasswordReset(code, password)
-      .then(() => {
-        return true;
-      });
-  };
+      .then(() => true);
 
   const googleLogin = async () => {
     await firebaseClient
@@ -87,8 +84,6 @@ export function AuthProvider({ children }) {
 
         nookies.destroy(null, 'token');
         nookies.set(null, 'token', '', {});
-
-        return;
       } else {
         console.log(`updating token...`);
 
@@ -120,6 +115,7 @@ export function AuthProvider({ children }) {
       value={{
         user,
         signIn,
+        signUp,
         signOut,
         sendPasswordResetEmail,
         confirmPasswordReset,
@@ -133,16 +129,5 @@ export function AuthProvider({ children }) {
   );
 }
 
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
+export const useAuth = () => useContext(AuthContext);
 
-const formatUser = (user) => {
-  return {
-    uid: user.uid,
-    email: user.email,
-    name: user?.displayName,
-    provider: user?.providerData[0].providerId,
-    photoUrl: user?.photoURL,
-  };
-};

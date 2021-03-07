@@ -1,5 +1,5 @@
-import Nav from '../components/Nav';
 import Head from 'next/head';
+import Nav from '../components/Nav';
 import { Hero } from '../components/Hero';
 import Feature from '../components/Feature';
 import { ActiveJobsHero } from '../lib/firestore';

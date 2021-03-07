@@ -19,34 +19,34 @@ export const AccountMenu = ({ user, signOut }) => {
   };
   return (
     <Box>
-      <Menu bg='gray.50' color='gray.900'>
+      <Menu bg="gray.50" color="gray.900">
         <MenuButton
-          size='sm'
-          bg='none'
-          ml='4'
-          rounded='sm'
+          size="sm"
+          bg="none"
+          ml="4"
+          rounded="sm"
           as={Button}
-          bg='gray.100'
-          color='black'
+          bg="gray.100"
+          color="black"
           rightIcon={<FiChevronDown />}
         >
           {user.name}
         </MenuButton>
-        <MenuList bg='gray.50' mt='3' color='gray.900'>
-          <NextLink href='/account' passHref>
+        <MenuList bg="gray.50" mt="3" color="gray.900">
+          <NextLink href="/account" passHref>
             <MenuItem as={Link} _hover={{ textDecoration: 'none' }}>
               Account
             </MenuItem>
           </NextLink>
 
           <MenuDivider />
-          <MenuGroup title='Help'>
-            <NextLink href='/account' passHref>
+          <MenuGroup title="Help">
+            <NextLink href="/account" passHref>
               <MenuItem as={Link} _hover={{ textDecoration: 'none' }}>
                 Docs
               </MenuItem>
             </NextLink>
-            <NextLink href='/account' passHref>
+            <NextLink href="/account" passHref>
               <MenuItem as={Link} _hover={{ textDecoration: 'none' }}>
                 FAQ
               </MenuItem>

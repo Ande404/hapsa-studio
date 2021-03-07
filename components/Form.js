@@ -32,29 +32,29 @@ const Form = () => {
           <VStack>
             <label>*Full name</label>
             <input
-              placeholder='Full name'
-              name='fullName'
+              placeholder="Full name"
+              name="fullName"
               ref={register({ required: true })}
             />
             {errors.fullname ? <p>{errors.fullName?.message}</p> : ''}
 
             <label>*Title</label>
             <input
-              placeholder='Title'
-              name='title'
+              placeholder="Title"
+              name="title"
               ref={register({ required: true })}
             />
             {errors.title ? <p>{errors.title?.message}</p> : ''}
 
             <label>Objective</label>
-            <textarea placeholder='Objective' name='objective' ref={register} />
+            <textarea placeholder="Objective" name="objective" ref={register} />
 
             <label>Preferred Location</label>
-            <select name='locationInterest' ref={register}>
-              <option value='Erbil'>Erbil</option>
-              <option value='Sulaymaniyah'>Sulaymaniyah</option>
-              <option value='Duhok'>Duhok</option>
-              <option value='Halabja'>Halabja</option>
+            <select name="locationInterest" ref={register}>
+              <option value="Erbil">Erbil</option>
+              <option value="Sulaymaniyah">Sulaymaniyah</option>
+              <option value="Duhok">Duhok</option>
+              <option value="Halabja">Halabja</option>
             </select>
             <button>Send Resume</button>
           </VStack>

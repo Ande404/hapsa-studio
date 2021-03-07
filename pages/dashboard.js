@@ -1,8 +1,4 @@
 import nookies from 'nookies';
-import { firebaseAdmin } from '../lib/firebase-admin';
-import { firebaseClient } from '../lib/firebase-client';
-import Nav from '../components/Nav';
-import Form from '../components/Form';
 import {
   Box,
   SimpleGrid,
@@ -12,6 +8,10 @@ import {
   StatNumber,
   Heading,
 } from '@chakra-ui/react';
+import { firebaseAdmin } from '../lib/firebase-admin';
+import { firebaseClient } from '../lib/firebase-client';
+import Nav from '../components/Nav';
+import Form from '../components/Form';
 import { StatCard } from '../components/StatCard';
 
 const data = [
@@ -49,17 +49,17 @@ const dashboard = ({ token }) => {
   return (
     <>
       <Nav status={token} logout={logout} />
-      <Box px={{ base: '16px', md: '40px', lg: '160px' }} mt='20'>
-        <Heading size='md'>Dashboard</Heading>
+      <Box px={{ base: '16px', md: '40px', lg: '160px' }} mt="20">
+        <Heading size="md">Dashboard</Heading>
 
         <SimpleGrid
-          as='section'
-          p='10'
-          mt='4'
+          as="section"
+          p="10"
+          mt="4"
           columns={{ base: 1, md: 3 }}
-          spacing='6'
-          maxW='7xl'
-          bg='gray.50'
+          spacing="6"
+          maxW="7xl"
+          bg="gray.50"
           px={{ base: '6', md: '8' }}
         >
           {data.map((stat, idx) => (

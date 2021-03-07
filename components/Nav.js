@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
-import { useAuth } from '../context/auth';
 import {
   Button,
   Box,
@@ -10,6 +9,7 @@ import {
   Link,
   Stack,
 } from '@chakra-ui/react';
+import { useAuth } from '../context/auth';
 import { AccountMenu } from './AccountMenu';
 
 const navLink = [
@@ -32,23 +32,23 @@ const Nav = () => {
 
   return (
     <Flex
-      py='2'
+      py="2"
       px={{ base: '16px', md: '40px', lg: '160px' }}
-      justify='space-between'
-      align='center'
-      bg='gray.900'
-      color='white'
-      borderBottom='1px solid rgba(216,236,241, .1)'
-      position='fixed'
-      top='0px'
-      zIndex='90000'
-      left='0px'
-      right='0px'
+      justify="space-between"
+      align="center"
+      bg="gray.900"
+      color="white"
+      borderBottom="1px solid rgba(216,236,241, .1)"
+      position="fixed"
+      top="0px"
+      zIndex="90000"
+      left="0px"
+      right="0px"
     >
       <Box>
-        <NextLink href='/'>
+        <NextLink href="/">
           <Link _hover={{ textDecor: 'none' }}>
-            <Heading size='sm' fontWeight='bold' letterSpacing='-1px'>
+            <Heading size="sm" fontWeight="bold" letterSpacing="-1px">
               Hapsa
             </Heading>
           </Link>
@@ -58,19 +58,17 @@ const Nav = () => {
       <Stack
         direction={{ base: 'column', lg: 'row' }}
         display={{ base: 'none', lg: 'inherit' }}
-        spacing='6'
+        spacing="6"
       >
-        {navLink.map(({ page, title }) => {
-          return (
-            <div key={page}>
-              <NextLink href={page}>
-                <Link fontWeight='semibold' letterSpacing='-.5px' fontSize='sm'>
-                  {title}
-                </Link>
-              </NextLink>
-            </div>
-          );
-        })}
+        {navLink.map(({ page, title }) => (
+          <div key={page}>
+            <NextLink href={page}>
+              <Link fontWeight="semibold" letterSpacing="-.5px" fontSize="sm">
+                {title}
+              </Link>
+            </NextLink>
+          </div>
+        ))}
       </Stack>
       <Box display={{ base: 'inherit', lg: 'inherit' }}>
         {user?.uid && router.pathname !== '/' ? (
@@ -78,37 +76,43 @@ const Nav = () => {
             <AccountMenu user={user} signOut={signOut} />
           </Box>
         ) : (
-          <div>
+          <Flex direction="row" justify='center' align="center">
+            <NextLink href="/login" passHref>
+
+
+            <Link     
+              // display={router.asPath !== '/login' ? 'none' : 'inherit'}
+              // disabled={router.asPath === '/login'}
+              size="sm"
+              bg="none"
+              color="white"
+              _hover={{
+                bg: 'none',
+                color: "white",
+                textDecoration: "underline"
+              }}
+              rounded="sm"
+              onClick={() => router.push('/login')}
+            >
+              Login
+            </Link>
+            </NextLink>
             <Button
+            ml="4"
               display={router.asPath == '/login' ? 'none' : 'inherit'}
-              size='sm'
-              bg='rgb(92,52,226)'
-              color='gray.100'
+              size="sm"
+              bg="rgb(92,52,226)"
+              color="gray.100"
               _hover={{
                 bg: 'rgb(90,42,200)',
               }}
-              rounded='sm'
-              mr='4'
-              onClick={() => router.push('login')}
+              rounded="sm"
+              onClick={() => router.push('/signup')}
             >
-              Sign in
+              Sign up
             </Button>
-            <Button
-              display={router.asPath !== '/login' ? 'none' : 'inherit'}
-              disabled={router.asPath !== '/login' ? false : true}
-              size='sm'
-              color='gray.900'
-              bg='gray.200'
-              color='gray.900'
-              _hover={{
-                bg: 'gray.300',
-              }}
-              rounded='sm'
-              onClick={() => router.push('dashboard')}
-            >
-              Dashboard
-            </Button>
-          </div>
+            
+          </Flex>
         )}
       </Box>
     </Flex>

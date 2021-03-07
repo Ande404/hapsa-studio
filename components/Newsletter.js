@@ -19,34 +19,36 @@ export const Newsletter = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <FormControl isInvalid={errors.name} id='email'>
-        <Flex py='4' pt='12' direction={{ base: 'column', lg: 'row' }}>
+      <FormControl isInvalid={errors.name} id="email">
+        <Flex py="4" pt="12" direction={{ base: 'column', lg: 'row' }}>
           <Box>
             <Input
-              name='email'
-              borderBottom={`.6px solid gray`}
+            
+              name="email"
               w={{ base: '100%', md: '320px' }}
-              type='email'
-              rounded='none'
-              placeholder='Email Address'
+              type="email"
+              p="4"
+              rounded="md"
+              bg="gray.50"
+              placeholder="Email Address"
               ref={register({ required: true })}
             />
 
             <FormErrorMessage>
               {errors.name && errors.name.message}
             </FormErrorMessage>
-            <FormHelperText fontSize='xs' mt='4'>
+            <FormHelperText fontSize="xs" mt="4">
               New job offers - are the only emails you will recieve!
             </FormHelperText>
           </Box>
 
           <Button
             w={{ base: '100%', md: 'auto' }}
-            type='submit'
-            size='md'
-            fontSize='sm'
-            bg='gray.900'
-            color='gray.100'
+            type="submit"
+            size="md"
+            fontSize="sm"
+            bg="gray.900"
+            color="gray.100"
             _hover={{
               color: 'gray.100',
               bg: 'gray.700',

@@ -1,9 +1,9 @@
 export const timestampAuth = () => {
   const today = new Date();
 
-  let date =
-    today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-  let time =
-    today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds();
-  return date + ' ' + time;
+  const date = `${today.getFullYear()}-${
+    today.getMonth() + 1
+  }-${today.getDate()}`;
+  const time = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
+  return `${date} ${time}`;
 };
