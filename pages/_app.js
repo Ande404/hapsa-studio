@@ -7,9 +7,7 @@ export default function App({ Component, pageProps }) {
     <AuthProvider>
     <ChakraProvider theme={customTheme}>
       <CSSReset />
-   
           <Component {...pageProps} />    
-    
     </ChakraProvider>
     </AuthProvider>
   );
