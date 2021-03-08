@@ -32,16 +32,13 @@
     "react-dom": "^17.0.1",
     "react-hook-form": "^6.15.4",
     "react-icons": "^4.1.0",
-    "react-query": "^2.26.2",
     "react-query-devtools": "^2.6.3",
     "react-text-loop": "^2.3.0",
     "remove": "^0.1.5",
-    "styled-components": "^5.2.1",
     "yup": "^0.32.9"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
-    "babel-plugin-styled-components": "^1.11.1",
     "eslint": "^7.21.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^6.15.0",

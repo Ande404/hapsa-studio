@@ -18,7 +18,7 @@ export const Hero = ({ jobs }) => (
     <Flex
       rounded="sm"
       bg="gray.200"
-      p={{ base: 12, lg: 8 }}
+      p={{ base:8 }}
       justify="space-between"
       direction={{ base: 'column', lg: 'row' }}
       position="relative"
@@ -62,7 +62,7 @@ export const Hero = ({ jobs }) => (
           <Newsletter />
         </Flex>
       </Box>
-      <Center p={{ base: 8, lg: 0 }} position="relative">
+      <Center pr={{ base: 8, lg: 16 }} position="relative">
         {/* <HeroJobCard jobs={jobs}/> */}
         <Image src="16.png" h={{ base: '220px', md: '280px', lg: '360px' }} />
       </Center>

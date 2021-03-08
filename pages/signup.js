@@ -45,6 +45,7 @@ const signup = () => {
   const onSubmit = async (user) => {
 
     if (userExists) {
+      setUserExists(true)
       console.warn("email already exists")
       return;
     }
@@ -68,7 +69,7 @@ const signup = () => {
   return (
     <div>
       {/* <Nav /> */}
-      <Center h="100vh" bg="gray.50" mt={{base: 8, lg: 0}} >
+      <Center h="100vh" bg="gray.50" mt={{base: 8, lg: 0}}>
         <Flex
      
           rounded="sm"
@@ -82,7 +83,11 @@ const signup = () => {
           <Heading size="lg" letterSpacing="-.8px" mb="12">
             Sign up
           </Heading>
+          
           <form onSubmit={handleSubmit(onSubmit)}>
+
+          {userExists && <Text color="red.600" pb="4" fontWeight="bold">This email is already registered</Text>}
+
             <FormControl id="email" isRequired>
               <FormLabel fontSize="md">Email address</FormLabel>
               <Input
@@ -132,6 +137,7 @@ const signup = () => {
                 bg: 'rgb(90,42,200)',
               }}
               color="white"
+              isDisabled={userExists}
             >
               Sign up
             </Button>
@@ -143,8 +149,6 @@ const signup = () => {
                 </Text>
               </Link>
             </NextLink>
-
-            {userExists && <Text colorScheme="red">Invalid email or password</Text>}
             </Box>
           </form>
           <Box py="12">
@@ -157,7 +161,6 @@ const signup = () => {
               variant="outline"
               onClick={facebookLogin}
               rounded="md"
-              
             >
               <VisuallyHidden>Login with Facebook</VisuallyHidden>
               <FaFacebook />
