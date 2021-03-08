@@ -67,16 +67,17 @@ const signup = () => {
 
   return (
     <div>
-      <Nav />
-      <Center bg="gray.50" height="100vh" >
+      {/* <Nav /> */}
+      <Center h="100vh" bg="gray.50" mt={{base: 8, lg: 0}} >
         <Flex
-          p={{ base: 8, lg: 8 }}
-          rounded="md"
+     
+          rounded="sm"
+          w="420px"
           bg="white"
           textAlign="center"
           direction="column"
           justify="center"
-          w="420px"
+          p="8"
         >
           <Heading size="lg" letterSpacing="-.8px" mb="12">
             Sign up
@@ -142,19 +143,21 @@ const signup = () => {
                 </Text>
               </Link>
             </NextLink>
-          
+
+            {userExists && <Text colorScheme="red">Invalid email or password</Text>}
             </Box>
           </form>
           <Box py="12">
             <hr style={{ border: '1px solid #edf2f7' }} />
           </Box>
           <Text size="sm"  letterSpacing="-.4px" fontWeight="semibold">Or continue with</Text>
-          <SimpleGrid mt="6" columns={{ base: 1, md: 3 }} spacing="3">
+          <SimpleGrid mt="6" columns="3" spacing="3">
             <Button
               color="currentColor"
               variant="outline"
               onClick={facebookLogin}
               rounded="md"
+              
             >
               <VisuallyHidden>Login with Facebook</VisuallyHidden>
               <FaFacebook />

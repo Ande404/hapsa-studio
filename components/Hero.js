@@ -17,7 +17,7 @@ export const Hero = ({ jobs }) => (
   <ChakraContainer mt={{base: "40px", lg: "65px"}}  px={{ base: '0', lg: '160px' }} >
     <Flex
       rounded="sm"
-      bg="brand.800"
+      bg="gray.200"
       p={{ base: 12, lg: 8 }}
       justify="space-between"
       direction={{ base: 'column', lg: 'row' }}

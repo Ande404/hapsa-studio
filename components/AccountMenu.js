@@ -13,6 +13,7 @@ import {
 } from '@chakra-ui/react';
 
 export const AccountMenu = ({ user, signOut }) => {
+  
   const handleSignout = async () => {
     signOut();
     window.location.href = '/';
@@ -30,7 +31,7 @@ export const AccountMenu = ({ user, signOut }) => {
           color="black"
           rightIcon={<FiChevronDown />}
         >
-          {user.name}
+          {user.provider === "password" ? user.email.split("@")[0] : user.name}
         </MenuButton>
         <MenuList bg="gray.50" mt="3" color="gray.900">
           <NextLink href="/account" passHref>

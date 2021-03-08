@@ -18,6 +18,7 @@ import {
   Td,
   Badge,
   TableCaption,
+  Text
 } from '@chakra-ui/react';
 import { firebaseClient } from '../lib/firebase-client';
 import Nav from '../components/Nav';
@@ -25,7 +26,7 @@ import { EmailAlert } from '../components/EmailAlert';
 import { AccountMenu } from '../components/AccountMenu';
 import { AccountTab } from '../components/AccountTab';
 import { ChakraContainer } from '../components/atoms/Container';
-
+import { firebaseAdmin } from "../lib/firebase-admin"
 export async function getServerSideProps(ctx) {
   try {
     const cookies = nookies.get(ctx);
@@ -40,7 +41,7 @@ export async function getServerSideProps(ctx) {
     return {
       redirect: {
         permanent: false,
-        destination: '/signup',
+        destination: '/login',
       },
       props: {},
     };
@@ -69,7 +70,7 @@ const account = ({ user }) => {
     await firebaseClient.auth().signOut();
     window.location.href = '/';
   };
-  const { name, picture } = user;
+  const { name, picture, email } = user;
   return (
     <>
       <Nav status={user} />
@@ -96,72 +97,34 @@ const account = ({ user }) => {
           </Breadcrumb>
 
           <Flex>
-            <Box mt="8" bg="gray.50" w="100%" p="8" h="100%" rounded="lg">
+            <Box mt="8" bg="gray.50" w="100%" p={{base: 4, lg: 8}} h="100%" rounded="lg">
               <Flex direction="row" mb="6">
                 <Box>
-                  <Image
+                  {user.password && <Image
                     borderRadius="full"
                     boxSize="65px"
-                    src={picture}
+                    src="https://bit.ly/sage-adebayo"
                     alt={name}
                   />
+                  }
+                  <Box w="60px" h="60px" bg="gray.300" p="4" position="relative" borderRadius="50%" ><Box bg="brand.900" w="20px" h="20px" borderRadius="50%" position="absolute" bottom="-1" left="0"></Box></Box>
                 </Box>
 
                 <Box flex="1" ml="4">
-                  <Heading
-                    size="lg"
+                  <Text
+                    // size={!user.name ? "md" : "lg"}
                     letterSpacing="-.8px"
                     fontWeight="700"
                     lineHeight="1.1"
                     my="2"
+                    
                   >
-                    {name}
-                  </Heading>
+                    {name ? name : email}
+                  </Text>
                   <Badge colorScheme="green">Applicant</Badge>
                 </Box>
               </Flex>
 
-              <Table
-                variant="simple"
-                mt="12"
-                variant="striped"
-                colorScheme="gray.50"
-              >
-                <TableCaption>
-                  Please check your email after each decision to confirm
-                </TableCaption>
-                <Thead>
-                  <Tr>
-                    <Th>Offer</Th>
-                    <Th>into</Th>
-                    <Th isNumeric>multiply by</Th>
-                  </Tr>
-                </Thead>
-                <Tbody>
-                  <Tr>
-                    <Td>inches</Td>
-                    <Td>millimetres (mm)</Td>
-                    <Td isNumeric>25.4</Td>
-                  </Tr>
-                  <Tr>
-                    <Td>feet</Td>
-                    <Td>centimetres (cm)</Td>
-                    <Td isNumeric>30.48</Td>
-                  </Tr>
-                  <Tr>
-                    <Td>yards</Td>
-                    <Td>metres (m)</Td>
-                    <Td isNumeric>0.91444</Td>
-                  </Tr>
-                </Tbody>
-                {/* <Tfoot>
-                  <Tr>
-                    <Th>To convert</Th>
-                    <Th>into</Th>
-                    <Th isNumeric>multiply by</Th>
-                  </Tr>
-                </Tfoot> */}
-              </Table>
 
               <Flex mt="14">
                 <Button

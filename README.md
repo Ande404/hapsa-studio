@@ -1,7 +1,3 @@
-## Features
-
-- Features list
-- add as you go
 
 ## Pre-requisites
 
