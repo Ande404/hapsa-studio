@@ -11,18 +11,21 @@ import {
 } from '@chakra-ui/react';
 import { Newsletter } from './Newsletter';
 import { Banner } from './Banner';
-import { ChakraContainer } from './atoms/Container';
-import {HeroJobCard} from "./HeroJobCard"
+
 export const Hero = ({ jobs }) => (
-  <ChakraContainer mt={{base: "40px", lg: "65px"}}  px={{ base: '0', lg: '160px' }} >
+  <Box
+    mt={{ base: '45px', lg: '65px' }}
+    px={{ base: '16px', md: '40px', lg: '160px' }}
+    as="section"
+  >
     <Flex
-      rounded="sm"
       bg="gray.200"
-      p={{ base:8 }}
+      px={{ base: 6, lg: 8 }}
+      py={{ base: 12, lg: 6 }}
       justify="space-between"
       direction={{ base: 'column', lg: 'row' }}
       position="relative"
-      rounded={{base: "none", lg: "md"}}
+      rounded={{ base: 'none', lg: 'md' }}
     >
       <Box>
         <Banner arrow="right">
@@ -67,5 +70,5 @@ export const Hero = ({ jobs }) => (
         <Image src="16.png" h={{ base: '220px', md: '280px', lg: '360px' }} />
       </Center>
     </Flex>
-  </ChakraContainer>
+  </Box>
 );

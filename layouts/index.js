@@ -1,14 +1,6 @@
+/* eslint-disable react/display-name */
 import { MDXProvider } from '@mdx-js/react';
-import {
-  Text,
-  Heading,
-  Flex,
-  Box,
-  Center,
-  Spacer,
-  Divider,
-} from '@chakra-ui/react';
-import { ChakraContainer } from '../components/atoms/Container';
+import { Text, Heading, Flex, Box, Divider } from '@chakra-ui/react';
 import Nav from '../components/Nav';
 
 const components = {
@@ -29,10 +21,10 @@ const components = {
     </Text>
   ),
 };
-const index = ({ children, frontMatter }) => (
+const Index = ({ children, frontMatter }) => (
   <div>
     <Nav />
-    <ChakraContainer mt="28">
+    <Box mt="28">
       <MDXProvider components={components}>
         <Flex
           textAlign="center"
@@ -65,8 +57,8 @@ const index = ({ children, frontMatter }) => (
           </Box>
         </Flex>
       </MDXProvider>
-    </ChakraContainer>
+    </Box>
   </div>
 );
 
-export default index;
+export default Index;

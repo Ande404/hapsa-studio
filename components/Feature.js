@@ -1,7 +1,6 @@
 import { Box, SimpleGrid, Text, Spacer } from '@chakra-ui/react';
 import { AtSignIcon } from '@chakra-ui/icons';
 import { FiFeather, FiShield } from 'react-icons/fi';
-import { ChakraContainer } from './atoms/Container';
 
 const cardsData = [
   {
@@ -24,7 +23,7 @@ const cardsData = [
   },
 ];
 const Feature = () => (
-  <ChakraContainer mt="4">
+  <Box px={{ base: '16px', md: '40px', lg: '160px' }} mt="4">
     <SimpleGrid columns={[1, 1, 3]} spacing="40px">
       {cardsData.map(({ icon, bg, header, info }) => (
         <Box
@@ -45,7 +44,7 @@ const Feature = () => (
         </Box>
       ))}
     </SimpleGrid>
-  </ChakraContainer>
+  </Box>
 );
 
 export default Feature;

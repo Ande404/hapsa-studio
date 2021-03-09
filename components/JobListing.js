@@ -16,7 +16,7 @@ import NextLink from 'next/link';
 
 const JobListing = ({ jobs }) => (
   <div>
-    <Grid gridTemplateColumns="1" align="stretch" >
+    <Grid gridTemplateColumns="1" align="stretch">
       {jobs.map((job) => (
         <Flex
           key={job.id}

@@ -2,7 +2,6 @@ import nookies from 'nookies';
 import NextLink from 'next/link';
 import {
   Box,
-  Heading,
   Flex,
   Link,
   Breadcrumb,
@@ -10,23 +9,19 @@ import {
   BreadcrumbLink,
   Button,
   Image,
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
   Badge,
-  TableCaption,
-  Text
+  Text,
 } from '@chakra-ui/react';
 import { firebaseClient } from '../lib/firebase-client';
 import Nav from '../components/Nav';
 import { EmailAlert } from '../components/EmailAlert';
-import { AccountMenu } from '../components/AccountMenu';
-import { AccountTab } from '../components/AccountTab';
+
+// import { AccountMenu } from '../components/AccountMenu';
+// import { AccountTab } from '../components/AccountTab';
+
 import { ChakraContainer } from '../components/atoms/Container';
-import { firebaseAdmin } from "../lib/firebase-admin"
+import { firebaseAdmin } from '../lib/firebase-admin';
+
 export async function getServerSideProps(ctx) {
   try {
     const cookies = nookies.get(ctx);
@@ -97,17 +92,42 @@ const account = ({ user }) => {
           </Breadcrumb>
 
           <Flex>
-            <Box mt="8" bg="gray.50" w="100%" p={{base: 4, lg: 8}} h="100%" rounded="lg">
+            <Box
+              mt="8"
+              bg="gray.50"
+              w="100%"
+              p={{ base: 4, lg: 8 }}
+              h="100%"
+              rounded="lg"
+            >
               <Flex direction="row" mb="6">
                 <Box>
-                  {user.password && <Image
-                    borderRadius="full"
-                    boxSize="65px"
-                    src="https://bit.ly/sage-adebayo"
-                    alt={name}
-                  />
-                  }
-                  <Box w="60px" h="60px" bg="gray.300" p="4" position="relative" borderRadius="50%" ><Box bg="brand.900" w="20px" h="20px" borderRadius="50%" position="absolute" bottom="-1" left="0"></Box></Box>
+                  {user.password && (
+                    <Image
+                      borderRadius="full"
+                      boxSize="65px"
+                      src="https://bit.ly/sage-adebayo"
+                      alt={name}
+                    />
+                  )}
+                  <Box
+                    w="60px"
+                    h="60px"
+                    bg="gray.300"
+                    p="4"
+                    position="relative"
+                    borderRadius="50%"
+                  >
+                    <Box
+                      bg="brand.900"
+                      w="20px"
+                      h="20px"
+                      borderRadius="50%"
+                      position="absolute"
+                      bottom="-1"
+                      left="0"
+                    />
+                  </Box>
                 </Box>
 
                 <Box flex="1" ml="4">
@@ -117,15 +137,12 @@ const account = ({ user }) => {
                     fontWeight="700"
                     lineHeight="1.1"
                     my="2"
-                    
                   >
-                    {name ? name : email}
+                    {name || email}
                   </Text>
                   <Badge colorScheme="green">Applicant</Badge>
                 </Box>
               </Flex>
-
-
               <Flex mt="14">
                 <Button
                   onClick={logout}

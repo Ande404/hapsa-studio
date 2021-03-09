@@ -2,7 +2,8 @@ import nc from 'next-connect';
 import morgan from 'morgan';
 import Cors from 'cors';
 import { createJob } from '../../lib/firestore';
-import { firestore } from "../../lib/firebase-admin"
+import { firestore } from '../../lib/firebase-admin';
+
 const cors = Cors({
   methods: ['GET', 'POST', 'HEAD', 'PUT'],
 });
@@ -15,26 +16,25 @@ function onNoMatch(req, res) {
   res.status(404).end('page is not found... or is it');
 }
 
+const handler = nc({ onError, onNoMatch });
 
+handler
+  .use(async (req, res, next) => {
+    if (req.headers?.authorization?.startsWith('Bearer ')) {
+      const idToken = req.headers.authorization.split('Bearer ')[1];
 
-const handler = nc({ onError, onNoMatch })
+      try {
+        const decodedToken = await firestore.auth().verifyIdToken(idToken);
+        req.currentUser = decodedToken;
 
-handler.use(async (req, res, next) => {
-  if (req.headers?.authorization?.startsWith("Bearer ")) {
-    const idToken = req.headers.authorization.split('Bearer ')[1]; 
-  
-    try {
-    const decodedToken = await firestore.auth().verifyIdToken(idToken);
-    req['currentUser'] = decodedToken;
-
-    next();
-  } catch (err) {
-    res.status(401).json({
-      error: 'Unatorized',
-    });
-  }
-}
-})
+        next();
+      } catch (err) {
+        res.status(401).json({
+          error: 'Unatorized',
+        });
+      }
+    }
+  })
   .use(morgan('tiny'), cors)
   .get(async (req, res) => {
     const jobs = [];

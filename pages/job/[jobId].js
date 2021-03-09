@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import fetch from 'node-fetch';
 import { CopyIcon } from '@chakra-ui/icons';
 import { FaFacebook, FaTwitter } from 'react-icons/fa';
 import {
+  Box,
   Heading,
   Text,
   GridItem,
@@ -13,11 +14,10 @@ import {
   ButtonGroup,
   useClipboard,
   Image,
-  Spacer,
   useDisclosure,
 } from '@chakra-ui/react';
+import PropTypes from 'prop-types';
 import { parseCookies } from 'nookies';
-import { ChakraContainer } from '../../components/atoms/Container';
 import { useAuth } from '../../context/auth';
 import { getAllJobId, getJobById } from '../../lib/firestore';
 import Nav from '../../components/Nav';
@@ -35,7 +35,6 @@ const Job = ({ job }) => {
   const { user } = useAuth();
   const cookies = parseCookies();
 
-  const [applyPayload, setApplyPayload] = useState({});
   const { hasCopied, onCopy } = useClipboard(url.concat(router.asPath));
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -71,7 +70,7 @@ const Job = ({ job }) => {
         token={cookies.token}
         sendApplication={sendApplication}
       />
-      <ChakraContainer>
+      <Box px={{ base: '16px', md: '40px', lg: '160px' }}>
         <Grid mt="28" templateColumns={{ base: '1fr', lg: '2fr 1fr' }} gap="20">
           <GridItem rowSpan={2}>
             <Heading letterSpacing="-1.2px">{job?.title}</Heading>
@@ -166,7 +165,7 @@ const Job = ({ job }) => {
             </Button>
           </GridItem>
         </Grid>
-      </ChakraContainer>
+      </Box>
     </div>
   );
 };
@@ -199,5 +198,10 @@ export async function getStaticPaths() {
     fallback: true,
   };
 }
+
+Job.propType = {
+  job: PropTypes.object,
+  title: PropTypes.string,
+};
 
 export default Job;

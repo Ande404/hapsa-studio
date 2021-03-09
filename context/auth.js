@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
 import nookies from 'nookies';
+import PropTypes from 'prop-types'; // ES6
 import { firebaseClient } from '../lib/firebase-client';
 import { createUser } from '../lib/firestore';
-import { formatUser } from "../lib/firebase-helpers"
-
+import { formatUser } from '../lib/firebase-helpers';
 
 const AuthContext = createContext({
   user: null,
@@ -27,9 +27,10 @@ export function AuthProvider({ children }) {
       .then((response) => {
         setUser(response.user);
         return response.user;
-      }).catch(err => {
-        if (err.code === "auth/email-already-in-use") {
-          return err
+      })
+      .catch((err) => {
+        if (err.code === 'auth/email-already-in-use') {
+          return err;
         }
       });
 
@@ -72,7 +73,7 @@ export function AuthProvider({ children }) {
   };
 
   useEffect(() => {
-    if (typeof window !== undefined) {
+    if (typeof window !== 'undefined') {
       window.nookies = nookies;
     }
     return firebaseClient.auth().onIdTokenChanged(async (idToken) => {
@@ -103,12 +104,13 @@ export function AuthProvider({ children }) {
     const handle = setInterval(async () => {
       console.log(`refreshing token...`);
 
-      const user = firebaseClient.auth().currentUser;
+      const currenUser = firebaseClient.auth().currentUser;
 
-      if (user) await user.getIdToken(true);
+      if (currenUser) await user.getIdToken(true);
     }, 10 * 60 * 1000);
 
     return () => clearInterval(handle);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <AuthContext.Provider
@@ -129,5 +131,8 @@ export function AuthProvider({ children }) {
   );
 }
 
-export const useAuth = () => useContext(AuthContext);
+AuthProvider.propTypes = {
+  children: PropTypes.node,
+};
 
+export const useAuth = () => useContext(AuthContext);

@@ -12,16 +12,15 @@ import {
   Stack,
   Button,
 } from '@chakra-ui/react';
+import PropTypes from 'prop-types';
 import Nav from '../../components/Nav';
 import { getAllJobId } from '../../lib/firestore';
 import JobListing from '../../components/JobListing';
-import { ChakraContainer } from '../../components/atoms/Container';
-
 
 const Jobs = ({ jobs }) => (
   <div>
     <Nav />
-    <ChakraContainer mt="20">
+    <Box px={{ base: '16px', md: '40px', lg: '160px' }} mt="20">
       <Grid
         templateRows="repeat(1, 1fr)"
         templateColumns={{ base: 'inherit', lg: 'repeat(8, 1fr)' }}
@@ -75,7 +74,6 @@ const Jobs = ({ jobs }) => (
                 size="md"
                 color="gray.900"
                 bg="gray.200"
-                color="gray.900"
                 _hover={{
                   bg: 'gray.300',
                 }}
@@ -99,7 +97,7 @@ const Jobs = ({ jobs }) => (
           <JobListing jobs={jobs} />
         </GridItem>
       </Grid>
-    </ChakraContainer>
+    </Box>
   </div>
 );
 
@@ -110,5 +108,9 @@ export async function getStaticProps() {
     props: { jobs },
   };
 }
+
+Jobs.propTypes = {
+  jobs: PropTypes.array,
+};
 
 export default Jobs;

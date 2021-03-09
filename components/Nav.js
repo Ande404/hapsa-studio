@@ -1,14 +1,6 @@
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
-import {
-  Button,
-  Box,
-  Flex,
-  Text,
-  Heading,
-  Link,
-  Stack,
-} from '@chakra-ui/react';
+import { Button, Box, Flex, Heading, Link, Stack } from '@chakra-ui/react';
 import { useAuth } from '../context/auth';
 import { AccountMenu } from './AccountMenu';
 
@@ -77,27 +69,26 @@ const Nav = () => {
             <AccountMenu user={user} signOut={signOut} />
           </Box>
         ) : (
-          <Flex direction="row" justify='center' align="center">
+          <Flex direction="row" justify="center" align="center">
             <NextLink href="/login" passHref>
-            <Link     
-              // display={router.asPath == '/signup' ? 'inherit' : 'none'}
-              fontWeight="semibold" letterSpacing="-.5px" fontSize="sm"
-              color="white"
-              _hover={{
-                bg: 'none',
-                color: "white",
-                textDecoration: "underline"
-              }}
-              
-              rounded="sm"
-              onClick={() => router.push('/login')}
-            >
-              Login
-            </Link>
+              <Link
+                fontWeight="semibold"
+                letterSpacing="-.5px"
+                fontSize="sm"
+                color="white"
+                _hover={{
+                  bg: 'none',
+                  color: 'white',
+                  textDecoration: 'underline',
+                }}
+                rounded="sm"
+                onClick={() => router.push('/login')}
+              >
+                Login
+              </Link>
             </NextLink>
             <Button
               ml="4"
-              // display={router.asPath == '/login'  ? 'inherit' : "none"}
               size="sm"
               px="2"
               bg="rgb(92,52,226)"
@@ -111,7 +102,6 @@ const Nav = () => {
             >
               Sign up
             </Button>
-            
           </Flex>
         )}
       </Box>

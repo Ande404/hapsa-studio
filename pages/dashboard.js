@@ -1,17 +1,8 @@
 import nookies from 'nookies';
-import {
-  Box,
-  SimpleGrid,
-  useColorModeValue as mode,
-  Stat,
-  StatLabel,
-  StatNumber,
-  Heading,
-} from '@chakra-ui/react';
+import { Box, SimpleGrid, Heading } from '@chakra-ui/react';
 import { firebaseAdmin } from '../lib/firebase-admin';
 import { firebaseClient } from '../lib/firebase-client';
 import Nav from '../components/Nav';
-import Form from '../components/Form';
 import { StatCard } from '../components/StatCard';
 
 const data = [

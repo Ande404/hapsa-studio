@@ -1,29 +1,4 @@
-import {
-  Box,
-  Heading,
-  Flex,
-  Link,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  Button,
-  Image,
-  Alert,
-  AlertIcon,
-  Text,
-  VStack,
-  HStack,
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  Badge,
-  TableCaption,
-  Spacer,
-} from '@chakra-ui/react';
+import { Box, Link, Alert, AlertIcon, Text } from '@chakra-ui/react';
 
 export const EmailAlert = ({ user }) => (
   <div>
@@ -38,6 +13,7 @@ export const EmailAlert = ({ user }) => (
               // feels good to be a gangsta
               ml="1"
               href={
+                // eslint-disable-next-line no-nested-ternary
                 user.firebase.sign_in_provider === 'google.com'
                   ? 'https://www.google.com/gmail/about/#'
                   : user.firebase.sign_in_provider === 'twitter.com'
