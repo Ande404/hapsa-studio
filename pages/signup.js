@@ -37,7 +37,7 @@ const Signup = () => {
   const router = useRouter();
   const { user, googleLogin, facebookLogin, twitterLogin, signUp } = useAuth();
 
-  const { register, handleSubmit, watch, errors } = useForm({
+  const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
   });
 

@@ -12,10 +12,10 @@ import {
 import { Newsletter } from './Newsletter';
 import { Banner } from './Banner';
 
-export const Hero = ({ jobs }) => (
+export const Hero = () => (
   <Box
-    mt={{ base: '45px', lg: '65px' }}
-    px={{ base: '16px', md: '40px', lg: '160px' }}
+    mt={{ base: '45px', lg: '70px' }}
+    px={{ base: '0', md: '40px', lg: '160px' }}
     as="section"
   >
     <Flex
@@ -66,7 +66,6 @@ export const Hero = ({ jobs }) => (
         </Flex>
       </Box>
       <Center pr={{ base: 8, lg: 16 }} position="relative">
-        {/* <HeroJobCard jobs={jobs}/> */}
         <Image src="16.png" h={{ base: '220px', md: '280px', lg: '360px' }} />
       </Center>
     </Flex>

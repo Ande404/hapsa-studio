@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useRouter } from 'next/router';
 import fetch from 'node-fetch';
 import { CopyIcon } from '@chakra-ui/icons';
@@ -199,7 +198,7 @@ export async function getStaticPaths() {
   };
 }
 
-Job.propType = {
+Job.propTypes = {
   job: PropTypes.object,
   title: PropTypes.string,
 };

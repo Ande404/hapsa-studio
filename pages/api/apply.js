@@ -1,13 +1,12 @@
 import nc from 'next-connect';
 import cors from 'cors';
-import fetch from 'node-fetch';
 import morgan from 'morgan';
 import { firebaseAdmin } from '../../lib/firebase-admin';
 
 const db = firebaseAdmin.firestore();
 
 const handler = nc()
-  .use(cors())
+  .use(morgan('tiny'), cors)
   .use(async (req, res, next) => {
     if (req.headers?.authorization?.startsWith('Bearer ')) {
       const idToken = req.headers.authorization.split('Bearer ')[1];

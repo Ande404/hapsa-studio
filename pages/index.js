@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import PropTypes from 'prop-types';
 import Nav from '../components/Nav';
 import { Hero } from '../components/Hero';
 import Feature from '../components/Feature';
@@ -25,3 +26,6 @@ export async function getStaticProps() {
     },
   };
 }
+Home.propTypes = {
+  jobs: PropTypes.string,
+};

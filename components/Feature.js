@@ -23,7 +23,7 @@ const cardsData = [
   },
 ];
 const Feature = () => (
-  <Box px={{ base: '16px', md: '40px', lg: '160px' }} mt="4">
+  <Box px={{ base: '16px', md: '40px', lg: '160px' }} mt="6">
     <SimpleGrid columns={[1, 1, 3]} spacing="40px">
       {cardsData.map(({ icon, bg, header, info }) => (
         <Box

@@ -12,14 +12,10 @@ import {
   Badge,
   Text,
 } from '@chakra-ui/react';
+import PropTypes from 'prop-types';
 import { firebaseClient } from '../lib/firebase-client';
 import Nav from '../components/Nav';
 import { EmailAlert } from '../components/EmailAlert';
-
-// import { AccountMenu } from '../components/AccountMenu';
-// import { AccountTab } from '../components/AccountTab';
-
-import { ChakraContainer } from '../components/atoms/Container';
 import { firebaseAdmin } from '../lib/firebase-admin';
 
 export async function getServerSideProps(ctx) {
@@ -43,35 +39,20 @@ export async function getServerSideProps(ctx) {
   }
 }
 
-const tabData = [
-  {
-    label: 'Account',
-    content: 'Perhaps the greatest dish ever invented.',
-  },
-  {
-    label: 'Documents',
-    content:
-      'Perhaps the surest dish ever invented but fills the stomach more than rice.',
-  },
-  {
-    label: 'Setting',
-    content:
-      'Perhaps the surest dish ever invented but fills the stomach more than rice.',
-  },
-];
-
-const account = ({ user }) => {
+const Account = ({ user }) => {
   const logout = async () => {
     await firebaseClient.auth().signOut();
     window.location.href = '/';
   };
+
   const { name, picture, email } = user;
+
   return (
     <>
       <Nav status={user} />
       {!user.email_verified && <EmailAlert user={user} />}
 
-      <ChakraContainer pt="20">
+      <Box pt="20" px={{ base: '16px', md: '40px', lg: '160px' }}>
         <Box h="100vh">
           <Breadcrumb fontSize="sm" fontWeight="medium" mt="6">
             <BreadcrumbItem isCurrentPage>
@@ -102,43 +83,44 @@ const account = ({ user }) => {
             >
               <Flex direction="row" mb="6">
                 <Box>
-                  {user.password && (
+                  {user.picture ? (
                     <Image
                       borderRadius="full"
-                      boxSize="65px"
-                      src="https://bit.ly/sage-adebayo"
+                      boxSize="60px"
+                      src={picture}
                       alt={name}
                     />
-                  )}
-                  <Box
-                    w="60px"
-                    h="60px"
-                    bg="gray.300"
-                    p="4"
-                    position="relative"
-                    borderRadius="50%"
-                  >
+                  ) : (
                     <Box
-                      bg="brand.900"
-                      w="20px"
-                      h="20px"
+                      w="60px"
+                      h="60px"
+                      bg="linear-gradient(144deg, rgba(25,35,52,1) 0%, rgba(56,62,70,1) 100%)"
+                      p="4"
+                      position="relative"
                       borderRadius="50%"
-                      position="absolute"
-                      bottom="-1"
-                      left="0"
-                    />
-                  </Box>
+                    >
+                      <Box
+                        bg="brand.900"
+                        w="20px"
+                        h="20px"
+                        borderRadius="50%"
+                        position="absolute"
+                        bottom="-1"
+                        left="0"
+                      />
+                    </Box>
+                  )}
                 </Box>
 
                 <Box flex="1" ml="4">
                   <Text
-                    // size={!user.name ? "md" : "lg"}
+                    size={{ base: 'md', md: 'lg' }}
                     letterSpacing="-.8px"
                     fontWeight="700"
                     lineHeight="1.1"
                     my="2"
                   >
-                    {name || email}
+                    {name || email.split('@')[0]}
                   </Text>
                   <Badge colorScheme="green">Applicant</Badge>
                 </Box>
@@ -155,11 +137,14 @@ const account = ({ user }) => {
               </Flex>
             </Box>
           </Flex>
-          {/* <AccountTab data={tabData} /> */}
         </Box>
-      </ChakraContainer>
+      </Box>
     </>
   );
 };
 
-export default account;
+Account.propTypes = {
+  user: PropTypes.object,
+};
+
+export default Account;

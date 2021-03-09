@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import Cors from 'cors';
 import { createJob } from '../../lib/firestore';
 import { firestore } from '../../lib/firebase-admin';
+import { NanoId } from '../../lib/firebase-helpers';
 
 const cors = Cors({
   methods: ['GET', 'POST', 'HEAD', 'PUT'],
@@ -16,7 +17,7 @@ function onNoMatch(req, res) {
   res.status(404).end('page is not found... or is it');
 }
 
-const handler = nc({ onError, onNoMatch });
+const handler = nc({ onError, onNoMatch }).use(morgan('tiny'), cors);
 
 handler
   .use(async (req, res, next) => {
@@ -35,7 +36,6 @@ handler
       }
     }
   })
-  .use(morgan('tiny'), cors)
   .get(async (req, res) => {
     const jobs = [];
     const snapshot = await firestore.collection('jobs').get();
@@ -53,7 +53,7 @@ handler
       res.status(404).end('request body is not found... or is it');
     }
 
-    const randomId = await nanoid();
+    const randomId = await NanoId();
 
     const title = req.body.title.toLowerCase().split(' ').join('-');
     const jobId = title.concat(randomId);

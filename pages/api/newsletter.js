@@ -20,7 +20,7 @@ function onNoMatch(req, res) {
   res.status(404).end('Resource not found');
 }
 
-const handler = nc({ onError, onNoMatch });
+const handler = nc({ onError, onNoMatch }).use(morgan('tiny'), cors);
 
 handler.use(morgan('tiny'), cors).post(async (req, res) => {
   const { email } = req.body;
@@ -39,7 +39,7 @@ handler.use(morgan('tiny'), cors).post(async (req, res) => {
 
     return res.status(201).json({ error: '', message: 'subscribed' });
   } catch (error) {
-    const { title, status, detial } = JSON.parse(error.response.text);
+    const { title, status } = JSON.parse(error.response.text);
 
     switch (title) {
       case 'Member Exists':
