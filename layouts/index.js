@@ -1,23 +1,25 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/display-name */
 import { MDXProvider } from '@mdx-js/react';
 import { Text, Heading, Flex, Box, Divider } from '@chakra-ui/react';
+import PropTypes from 'prop-types';
 import Nav from '../components/Nav';
 
-const components = {
-  h1: (props) => (
+const MdxWrapper = {
+  h1: ({ children }) => (
     <Heading fontWeight="bold" fontSize="3xl" textAlign="center">
-      {props.children}
+      {children}
     </Heading>
   ),
-  h2: (props) => (
+  h2: ({ children }) => (
     <Heading fontSize="xl" mt="12" mb="6" textAlign="center">
-      {props.children}
+      {children}
     </Heading>
   ),
 
-  p: (props) => (
+  p: ({ children }) => (
     <Text mb={6} fontSize="18px" fontWeight="normal">
-      {props.children}
+      {children}
     </Text>
   ),
 };
@@ -25,11 +27,11 @@ const Index = ({ children, frontMatter }) => (
   <div>
     <Nav />
     <Box mt="28">
-      <MDXProvider components={components}>
+      <MDXProvider components={MdxWrapper}>
         <Flex
           textAlign="center"
           flexDirection="column"
-          px={{ base: 4, md: 12, lg: 60 }}
+          px={{ base: 4, md: 12, lg: '340px' }}
           margin="0 auto"
         >
           <Heading color="rgb(92,52,226)" size="xl" letterSpacing="-1px" mb="4">
@@ -60,5 +62,10 @@ const Index = ({ children, frontMatter }) => (
     </Box>
   </div>
 );
+
+Index.propTypes = {
+  frontMatter: PropTypes.object,
+  children: PropTypes.node,
+};
 
 export default Index;

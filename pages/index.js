@@ -27,5 +27,5 @@ export async function getStaticProps() {
   };
 }
 Home.propTypes = {
-  jobs: PropTypes.string,
+  jobs: PropTypes.array,
 };
