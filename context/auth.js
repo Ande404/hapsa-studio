@@ -87,7 +87,6 @@ export function AuthProvider({ children }) {
         nookies.set(null, 'token', '', {});
       } else {
         console.log(`updating token...`);
-
         const saveUser = formatUser(idToken);
 
         setUser(saveUser);
@@ -95,6 +94,8 @@ export function AuthProvider({ children }) {
         createUser(idToken.uid, saveUser);
 
         const token = await idToken.getIdToken();
+
+        console.log(token);
         nookies.set(null, 'token', token, {});
       }
     });
@@ -106,7 +107,7 @@ export function AuthProvider({ children }) {
 
       const currenUser = firebaseClient.auth().currentUser;
 
-      if (currenUser) await user.getIdToken(true);
+      if (currenUser) await currenUser.getIdToken(true);
     }, 10 * 60 * 1000);
 
     return () => clearInterval(handle);

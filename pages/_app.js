@@ -7,6 +7,7 @@ export default function App({ Component, pageProps }) {
     <AuthProvider>
       <ChakraProvider theme={customTheme}>
         <CSSReset />
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
         <Component {...pageProps} />
       </ChakraProvider>
     </AuthProvider>

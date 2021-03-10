@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 import { firebaseClient } from '../lib/firebase-client';
-import Nav from '../components/Nav';
+import { Nav } from '../components/Nav/Nav';
 import { EmailAlert } from '../components/EmailAlert';
 import { firebaseAdmin } from '../lib/firebase-admin';
 

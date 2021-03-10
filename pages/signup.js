@@ -65,121 +65,121 @@ const Signup = () => {
   }, [user]);
 
   return (
-    <Box h="100vh" bg="gray.50">
-      <Center pt="20">
+    <Box h='100vh' bg='gray.50'>
+      <Center pt='20'>
         <Flex
-          rounded="sm"
-          w="420px"
-          textAlign="center"
-          direction="column"
-          justify="center"
-          px="8"
+          rounded='none'
+          w='420px'
+          textAlign='center'
+          direction='column'
+          justify='center'
+          px='8'
         >
-          <Heading size="lg" letterSpacing="-.8px" mb="12">
+          <Heading size='lg' letterSpacing='-.8px' mb='12'>
             Sign up
           </Heading>
 
           <form onSubmit={handleSubmit(onSubmit)}>
             {userExists && (
-              <Text color="red.600" pb="4" fontWeight="bold">
+              <Text color='red.600' pb='4' fontWeight='bold'>
                 This email is already registered
               </Text>
             )}
 
-            <FormControl id="email" isRequired>
-              <FormLabel fontSize="md">Email address</FormLabel>
+            <FormControl id='email' isRequired>
+              <FormLabel fontSize='md'>Email address</FormLabel>
               <Input
                 ref={register({ required: true })}
-                fontSize="sm"
-                rounded="sm"
-                id="email"
-                type="email"
-                name="email"
-                placeholder="Email Address"
+                fontSize='sm'
+                rounded='none'
+                id='email'
+                type='email'
+                name='email'
+                placeholder='Email Address'
               />
               <p>{errors.email?.message}</p>
             </FormControl>
-            <FormControl id="password" isRequired mt="4">
-              <FormLabel fontSize="md">Password</FormLabel>
-              <InputGroup size="md">
+            <FormControl id='password' isRequired mt='4'>
+              <FormLabel fontSize='md'>Password</FormLabel>
+              <InputGroup size='md'>
                 <Input
                   ref={register({ required: true })}
-                  fontSize="md"
-                  rounded="sm"
-                  pr="4.5rem"
-                  name="password"
+                  fontSize='md'
+                  rounded='none'
+                  pr='4.5rem'
+                  name='password'
                   type={show ? 'text' : 'password'}
-                  placeholder="Enter password"
+                  placeholder='Enter password'
                 />
-                <InputRightElement width="4.5rem">
-                  <Button h="1.75rem" size="sm" onClick={handleClick}>
+                <InputRightElement width='4.5rem'>
+                  <Button h='1.75rem' size='sm' onClick={handleClick}>
                     {show ? 'Hide' : 'Show'}
                   </Button>
                 </InputRightElement>
               </InputGroup>
               {errors.password?.message && (
-                <Text fontSize="sm" py="2" textAlign="left" colorScheme="red">
+                <Text fontSize='sm' py='2' textAlign='left' colorScheme='red'>
                   {errors.password?.message}
                 </Text>
               )}
             </FormControl>
 
-            <Box textAlign="left" mt="2">
-              <Link fontSize="sm" color="gray.500">
+            <Box textAlign='left' mt='2'>
+              <Link fontSize='sm' color='gray.500'>
                 Trouble signing in?
               </Link>
             </Box>
             <Button
-              rounded="sm"
-              type="submit"
-              w="100%"
-              mt="10"
-              bg="brand.900"
+              rounded='none'
+              type='submit'
+              w='100%'
+              mt='10'
+              bg='brand.900'
               _hover={{
                 bg: 'rgb(90,42,200)',
               }}
-              color="white"
+              color='white'
               isDisabled={userExists}
             >
               Sign up
             </Button>
-            <Box mt="8">
-              <NextLink href="/login">
+            <Box mt='8'>
+              <NextLink href='/login'>
                 <Link>
-                  <Text size="sm" letterSpacing="-.4px">
+                  <Text size='sm' letterSpacing='-.4px'>
                     Already have an account? Log in
                   </Text>
                 </Link>
               </NextLink>
             </Box>
           </form>
-          <Box py="12">
+          <Box py='12'>
             <hr style={{ border: '1px solid #edf2f7' }} />
           </Box>
-          <Text size="sm" letterSpacing="-.4px" fontWeight="semibold">
+          <Text size='sm' letterSpacing='-.4px' fontWeight='semibold'>
             Or continue with
           </Text>
-          <SimpleGrid mt="6" columns="3" spacing="3">
+          <SimpleGrid mt='6' columns='3' spacing='3'>
             <Button
-              color="currentColor"
-              variant="outline"
+              color='currentColor'
+              variant='outline'
               onClick={facebookLogin}
-              rounded="md"
+              rounded='md'
             >
               <VisuallyHidden>Login with Facebook</VisuallyHidden>
               <FaFacebook />
             </Button>
             <Button
-              color="currentColor"
-              variant="outline"
+              color='currentColor'
+              variant='outline'
               onClick={googleLogin}
             >
               <VisuallyHidden>Login with Google</VisuallyHidden>
               <FaGoogle />
             </Button>
             <Button
-              color="currentColor"
-              variant="outline"
+              color='currentColor'
+              variant='outline'
               onClick={twitterLogin}
             >
               <VisuallyHidden>Login with Twitter</VisuallyHidden>

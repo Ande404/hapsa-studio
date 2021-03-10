@@ -1,4 +1,6 @@
+# Hapsa Studio 
 
+[![CircleCI](https://circleci.com/gh/hawyar/hapsa-studio.svg?style=shield)](https://app.circleci.com/pipelines/github/hawyar/hapsa-studio)
 ## Pre-requisites
 
 - [Node](https://nodejs.org/en/)

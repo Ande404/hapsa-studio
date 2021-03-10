@@ -1,7 +1,7 @@
 import React from 'react';
 import nookies from 'nookies';
 import { Box } from '@chakra-ui/react';
-import Nav from '../components/Nav';
+import { Nav } from '../components/Nav/Nav';
 import { firebaseAdmin } from '../lib/firebase-admin';
 
 export async function getServerSideProps(ctx) {
@@ -28,7 +28,9 @@ export async function getServerSideProps(ctx) {
 const recruiter = () => (
   <div>
     <Nav />
-    <Box>recruiter page</Box>
+    <Box mt="80px" px={{ base: '16px', md: '40px', lg: '160px' }}>
+      recruiter page
+    </Box>
   </div>
 );
 

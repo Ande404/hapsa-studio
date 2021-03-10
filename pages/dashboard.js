@@ -2,10 +2,10 @@ import nookies from 'nookies';
 import { Box, SimpleGrid, Heading } from '@chakra-ui/react';
 import { firebaseAdmin } from '../lib/firebase-admin';
 import { firebaseClient } from '../lib/firebase-client';
-import Nav from '../components/Nav';
+import { Nav } from '../components/Nav/Nav';
 import { StatCard } from '../components/StatCard';
 
-const data = [
+const statData = [
   { label: 'Submitted Applications', value: '19' },
   { label: 'Response Rate', value: '56.87%' },
   { label: 'Profile Views', value: '2,152' },
@@ -14,11 +14,11 @@ const data = [
 export async function getServerSideProps(ctx) {
   try {
     const cookies = nookies.get(ctx);
-    const token = await firebaseAdmin.auth().verifyIdToken(cookies.token);
+    await firebaseAdmin.auth().verifyIdToken(cookies.token);
 
     return {
       props: {
-        token,
+        data: 'user data - dashboard',
       },
     };
   } catch (err) {
@@ -31,17 +31,15 @@ export async function getServerSideProps(ctx) {
     };
   }
 }
-const dashboard = ({ token }) => {
-  const logout = async () => {
-    await firebaseClient.auth().signOut();
-    window.location.href = '/';
-  };
-
+const Dashboard = ({ data }) => {
+  console.log(data);
   return (
-    <>
-      <Nav status={token} logout={logout} />
+    <div>
+      <Nav />
       <Box px={{ base: '16px', md: '40px', lg: '160px' }} mt="20">
-        <Heading size="md">Dashboard</Heading>
+        <Heading size="md" letterSpacing="-.4px">
+          Dashboard
+        </Heading>
 
         <SimpleGrid
           as="section"
@@ -53,13 +51,13 @@ const dashboard = ({ token }) => {
           bg="gray.50"
           px={{ base: '6', md: '8' }}
         >
-          {data.map((stat, idx) => (
+          {statData.map((stat, idx) => (
             <StatCard key={idx} data={stat} />
           ))}
         </SimpleGrid>
       </Box>
-    </>
+    </div>
   );
 };
 
-export default dashboard;
+export default Dashboard;

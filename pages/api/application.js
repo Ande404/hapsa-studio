@@ -1,5 +1,6 @@
 import nc from 'next-connect';
 import cors from 'cors';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import morgan from 'morgan';
 import { firebaseAdmin } from '../../lib/firebase-admin';
 
@@ -56,7 +57,7 @@ const handler = nc()
     await db.collection('applications').add({
       user: user.uid,
       job: job.jobId,
-      time_applied: new Date().getTime(),
+      time_applied: new Date(),
     });
 
     // update user's list of job applications

@@ -19,7 +19,7 @@ import PropTypes from 'prop-types';
 import { parseCookies } from 'nookies';
 import { useAuth } from '../../context/auth';
 import { getAllJobId, getJobById } from '../../lib/firestore';
-import Nav from '../../components/Nav';
+import { Nav } from '../../components/Nav/Nav';
 import JobModal from '../../components/JobModal';
 
 const Job = ({ job }) => {

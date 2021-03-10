@@ -1,4 +1,5 @@
 import nc from 'next-connect';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import morgan from 'morgan';
 import Cors from 'cors';
 import mailchimp from '@mailchimp/mailchimp_marketing';

@@ -13,7 +13,7 @@ import {
   Button,
 } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
-import Nav from '../../components/Nav';
+import { Nav } from '../../components/Nav/Nav';
 import { getAllJobId } from '../../lib/firestore';
 import JobListing from '../../components/JobListing';
 

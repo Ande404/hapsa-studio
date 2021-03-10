@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 import { Box, Flex, Heading, Link, Stack } from '@chakra-ui/react';
-import { useAuth } from '../context/auth';
-import { AccountMenu } from './AccountMenu';
-import { NavButton } from './NavButton';
+import { useAuth } from '../../context/auth';
+import { AccountMenu } from '../AccountMenu';
+import { NavButton } from '../NavButton';
 
 const navLink = [
   {
@@ -28,7 +28,7 @@ const navLink = [
   },
 ];
 
-const Nav = () => {
+export const Nav = () => {
   const { user, signOut } = useAuth();
   const router = useRouter();
 
@@ -44,14 +44,13 @@ const Nav = () => {
       align="center"
       bg="gray.900"
       color="white"
-      borderBottom="1px solid rgba(216,236,241, .1)"
       position="fixed"
       top="0px"
-      zIndex="90000"
+      zIndex="22"
       left="0px"
       right="0px"
     >
-      <Box>
+      <Box as="nav">
         <NextLink href="/">
           <Link _hover={{ textDecor: 'none' }}>
             <Heading size="sm" fontWeight="bold" letterSpacing="-1px">
@@ -90,5 +89,3 @@ const Nav = () => {
     </Flex>
   );
 };
-
-export default Nav;

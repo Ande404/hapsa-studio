@@ -1,9 +1,10 @@
 import nc from 'next-connect';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import morgan from 'morgan';
 import Cors from 'cors';
-import { createJob } from '../../lib/firestore';
-import { firestore } from '../../lib/firebase-admin';
+import { firebaseAdmin, firestore } from '../../lib/firebase-admin';
 import { NanoId } from '../../lib/firebase-helpers';
+import { schemaValidator } from '../../schema/job';
 
 const cors = Cors({
   methods: ['GET', 'POST', 'HEAD', 'PUT'],
@@ -25,45 +26,89 @@ handler
       const idToken = req.headers.authorization.split('Bearer ')[1];
 
       try {
-        const decodedToken = await firestore.auth().verifyIdToken(idToken);
+        const decodedToken = await firebaseAdmin.auth().verifyIdToken(idToken);
         req.currentUser = decodedToken;
 
         next();
       } catch (err) {
         res.status(401).json({
-          error: 'Unatorized',
+          error: 'Unauthorized',
         });
       }
     }
   })
+  .use(async (req, res, next) => {
+    const userRecord = await firebaseAdmin.auth().getUser(req.currentUser.uid);
+
+    console.log(
+      `user custom claims: ${JSON.stringify(userRecord.customClaims)}`
+    );
+    next();
+  })
   .get(async (req, res) => {
-    const jobs = [];
-    const snapshot = await firestore.collection('jobs').get();
-    snapshot.forEach((doc) => {
-      jobs.push({
-        id: doc.id,
-        data: doc.data(),
+    const jobsSnapshot = await firestore
+      .collection('jobs')
+      .where('status', '==', 'active')
+      .get();
+    const allJobs = await jobsSnapshot.docs.map((job) => ({
+      jobId: job.id,
+      jobData: job.data(),
+    }));
+
+    res.status(200).json({ jobs: allJobs });
+  })
+  .use((req, res, next) => {
+    if (!req.currentUser.recruiter) {
+      res.status(401).json({
+        error: 'Not authorized',
       });
+    }
+    next();
+  })
+  .use(async (req, res, next) => {
+    if (req.body) {
+      try {
+        const isSchemaValid = await schemaValidator(req.body);
+        console.log(isSchemaValid);
+        if (isSchemaValid) {
+          req.validatedJob = req.body;
+          next();
+        }
+        req.validatedJob = '';
+        res.status(400).json({
+          error: 'Invalid Schema',
+        });
+      } catch (error) {
+        res.status(400).json({
+          error: error.errors,
+        });
+      }
+    }
+    res.status(400).json({
+      error: 'Bad Input',
     });
-    res.json(jobs);
   })
   .post(async (req, res) => {
-    const { body } = req;
-    if (!body) {
-      res.status(404).end('request body is not found... or is it');
-    }
-
-    const randomId = await NanoId();
-
-    const title = req.body.title.toLowerCase().split(' ').join('-');
-    const jobId = title.concat(randomId);
-
-    const job = await createJob(jobId, body);
-
-    res.status(200).json({
-      msg: 'Job created successfully ✅',
-      data: job,
-    });
+    console.log(`validated job: ${JSON.stringify(req.validatedJob)}`);
+    res.status(200);
+    // try {
+    //   const randomId = await NanoId();
+    //   const title = req.body.title.toLowerCase().split(' ').join('-');
+    //   const jobId = title.concat(randomId);
+    //   const jobData = req.validatedJob;
+    //   const newJob = await firestore
+    //     .collection('jobs')
+    //     .doc(jobId)
+    //     .set({ ...jobData, jobId });
+    //   res.status(201).json({
+    //     message: 'Created new job',
+    //     data: newJob,
+    //   });
+    // } catch (error) {
+    //   res.status(500).json({
+    //     error: 'Failed to create job',
+    //   });
+    // }
   })
   .put(async (req, res) => {
     res.end('async/await is also supported!');

@@ -3,7 +3,7 @@
 import { MDXProvider } from '@mdx-js/react';
 import { Text, Heading, Flex, Box, Divider } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
-import Nav from '../components/Nav';
+import { Nav } from '../components/Nav/Nav';
 
 const MdxWrapper = {
   h1: ({ children }) => (

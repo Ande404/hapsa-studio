@@ -73,7 +73,7 @@ const Login = () => {
     <Box h="100vh" bg="gray.50">
       <Center pt="20">
         <Flex
-          rounded="sm"
+          rounded="none"
           w="420px"
           textAlign="center"
           direction="column"
@@ -89,7 +89,7 @@ const Login = () => {
               <Input
                 ref={register({ required: true })}
                 fontSize="sm"
-                rounded="sm"
+                rounded="none"
                 id="email"
                 type="email"
                 name="email"
@@ -103,7 +103,7 @@ const Login = () => {
                 <Input
                   ref={register({ required: true })}
                   fontSize="md"
-                  rounded="sm"
+                  rounded="none"
                   pr="4.5rem"
                   name="password"
                   type={show ? 'text' : 'password'}
@@ -128,7 +128,7 @@ const Login = () => {
               </Link>
             </Box>
             <Button
-              rounded="sm"
+              rounded="none"
               type="submit"
               w="100%"
               mt="10"
