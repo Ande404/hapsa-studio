@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import PropTypes from 'prop-types';
+import { Center, Heading, Badge, Box, Text } from '@chakra-ui/react';
 import { Nav } from '../components/Nav/Nav';
 import { Hero } from '../components/Hero/Hero';
 import Feature from '../components/Feature';
@@ -14,6 +15,18 @@ export default function Home({ jobs }) {
       <Nav />
       <Hero jobs={jobs} />
       <Feature />
+      <Center px={{ base: '0', md: '40px', lg: '160px' }} my="20">
+        <Box>
+          <Badge colorScheme="green" mb="2">
+            Success
+          </Badge>
+          <Heading letterSpacing="-.6px">
+            Keep your job applications in one place
+          </Heading>
+
+          <Box h="240px" bg="gray.900" rounded="sm" mt="12"></Box>
+        </Box>
+      </Center>
     </>
   );
 }

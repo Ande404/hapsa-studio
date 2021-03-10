@@ -71,16 +71,16 @@ const Login = () => {
 
   return (
     <Box h="100vh" bg="gray.50">
-      <Center pt="20">
+      <Center pt="12">
         <Flex
           rounded="none"
           w="420px"
-          textAlign="center"
+          textAlign="left"
           direction="column"
           justify="center"
           px="8"
         >
-          <Heading size="lg" letterSpacing="-.8px" mb="12">
+          <Heading size="lg" letterSpacing="-1px" mb="12">
             Log in
           </Heading>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -122,13 +122,8 @@ const Login = () => {
               )}
             </FormControl>
 
-            <Box textAlign="left" mt="2">
-              <Link fontSize="sm" color="gray.500">
-                Trouble signing in?
-              </Link>
-            </Box>
             <Button
-              rounded="none"
+              rounded="sm"
               type="submit"
               w="100%"
               mt="10"
@@ -143,8 +138,15 @@ const Login = () => {
             <Box mt="8">
               <NextLink href="/signup" passHref>
                 <Link>
-                  <Text size="sm" letterSpacing="-.4px">
+                  <Text size="sm" letterSpacing="-.2px">
                     Don't have an account yet? Sign up
+                  </Text>
+                </Link>
+              </NextLink>
+              <NextLink href="/signup" passHref>
+                <Link>
+                  <Text size="sm" letterSpacing="-.2px">
+                    Trouble signing in?
                   </Text>
                 </Link>
               </NextLink>
