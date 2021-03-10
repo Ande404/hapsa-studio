@@ -2,10 +2,8 @@ import nc from 'next-connect';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import morgan from 'morgan';
 import Cors from 'cors';
-import { createJob } from '../../lib/firestore';
 import { firebaseAdmin, firestore } from '../../lib/firebase-admin';
 import { NanoId } from '../../lib/firebase-helpers';
-import { firebaseAuth, firebaseUserRole } from '../../middleware/auth';
 
 const cors = Cors({
   methods: ['GET', 'POST', 'HEAD', 'PUT'],
@@ -36,6 +34,10 @@ handler
           error: 'Unauthorized',
         });
       }
+    } else {
+      res.status(401).json({
+        error: 'Unauthorized',
+      });
     }
   })
   .use(async (req, res, next) => {
@@ -46,7 +48,7 @@ handler
 
       if (
         recruiterRequest[0] === 'recruiter' &&
-        recruiterRequest[1] === '007'
+        recruiterRequest[1] === process.env.FIREBASE_ROLE_RECRUIT
       ) {
         try {
           await firebaseAdmin.auth().setCustomUserClaims(uid, {
@@ -54,31 +56,19 @@ handler
           });
           next();
         } catch (error) {
-          res.status(500).json({
-            error: 'Something went wrong with setting custom claims',
+          res.status(401).json({
+            error: 'Unauthorizedss',
           });
         }
       }
     }
-    res.status(400).json({
-      error: 'Not authorized',
+    res.status(401).json({
+      error: 'Unauthorized',
     });
   })
   .post(async (req, res) => {
-    // const { body } = req;
-    // if (!body) {
-    //   res.status(404).end('request body is not found... or is it');
-    // }
-
-    // const randomId = await NanoId();
-
-    // const title = req.body.title.toLowerCase().split(' ').join('-');
-    // const jobId = title.concat(randomId);
-
-    // const job = await createJob(jobId, body);
-
     res.status(200).json({
-      msg: 'Success',
+      msg: 'You are a recruiter',
     });
   })
   .put(async (req, res) => {

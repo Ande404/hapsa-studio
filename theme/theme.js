@@ -9,11 +9,6 @@ const colors = {
   },
 };
 
-// const fonts = {
-//   heading: 'Space Grotesk',
-//   body: 'Space Grotesk',
-// };
-
 const fonts = {
   heading: 'Manrope',
   body: 'Manrope',

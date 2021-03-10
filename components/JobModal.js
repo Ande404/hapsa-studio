@@ -20,26 +20,23 @@ const JobModal = ({
 }) => {
   const submitApplication = () => {
     sendApplication();
-    alert('job submitted');
     onClose();
   };
   return (
-    <div>
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>{job?.title || 'no title'}</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>Hello</ModalBody>
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>{job?.title || 'no title'}</ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>Applicant info and job info here</ModalBody>
 
-          <ModalFooter>
-            <Button onClick={submitApplication} disabled={!user && !token}>
-              Submit
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </div>
+        <ModalFooter>
+          <Button onClick={submitApplication} disabled={!user && !token}>
+            Submit
+          </Button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
   );
 };
 

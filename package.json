@@ -19,7 +19,7 @@
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
       "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
     }
-},
+  },
   "dependencies": {
     "@chakra-ui/icons": "^1.0.5",
     "@chakra-ui/react": "^1.1.5",
@@ -29,6 +29,7 @@
     "@mailchimp/mailchimp_marketing": "^3.0.34",
     "@mapbox/rehype-prism": "^0.6.0",
     "@mdx-js/react": "^1.6.22",
+    "babel-plugin-superjson-next": "^0.2.3",
     "cors": "^2.8.5",
     "express-validator": "^6.9.2",
     "firebase": "7.17.1",
@@ -50,6 +51,7 @@
     "react-icons": "^4.1.0",
     "react-text-loop": "^2.3.0",
     "remove": "^0.1.5",
+    "superjson": "^1.7.2",
     "yup": "^0.32.9"
   },
   "devDependencies": {

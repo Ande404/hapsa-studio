@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import {
   Box,
   Heading,
@@ -13,6 +14,7 @@ import {
   Button,
 } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
+import superjson from 'superjson';
 import { Nav } from '../../components/Nav/Nav';
 import { getAllJobId } from '../../lib/firestore';
 import JobListing from '../../components/JobListing';
@@ -102,7 +104,13 @@ const Jobs = ({ jobs }) => (
 );
 
 export async function getStaticProps() {
-  const jobs = await getAllJobId();
+  const rawJobs = await getAllJobId();
+
+  // Firebase understands timestamps however Next.js only serializes JSON types see https://github.com/vercel/next.js/discussions/11498
+  // superjson will cast timestamps to string
+  const jobs = rawJobs.map((job) => superjson.serialize(job).json);
+
+  console.log(jobs);
 
   return {
     props: { jobs },

@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-const jobSchema = yup.object().shape({
+export const jobSchema = yup.object().shape({
   title: yup.string().max(42),
   status: yup.string().trim().required(),
   remote: yup.bool().default(false).optional(),
@@ -16,14 +16,3 @@ const jobSchema = yup.object().shape({
   updated_at: yup.date().default(new Date()).optional(),
   deleted_at: yup.date().optional(),
 });
-
-export const schemaValidator = async (data) => {
-  try {
-    const isSchemaValid = await jobSchema.isValid({
-      ...data,
-    });
-    return isSchemaValid;
-  } catch (error) {
-    return error;
-  }
-};

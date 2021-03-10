@@ -14,6 +14,7 @@ import {
   useClipboard,
   Image,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 import { parseCookies } from 'nookies';
@@ -42,18 +43,24 @@ const Job = ({ job }) => {
   }
 
   const sendApplication = async () => {
-    if (user && cookies.token) {
-      const response = await fetch('/api/apply', {
-        method: 'post',
-        body: JSON.stringify(job),
-        headers: {
-          Authorization: `Bearer ${cookies.token}`,
-        },
-      });
-      const data = await response.json();
-      console.log(data);
+    if (user.uid && cookies.token) {
+      try {
+        const response = await fetch('/api/apply', {
+          method: 'post',
+          body: JSON.stringify({ uid: user.uid, jobId: job.jobId }),
+          headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${cookies.token}`,
+          },
+        });
+        const data = await response.json();
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      console.log('User is not signed in');
     }
-    console.log('User is not logged in');
   };
 
   // console.log(`/api/apply/${router.query.jobId}`)
@@ -148,7 +155,7 @@ const Job = ({ job }) => {
             </Heading>
 
             <Button
-              onClick={onOpen}
+              onClick={user ? onOpen : null}
               w={{ base: '100%', md: 'auto' }}
               type="submit"
               size="md"

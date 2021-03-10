@@ -2,9 +2,11 @@ import nc from 'next-connect';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import morgan from 'morgan';
 import Cors from 'cors';
+import superjson from 'superjson';
 import { firebaseAdmin, firestore } from '../../lib/firebase-admin';
 import { NanoId } from '../../lib/firebase-helpers';
-import { schemaValidator } from '../../schema/job';
+import { schemaValidator } from '../../schema/validator';
+import { jobSchema } from '../../schema/job';
 
 const cors = Cors({
   methods: ['GET', 'POST', 'HEAD', 'PUT'],
@@ -15,7 +17,7 @@ function onError(err, req, res, next) {
 }
 
 function onNoMatch(req, res) {
-  res.status(404).end('page is not found... or is it');
+  res.status(404).end('Method not allowed');
 }
 
 const handler = nc({ onError, onNoMatch }).use(morgan('tiny'), cors);
@@ -35,6 +37,10 @@ handler
           error: 'Unauthorized',
         });
       }
+    } else {
+      res.status(401).json({
+        error: 'Unauthorized',
+      });
     }
   })
   .use(async (req, res, next) => {
@@ -46,6 +52,8 @@ handler
     next();
   })
   .get(async (req, res) => {
+    // Get all active jobs
+
     const jobsSnapshot = await firestore
       .collection('jobs')
       .where('status', '==', 'active')
@@ -58,63 +66,82 @@ handler
     res.status(200).json({ jobs: allJobs });
   })
   .use((req, res, next) => {
+    // Check if user is recruiter
+
     if (!req.currentUser.recruiter) {
       res.status(401).json({
-        error: 'Not authorized',
+        error: 'Unauthorized',
       });
     }
     next();
   })
   .use(async (req, res, next) => {
-    if (req.body) {
-      try {
-        const isSchemaValid = await schemaValidator(req.body);
-        console.log(isSchemaValid);
-        if (isSchemaValid) {
-          req.validatedJob = req.body;
-          next();
-        }
+    // Validate user input against schema
+
+    if (!req.body) {
+      res.status(400).json({
+        error: 'Body not found',
+      });
+    }
+    try {
+      const isSchemaValid = await schemaValidator(jobSchema, req.body);
+
+      if (!isSchemaValid) {
         req.validatedJob = '';
         res.status(400).json({
           error: 'Invalid Schema',
         });
-      } catch (error) {
-        res.status(400).json({
-          error: error.errors,
-        });
       }
+      req.validatedJob = req.body;
+      next();
+    } catch (error) {
+      res.status(400).json({
+        error: 'Bad request',
+      });
     }
-    res.status(400).json({
-      error: 'Bad Input',
-    });
+  })
+  .use(async (req, res, next) => {
+    // Check if job already exists
+
+    const randomId = await NanoId();
+    const title = req.validatedJob.title.toLowerCase().split(' ').join('-');
+    const jobId = title.concat(randomId);
+
+    req.validatedJob.jobId = jobId;
+
+    req.validatedJob.created_at = new Date();
+    req.validatedJob.updated_at = new Date();
+
+    const job = await firestore.collection('jobs').doc(jobId).get();
+
+    if (job.exists) {
+      console.log('Job already exists');
+      res.status(400).json({
+        error: 'Job already exists',
+      });
+    }
+    next();
   })
   .post(async (req, res) => {
-    console.log(`validated job: ${JSON.stringify(req.validatedJob)}`);
-    res.status(200);
-    // try {
-    //   const randomId = await NanoId();
-    //   const title = req.body.title.toLowerCase().split(' ').join('-');
-    //   const jobId = title.concat(randomId);
-    //   const jobData = req.validatedJob;
-    //   const newJob = await firestore
-    //     .collection('jobs')
-    //     .doc(jobId)
-    //     .set({ ...jobData, jobId });
-    //   res.status(201).json({
-    //     message: 'Created new job',
-    //     data: newJob,
-    //   });
-    // } catch (error) {
-    //   res.status(500).json({
-    //     error: 'Failed to create job',
-    //   });
-    // }
-  })
-  .put(async (req, res) => {
-    res.end('async/await is also supported!');
-  })
-  .patch(async (req, res) => {
-    throw new Error('Throws me around! Error can be caught and handled.');
+    // Create new job
+
+    try {
+      await firestore
+        .collection('jobs')
+        .doc(req.validatedJob.jobId)
+        .set({ ...req.validatedJob });
+
+      res.status(201).json({
+        message: 'Created job',
+      });
+    } catch (error) {
+      res.status(200).json({
+        message: 'Failed to job',
+      });
+    }
+    res.status(200).json({
+      job: req.validatedJob,
+    });
   });
 
 export default handler;

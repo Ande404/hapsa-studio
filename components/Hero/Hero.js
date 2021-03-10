@@ -9,8 +9,8 @@ import {
   Image,
   Center,
 } from '@chakra-ui/react';
-import { Newsletter } from './Newsletter';
-import { Banner } from './Banner';
+import { Newsletter } from '../Newsletter';
+import { Banner } from '../Banner';
 
 export const Hero = () => (
   <Box
@@ -20,7 +20,7 @@ export const Hero = () => (
   >
     <Flex
       bg="gray.200"
-      px={{ base: 6, lg: 8 }}
+      px={{ base: 4, lg: 8 }}
       py={{ base: 12, lg: 6 }}
       justify="space-between"
       direction={{ base: 'column', lg: 'row' }}
@@ -65,7 +65,11 @@ export const Hero = () => (
           <Newsletter />
         </Flex>
       </Box>
-      <Center pr={{ base: 8, lg: 16 }} position="relative">
+      <Center
+        pr={{ base: 0, lg: 16 }}
+        pt={{ base: 8, lg: 0 }}
+        position="relative"
+      >
         <Image src="16.png" h={{ base: '220px', md: '280px', lg: '360px' }} />
       </Center>
     </Flex>
