@@ -110,8 +110,6 @@ export async function getStaticProps() {
   // superjson will cast timestamps to string
   const jobs = rawJobs.map((job) => superjson.serialize(job).json);
 
-  console.log(jobs);
-
   return {
     props: { jobs },
   };

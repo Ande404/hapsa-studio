@@ -51,6 +51,12 @@ export const AccountMenu = ({ user, signOut }) => {
                 FAQ
               </MenuItem>
             </NextLink>
+            <NextLink href="/account" passHref>
+              <MenuItem as={Link} _hover={{ textDecoration: 'none' }}>
+                Privacy
+              </MenuItem>
+            </NextLink>
+            <MenuDivider />
             <MenuItem onClick={handleSignout}>Log out</MenuItem>
           </MenuGroup>
         </MenuList>

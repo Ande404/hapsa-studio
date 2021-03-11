@@ -9,7 +9,6 @@ import {
   Image,
   Center,
 } from '@chakra-ui/react';
-import { Newsletter } from '../Newsletter';
 import { Banner } from '../Banner';
 
 export const Hero = () => (
@@ -19,30 +18,14 @@ export const Hero = () => (
     as="section"
   >
     <Flex
-      bg="gray.200"
-      px={{ base: 4, lg: 8 }}
-      py={{ base: 12, lg: 6 }}
+      p="12"
       justify="space-between"
       direction={{ base: 'column', lg: 'row' }}
       position="relative"
       rounded={{ base: 'none', lg: 'md' }}
     >
       <Box>
-        <Banner arrow="right">
-          <div>
-            <Heading
-              as={Link}
-              size="md"
-              letterSpacing="-.8px"
-              fontWeight="semibold"
-              mb="4"
-            >
-              Join our first online hackathon with friends
-            </Heading>
-            <ArrowForwardIcon ml="2" />
-          </div>
-        </Banner>
-        <Flex mt="14" direction="column" w={{ base: '100%', lg: '620px' }}>
+        <Flex direction="column" w={{ base: '100%', lg: '620px' }}>
           <Heading
             size="2xl"
             letterSpacing="-1.6px"
@@ -61,17 +44,35 @@ export const Hero = () => (
           <Box mt="8">
             <Text>Get notified when we lauch our beta program</Text>
           </Box>
-
-          <Newsletter />
         </Flex>
       </Box>
-      <Center
-        pr={{ base: 0, lg: 16 }}
-        pt={{ base: 8, lg: 0 }}
-        position="relative"
+      <Box
+      // pr={{ base: 0, lg: 16 }}
+      // pt={{ base: 8, lg: 0 }}
+      // position="relative"
       >
-        <Image src="16.png" h={{ base: '220px', md: '280px', lg: '360px' }} />
-      </Center>
+        <Banner
+          bg="brand.900"
+          px="4"
+          py="4"
+          color="gray.50"
+          rounded="md"
+          mb="6"
+        >
+          <Box>
+            <Heading
+              as={Link}
+              size="sm"
+              letterSpacing="-.3px"
+              fontWeight="semibold"
+              mb="4"
+            >
+              Join our first online hackathon with friends
+            </Heading>
+            <ArrowForwardIcon ml="2" />
+          </Box>
+        </Banner>
+      </Box>
     </Flex>
   </Box>
 );

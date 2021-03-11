@@ -50,11 +50,11 @@ const Account = ({ user }) => {
   return (
     <>
       <Nav status={user} />
-      {!user.email_verified && <EmailAlert user={user} />}
+      {!user.email_verified && <EmailAlert user={user} mt="20" />}
 
-      <Box pt="20" px={{ base: '16px', md: '40px', lg: '160px' }}>
-        <Box h="100vh">
-          <Breadcrumb fontSize="sm" fontWeight="medium" mt="6">
+      <Box px={{ base: '16px', md: '40px', lg: '160px' }} >
+        <Box h="100vh" >
+          <Breadcrumb fontSize="sm" fontWeight="medium" mt="10">
             <BreadcrumbItem isCurrentPage>
               <NextLink href="/dashboard" passHref>
                 <BreadcrumbLink as={Link} _hover={{ textDecoration: 'none' }}>
@@ -74,7 +74,7 @@ const Account = ({ user }) => {
 
           <Flex>
             <Box
-              mt="8"
+              mt="4"
               bg="gray.50"
               w="100%"
               p={{ base: 4, lg: 8 }}
@@ -114,8 +114,8 @@ const Account = ({ user }) => {
 
                 <Box flex="1" ml="4">
                   <Text
-                    size={{ base: 'md', md: 'lg' }}
-                    letterSpacing="-.8px"
+                    fontSize={{ base: 'md', md: '2xl' }}
+                    letterSpacing="-.4px"
                     fontWeight="700"
                     lineHeight="1.1"
                     my="2"

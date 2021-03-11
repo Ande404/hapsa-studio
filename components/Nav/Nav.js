@@ -42,7 +42,7 @@ export const Nav = () => {
       px={{ base: '16px', md: '40px', lg: '160px' }}
       justify="space-between"
       align="center"
-      bg="gray.900"
+      bg="brand.700"
       color="white"
       position="fixed"
       top="0px"

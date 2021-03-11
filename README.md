@@ -7,7 +7,7 @@
 
 ## Setup
 
-Clone this repository and then cd into the set directory.
+Clone this repository then cd into the directory.
 
 ```bash
 git clone https://github.com/hawyar/hapsa-studio.git
@@ -19,23 +19,26 @@ cd hapsa-studio
 Install dependencies
 
 ```bash
-yarn install
-// npm install
+npm i
+// yarn install
 ```
 
 Start the development environment
 
 ```bash
-yarn dev
+npm run dev
+// yarn dev
 ```
 
-## Fix environment variables
+## Environment variables
 
 1. Rename `.env.example` to `.env.local` and make sure it is ignored in your `.gitignore` file.
 
-2. Set the environment variables
+2. Set the correct environment variables
 
 ## Contributing
+
+Open to all kinds of contribution. I will gladly merge PRs as soon as I finish setting up tests. 
 
 1. Fork the repository.
 2. Create your feature branch (`git checkout -b feature/fooBar`)

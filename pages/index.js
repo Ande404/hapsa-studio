@@ -14,8 +14,7 @@ export default function Home({ jobs }) {
       </Head>
       <Nav />
       <Hero jobs={jobs} />
-      <Feature />
-      <Center px={{ base: '0', md: '40px', lg: '160px' }} my="20">
+      <Center px={{ base: '4', md: '40px', lg: '160px' }} my="20">
         <Box>
           <Badge colorScheme="green" mb="2">
             Success
@@ -23,8 +22,7 @@ export default function Home({ jobs }) {
           <Heading letterSpacing="-.6px">
             Keep your job applications in one place
           </Heading>
-
-          <Box h="240px" bg="gray.900" rounded="sm" mt="12"></Box>
+          <Box h="240px" bg="gray.900" rounded="sm" mt="12" />
         </Box>
       </Center>
     </>

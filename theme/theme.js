@@ -10,8 +10,8 @@ const colors = {
 };
 
 const fonts = {
-  heading: 'Space Grotesk',
-  body: 'Space Grotesk',
+  heading: 'Manrope',
+  body: 'Manrope',
 };
 
 export const customTheme = extendTheme({

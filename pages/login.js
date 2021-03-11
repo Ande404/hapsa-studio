@@ -52,13 +52,13 @@ const Login = () => {
       console.warn('email already exists');
       return;
     }
-    const createdUser = await signIn(userData.email, userData.password);
+    const loggedUser = await signIn(userData.email, userData.password);
 
-    if (createdUser.code === 'auth/email-already-in-use') {
+    if (loggedUser.code === 'auth/email-already-in-use') {
       console.log('email already exists');
       setUserExists(true);
     } else {
-      console.log(formatUser(createdUser));
+      console.log(formatUser(loggedUser));
     }
   };
 
@@ -89,7 +89,7 @@ const Login = () => {
               <Input
                 ref={register({ required: true })}
                 fontSize="sm"
-                rounded="none"
+                rounded="sm"
                 id="email"
                 type="email"
                 name="email"
@@ -103,7 +103,7 @@ const Login = () => {
                 <Input
                   ref={register({ required: true })}
                   fontSize="md"
-                  rounded="none"
+                  rounded="sm"
                   pr="4.5rem"
                   name="password"
                   type={show ? 'text' : 'password'}
@@ -145,7 +145,7 @@ const Login = () => {
               </NextLink>
               <NextLink href="/signup" passHref>
                 <Link>
-                  <Text size="sm" letterSpacing="-.2px">
+                  <Text size="sm" letterSpacing="-.2px" mt="2">
                     Trouble signing in?
                   </Text>
                 </Link>
@@ -163,7 +163,7 @@ const Login = () => {
               color="currentColor"
               variant="outline"
               onClick={facebookLogin}
-              rounded="md"
+              rounded="sm"
             >
               <VisuallyHidden>Login with Facebook</VisuallyHidden>
               <FaFacebook />

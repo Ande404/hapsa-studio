@@ -23,37 +23,65 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { useAuth } from '../context/auth';
-import { formatUser } from '../lib/firebase-helpers';
 
 const schema = yup.object().shape({
   email: yup.string().required().email(),
   password: yup.string().min(8).max(32),
 });
 
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 const Signup = () => {
-  const [userExists, setUserExists] = useState(false);
+  const [signupStatus, setSignupStatus] = useState({});
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
   const router = useRouter();
   const { user, googleLogin, facebookLogin, twitterLogin, signUp } = useAuth();
 
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors, setError } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = async (userData) => {
-    if (userExists) {
-      setUserExists(true);
-      console.warn('email already exists');
-      return;
-    }
-    const createdUser = await signUp(userData.email, userData.password);
+  const onSubmit = async (userData, e) => {
+    try {
+      const signupRequest = await signUp(userData.email, userData.password);
 
-    if (createdUser.code === 'auth/email-already-in-use') {
-      console.log('email already exists');
-      setUserExists(true);
-    } else {
-      console.log(formatUser(createdUser));
+      if (signupRequest?.code) {
+        switch (signupRequest.code) {
+          case 'auth/email-already-in-use':
+            setSignupStatus({
+              err: true,
+              msg: signupRequest.message,
+            });
+            break;
+          case 'auth/invalid-email':
+            setSignupStatus({
+              err: true,
+              msg: signupRequest.message,
+            });
+            break;
+          case 'auth/operation-not-allowed':
+            setSignupStatus({
+              err: true,
+              msg: signupRequest.message,
+            });
+            break;
+          case 'auth/weak-password':
+            setSignupStatus({
+              err: true,
+              msg: signupRequest.message,
+            });
+            break;
+          default:
+            break;
+        }
+        e.target.reset();
+      }
+      return;
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -66,7 +94,7 @@ const Signup = () => {
 
   return (
     <Box h="100vh" bg="gray.50">
-      <Center pt="20">
+      <Center pt="12">
         <Flex
           rounded="none"
           w="420px"
@@ -75,17 +103,28 @@ const Signup = () => {
           justify="center"
           px="8"
         >
-          <Heading size="lg" letterSpacing="-.8px" mb="12">
-            Sign up
-          </Heading>
+          <Flex direction="row" align="center" justify="space-between">
+            <Heading size="lg" letterSpacing="-.8px" mb="12">
+              Sign up
+            </Heading>
+            <NextLink href="/login">
+              <Link
+                href="/login"
+                ml="6"
+                fontWeight="semibold"
+                fontSize="md"
+                letterSpacing="-.8px"
+                color="gray.400"
+                mb="12"
+              >
+                Log in
+              </Link>
+            </NextLink>
+          </Flex>
+
+          {signupStatus.err && <Text my="2">{signupStatus.msg}</Text>}
 
           <form onSubmit={handleSubmit(onSubmit)}>
-            {userExists && (
-              <Text color="red.600" pb="4" fontWeight="bold">
-                This email is already registered
-              </Text>
-            )}
-
             <FormControl id="email" isRequired>
               <FormLabel fontSize="md">Email address</FormLabel>
               <Input
@@ -97,9 +136,13 @@ const Signup = () => {
                 name="email"
                 placeholder="Email Address"
               />
-              <p>{errors.email?.message}</p>
+              {errors.email?.message && (
+                <Text fontSize="md" pt="4" textAlign="left">
+                  {capitalizeFirstLetter(errors.email?.message)}
+                </Text>
+              )}
             </FormControl>
-            <FormControl id="password" isRequired mt="4">
+            <FormControl id="password" isRequired mt="6">
               <FormLabel fontSize="md">Password</FormLabel>
               <InputGroup size="md">
                 <Input
@@ -118,17 +161,12 @@ const Signup = () => {
                 </InputRightElement>
               </InputGroup>
               {errors.password?.message && (
-                <Text fontSize="sm" py="2" textAlign="left" colorScheme="red">
-                  {errors.password?.message}
+                <Text fontSize="md" pt="4" textAlign="left">
+                  {capitalizeFirstLetter(errors.password?.message)}
                 </Text>
               )}
             </FormControl>
 
-            <Box textAlign="left" mt="2">
-              <Link fontSize="sm" color="gray.500">
-                Trouble signing in?
-              </Link>
-            </Box>
             <Button
               rounded="none"
               type="submit"
@@ -139,7 +177,6 @@ const Signup = () => {
                 bg: 'rgb(90,42,200)',
               }}
               color="white"
-              isDisabled={userExists}
             >
               Sign up
             </Button>
@@ -148,6 +185,13 @@ const Signup = () => {
                 <Link>
                   <Text size="sm" letterSpacing="-.4px">
                     Already have an account? Log in
+                  </Text>
+                </Link>
+              </NextLink>
+              <NextLink href="/signup">
+                <Link>
+                  <Text size="md" letterSpacing="-.4px" mt="2">
+                    Trouble signing in?
                   </Text>
                 </Link>
               </NextLink>

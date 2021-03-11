@@ -5,6 +5,7 @@ import {
   Button,
   FormControl,
   Box,
+  Heading,
   FormErrorMessage,
   FormHelperText,
   Alert,
@@ -45,25 +46,39 @@ export const Newsletter = () => {
 
     console.warn(status, error);
 
-    if (error === 'Email address already registered') {
-      console.log('Email address already exists');
-    }
-
-    if (error === 'Invaild email address') {
-      console.log('Invalid email request');
-    }
-
     if (status === 201) {
       e.target.reset();
       console.log('user registered');
+    }
+
+    switch (error) {
+      case 'Email address already registered':
+        console.log('Email address already registered');
+        break;
+      case 'Invaild email address':
+        console.log('Email address already registered');
+        break;
+      default:
+        break;
     }
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormControl isInvalid={errors.name} id="email">
-        <Flex py="4" pt="12" direction={{ base: 'column', lg: 'row' }}>
-          <Box>
+        <Flex
+          bg="brand.600"
+          direction={{ base: 'column', lg: 'row' }}
+          my="14"
+          p="8"
+        >
+          <Box w={{ base: '100%', lg: '50%' }}>
+            <Heading letterSpacing="-.6px" size="lg">
+              Come thru &amp; meet the woo
+            </Heading>
+          </Box>
+
+          <Box mt={{ base: 4, lg: 0 }}>
             <Input
               name="email"
               w={{ base: '100%', md: '320px' }}
@@ -78,27 +93,23 @@ export const Newsletter = () => {
             <FormErrorMessage>
               {errors.email && errors.email.message}
             </FormErrorMessage>
-            <FormHelperText fontSize="xs" mt="4">
-              New job offers - are the only emails you will recieve!
-            </FormHelperText>
-          </Box>
 
-          <Button
-            w={{ base: '100%', md: 'auto' }}
-            type="submit"
-            size="md"
-            fontSize="sm"
-            bg="gray.900"
-            color="gray.100"
-            _hover={{
-              color: 'gray.100',
-              bg: 'gray.700',
-            }}
-            ml={{ base: 0, lg: 4 }}
-            mt={{ base: 8, lg: 0 }}
-          >
-            Get notified
-          </Button>
+            <Button
+              w={{ base: '100%', md: 'auto' }}
+              type="submit"
+              size="md"
+              fontSize="sm"
+              bg="gray.900"
+              color="gray.100"
+              _hover={{
+                color: 'gray.100',
+                bg: 'gray.700',
+              }}
+              mt="2"
+            >
+              Get notified
+            </Button>
+          </Box>
         </Flex>
       </FormControl>
     </form>

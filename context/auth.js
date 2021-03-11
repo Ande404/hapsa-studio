@@ -14,25 +14,26 @@ export function AuthProvider({ children }) {
 
   const signIn = (email, password) =>
     firebaseClient
+      .auth()
       .signInWithEmailAndPassword(email, password)
       .then((response) => {
         setUser(response.user);
         return response.user;
       });
 
-  const signUp = (email, password) =>
-    firebaseClient
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((response) => {
-        setUser(response.user);
-        return response.user;
-      })
-      .catch((err) => {
-        if (err.code === 'auth/email-already-in-use') {
-          return err;
-        }
-      });
+  const signUp = async (email, password) => {
+    try {
+      const newUser = await firebaseClient
+        .auth()
+        .createUserWithEmailAndPassword(email, password);
+
+      const token = await newUser.user.getIdToken();
+
+      nookies.set(null, 'token', token, {});
+    } catch (error) {
+      return error;
+    }
+  };
 
   const signOut = () =>
     firebaseClient

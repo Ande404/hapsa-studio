@@ -1,15 +1,11 @@
+/* eslint-disable react/jsx-props-no-spreading */
+import { Box } from '@chakra-ui/layout';
 import NextLink from 'next/link';
 
-export const Banner = ({ children, arrow }) => (
-  <div>
+export const Banner = ({ children, arrow, ...props }) => (
+  <Box {...props}>
     <NextLink href="/">
       <a>{children}</a>
     </NextLink>
-    <hr
-      style={{
-        borderTop: '2px solid black',
-        marginTop: '10px',
-      }}
-    />
-  </div>
+  </Box>
 );
