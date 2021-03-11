@@ -69,7 +69,7 @@ export const Newsletter = () => {
         <Flex
           bg="brand.600"
           direction={{ base: 'column', lg: 'row' }}
-          my="14"
+          my="16"
           p="8"
         >
           <Box w={{ base: '100%', lg: '50%' }}>

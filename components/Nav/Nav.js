@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 import { Box, Flex, Heading, Link, Stack } from '@chakra-ui/react';
+import { FiFeather, FiShield } from 'react-icons/fi';
 import { useAuth } from '../../context/auth';
 import { AccountMenu } from '../AccountMenu';
 import { NavButton } from '../NavButton';
@@ -38,8 +39,9 @@ export const Nav = () => {
 
   return (
     <Flex
-      py="2"
-      px={{ base: '16px', md: '40px', lg: '160px' }}
+      data-testid="navbar"
+      py="3"
+      px={{ base: '16px', md: '40px', lg: '220px' }}
       justify="space-between"
       align="center"
       bg="brand.700"
@@ -53,9 +55,7 @@ export const Nav = () => {
       <Box as="nav">
         <NextLink href="/">
           <Link _hover={{ textDecor: 'none' }}>
-            <Heading size="sm" fontWeight="bold" letterSpacing="-1px">
-              Hapsa
-            </Heading>
+            <FiFeather size="20" />
           </Link>
         </NextLink>
       </Box>

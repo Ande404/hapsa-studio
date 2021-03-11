@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import PropTypes from 'prop-types';
-import { Center, Heading, Badge, Box, Text } from '@chakra-ui/react';
+import { Flex, Heading, Badge, Box, Text } from '@chakra-ui/react';
 import { Nav } from '../components/Nav/Nav';
 import { Hero } from '../components/Hero/Hero';
 import Feature from '../components/Feature';
@@ -14,9 +14,10 @@ export default function Home({ jobs }) {
       </Head>
       <Nav />
       <Hero jobs={jobs} />
-      <Center px={{ base: '4', md: '40px', lg: '160px' }} my="20">
+
+      <Flex px={{ base: '16px', md: '40px', lg: '220px' }} my="20">
         <Box>
-          <Badge colorScheme="green" mb="2">
+          <Badge mb="2" px="2" py="1">
             Success
           </Badge>
           <Heading letterSpacing="-.6px">
@@ -24,7 +25,7 @@ export default function Home({ jobs }) {
           </Heading>
           <Box h="240px" bg="gray.900" rounded="sm" mt="12" />
         </Box>
-      </Center>
+      </Flex>
     </>
   );
 }

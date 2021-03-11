@@ -1,5 +1,5 @@
 import TextLoop from 'react-text-loop';
-import { ArrowForwardIcon } from '@chakra-ui/icons';
+import { FaArrowRight } from 'react-icons/fa';
 import {
   Box,
   Heading,
@@ -8,17 +8,23 @@ import {
   Link,
   Image,
   Center,
+  SimpleGrid,
 } from '@chakra-ui/react';
 import { Banner } from '../Banner';
+import { HeroJobCard } from './HeroJobCard';
 
-export const Hero = () => (
+export const Hero = ({ jobs }) => (
   <Box
-    mt={{ base: '45px', lg: '70px' }}
-    px={{ base: '0', md: '40px', lg: '160px' }}
+    pt={{ base: '10px', lg: '40px' }}
+    px={{ base: '16px', md: '40px', lg: '220px' }}
     as="section"
+    h="360px"
+    bg="black"
   >
-    <Flex
-      p="12"
+    <SimpleGrid
+      columns={[1, null, 2]}
+      spacing="12"
+      mt="16"
       justify="space-between"
       direction={{ base: 'column', lg: 'row' }}
       position="relative"
@@ -30,49 +36,48 @@ export const Hero = () => (
             size="2xl"
             letterSpacing="-1.6px"
             fontWeight="bolder"
-            lineHeight="1.1"
-            color="black"
+            lineHeight="1.14"
+            color="white"
           >
-            Tired of painful job applications? We connect you with{' '}
+            Tired of broken job applications? We connect you with{' '}
             <TextLoop>
               <Text color="brand.900">agencies</Text>
               <Text color="brand.900">recruiters</Text>
               <Text color="brand.900">freelancers</Text>
             </TextLoop>
           </Heading>
-
-          <Box mt="8">
-            <Text>Get notified when we lauch our beta program</Text>
-          </Box>
         </Flex>
       </Box>
-      <Box
-      // pr={{ base: 0, lg: 16 }}
-      // pt={{ base: 8, lg: 0 }}
-      // position="relative"
-      >
+      <Box>
         <Banner
-          bg="brand.900"
+          bg="rgb(92,52,226, .2)"
           px="4"
           py="4"
-          color="gray.50"
-          rounded="md"
+          borderLeftRadius="0"
           mb="6"
+          rounded="md"
+          color="rgb(92,52,226, 1)"
+          _hover={{
+            color: 'black',
+            background: 'rgb(92,52,226, 1)',
+            cursor: 'pointer',
+          }}
         >
-          <Box>
+          <Flex>
             <Heading
               as={Link}
               size="sm"
               letterSpacing="-.3px"
               fontWeight="semibold"
-              mb="4"
             >
-              Join our first online hackathon with friends
+              Join our first online meetup
             </Heading>
-            <ArrowForwardIcon ml="2" />
-          </Box>
+            <Box ml="4">
+              <FaArrowRight />
+            </Box>
+          </Flex>
         </Banner>
       </Box>
-    </Flex>
+    </SimpleGrid>
   </Box>
 );
