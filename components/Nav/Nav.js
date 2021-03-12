@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
-import { Box, Flex, Heading, Link, Stack } from '@chakra-ui/react';
+import { Box, Flex, Button, Heading, Link, Stack } from '@chakra-ui/react';
 import { FiFeather, FiShield } from 'react-icons/fi';
 import { useAuth } from '../../context/auth';
 import { AccountMenu } from '../AccountMenu';
@@ -40,8 +40,8 @@ export const Nav = () => {
   return (
     <Flex
       data-testid="navbar"
-      py="3"
-      px={{ base: '16px', md: '40px', lg: '220px' }}
+      py="2"
+      px={{ base: '16px', md: '40px', lg: '320px' }}
       justify="space-between"
       align="center"
       bg="brand.700"
@@ -52,7 +52,7 @@ export const Nav = () => {
       left="0px"
       right="0px"
     >
-      <Box as="nav">
+      <Box>
         <NextLink href="/">
           <Link _hover={{ textDecor: 'none' }}>
             <FiFeather size="20" />
@@ -82,8 +82,34 @@ export const Nav = () => {
           <Box>
             <AccountMenu user={user} signOut={signOut} />
           </Box>
+        ) : user?.uid && router.pathname === '/' ? (
+          <Button
+            size="sm"
+            bg="brand.900"
+            color="gray.100"
+            _hover={{
+              background: 'gray.700',
+            }}
+            fontSize="14px"
+            rounded="sm"
+            onClick={() => router.push('/signup')}
+          >
+            Go to dashboard
+          </Button>
         ) : (
-          <NavButton />
+          <Button
+            size="sm"
+            color="gray.100"
+            bg="brand.900"
+            _hover={{
+              background: 'rgb(92,52,226, .7)',
+            }}
+            fontSize="14px"
+            rounded="sm"
+            onClick={() => router.push('/register')}
+          >
+            Sign up
+          </Button>
         )}
       </Box>
     </Flex>

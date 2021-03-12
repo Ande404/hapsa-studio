@@ -1,4 +1,4 @@
-import { firestore } from './firebase-client';
+import { firestore } from './client';
 
 export function createUser(uid, data) {
   return firestore

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
 import nookies from 'nookies';
 import PropTypes from 'prop-types'; // ES6
-import { firebaseClient } from '../lib/firebase-client';
-import { createUser } from '../lib/firestore';
-import { formatUser } from '../lib/firebase-helpers';
+import { firebaseClient } from '../firebase/client';
+import { createUser } from '../firebase/firestore';
+import { formatUser } from '../firebase/helpers';
 
 const AuthContext = createContext({
   user: null,
@@ -28,6 +28,8 @@ export function AuthProvider({ children }) {
         .createUserWithEmailAndPassword(email, password);
 
       const token = await newUser.user.getIdToken();
+
+      console.log(token);
 
       nookies.set(null, 'token', token, {});
     } catch (error) {

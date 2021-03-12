@@ -19,10 +19,9 @@ export const AccountMenu = ({ user, signOut }) => {
   };
   return (
     <Box>
-      <Menu bg="gray.50" color="gray.900">
+      <Menu bg="gray.200" color="gray.900">
         <MenuButton
           size="sm"
-          bg="none"
           ml="4"
           rounded="sm"
           as={Button}

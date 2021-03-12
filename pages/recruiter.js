@@ -1,8 +1,8 @@
 import React from 'react';
 import nookies from 'nookies';
-import { Box } from '@chakra-ui/react';
+import { Box, Text, Heading } from '@chakra-ui/react';
 import { Nav } from '../components/Nav/Nav';
-import { firebaseAdmin } from '../lib/firebase-admin';
+import { firebaseAdmin } from '../firebase/admin';
 
 export async function getServerSideProps(ctx) {
   try {
@@ -18,7 +18,7 @@ export async function getServerSideProps(ctx) {
     return {
       redirect: {
         permanent: false,
-        destination: '/login',
+        destination: '/register',
       },
       props: {},
     };
@@ -28,8 +28,10 @@ export async function getServerSideProps(ctx) {
 const recruiter = () => (
   <div>
     <Nav />
-    <Box mt="80px" px={{ base: '16px', md: '40px', lg: '160px' }}>
-      recruiter page
+    <Box mt="20" px={{ base: '16px', md: '40px', lg: '320px' }}>
+      <Heading fontWeight="700" fontSize="22px" letterSpacing="-.8px">
+        Recruiter
+      </Heading>
     </Box>
   </div>
 );

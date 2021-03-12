@@ -2,8 +2,8 @@ import nc from 'next-connect';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import morgan from 'morgan';
 import Cors from 'cors';
-import { firebaseAdmin, firestore } from '../../lib/firebase-admin';
-import { NanoId } from '../../lib/firebase-helpers';
+import { firebaseAdmin, firestore } from '../../firebase/admin';
+import { NanoId } from '../../firebase/helpers';
 import { schemaValidator } from '../../schema/validator';
 import { applicationSchema } from '../../schema/application';
 

@@ -13,10 +13,10 @@ import {
   Text,
 } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
-import { firebaseClient } from '../lib/firebase-client';
+import { firebaseClient } from '../firebase/client';
 import { Nav } from '../components/Nav/Nav';
 import { EmailAlert } from '../components/EmailAlert';
-import { firebaseAdmin } from '../lib/firebase-admin';
+import { firebaseAdmin } from '../firebase/admin';
 
 export async function getServerSideProps(ctx) {
   try {
@@ -32,7 +32,7 @@ export async function getServerSideProps(ctx) {
     return {
       redirect: {
         permanent: false,
-        destination: '/login',
+        destination: '/register',
       },
       props: {},
     };
@@ -52,8 +52,8 @@ const Account = ({ user }) => {
       <Nav status={user} />
       {!user.email_verified && <EmailAlert user={user} mt="20" />}
 
-      <Box px={{ base: '16px', md: '40px', lg: '160px' }} >
-        <Box h="100vh" >
+      <Box px={{ base: '16px', md: '40px', lg: '160px' }}>
+        <Box h="100vh">
           <Breadcrumb fontSize="sm" fontWeight="medium" mt="10">
             <BreadcrumbItem isCurrentPage>
               <NextLink href="/dashboard" passHref>

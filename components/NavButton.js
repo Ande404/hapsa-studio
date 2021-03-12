@@ -26,11 +26,10 @@ export const NavButton = () => {
       <Button
         ml="4"
         size="sm"
-        px="2"
-        bg="rgb(92,52,226)"
         color="gray.100"
+        bg="brand.900"
         _hover={{
-          bg: 'rgb(90,42,200)',
+          background: 'rgb(92,52,226, .7)',
         }}
         fontSize="14px"
         rounded="sm"

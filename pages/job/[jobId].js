@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import fetch from 'node-fetch';
+import { MDXProvider } from '@mdx-js/react';
 import { CopyIcon } from '@chakra-ui/icons';
 import { FaFacebook, FaTwitter } from 'react-icons/fa';
 import {
@@ -13,15 +14,19 @@ import {
   ButtonGroup,
   useClipboard,
   Image,
+  Stack,
   useDisclosure,
   useToast,
 } from '@chakra-ui/react';
+import * as matter from 'gray-matter';
+
 import PropTypes from 'prop-types';
 import { parseCookies } from 'nookies';
 import { useAuth } from '../../context/auth';
-import { getAllJobId, getJobById } from '../../lib/firestore';
+import { getAllJobId, getJobById } from '../../firebase/firestore';
 import { Nav } from '../../components/Nav/Nav';
 import JobModal from '../../components/JobModal';
+import { SocialButtonGroup } from '../../components/SocialButtonGroup/SocialButtonGroup';
 
 const Job = ({ job }) => {
   const url =
@@ -76,83 +81,58 @@ const Job = ({ job }) => {
         token={cookies.token}
         sendApplication={sendApplication}
       />
-      <Box px={{ base: '16px', md: '40px', lg: '160px' }}>
-        <Grid mt="28" templateColumns={{ base: '1fr', lg: '2fr 1fr' }} gap="20">
+      <Box px={{ base: '16px', md: '40px', lg: '320px' }}>
+        <Grid mt="28" templateColumns={{ base: '1fr', lg: '1fr' }} gap="5">
           <GridItem rowSpan={2}>
             <Heading letterSpacing="-1.2px">{job?.title}</Heading>
-            <ButtonGroup variant="outline" spacing="6" my="8">
-              <Flex
-                direction={{ base: 'column', lg: 'row' }}
-                justify="center"
-                align={{ base: 'start', lg: 'center' }}
-              >
-                <Button
-                  colorScheme="facebook"
-                  size="sm"
-                  leftIcon={<FaFacebook />}
-                >
-                  Share on Facebook
-                </Button>
-
-                <Button
-                  size="sm"
-                  colorScheme="twitter"
-                  leftIcon={<FaTwitter />}
-                  mx={{ base: 0, lg: 2 }}
-                  my={{ base: 2, lg: 0 }}
-                >
-                  Share on Twitter
-                </Button>
-                <Button
-                  size="sm"
-                  colorScheme="black"
-                  leftIcon={<CopyIcon />}
-                  onClick={onCopy}
-                >
-                  Copy URL
-                </Button>
-              </Flex>
-            </ButtonGroup>
-
-            <Text>{job?.descripton}</Text>
           </GridItem>
-          <GridItem borderWidth="1px" p="4" rounded="lg">
+          <GridItem rounded="lg" mt="10" mb="90px">
             <Image
               borderRadius="full"
               boxSize="65px"
               src="https://logos-download.com/wp-content/uploads/2016/11/EA_logo_black.png"
               alt="some-alt"
             />
-            <Text fontSize="sm" mt="4">
-              Recruiter
-            </Text>
-            <Heading size="md" letterSpacing="-.2px" mt="2">
-              {job?.recruiter}
-            </Heading>
+            <Stack direction={['column', 'row']} spacing="42px">
+              <div>
+                <Text fontSize="sm" mt="4">
+                  Recruiter
+                </Text>
+                <Heading size="md" letterSpacing="-.2px" mt="2">
+                  {job?.recruiter}
+                </Heading>
+              </div>
 
-            <Text fontSize="sm" pt="4">
-              Job Type
-            </Text>
+              <div>
+                <Text fontSize="sm" pt="4">
+                  Job Type
+                </Text>
 
-            <Heading size="md" letterSpacing="-.2px" mt="2">
-              {job?.job_type}
-            </Heading>
+                <Heading size="md" letterSpacing="-.2px" mt="2">
+                  {job?.job_type}
+                </Heading>
+              </div>
 
-            <Text fontSize="sm" pt="4">
-              Location
-            </Text>
+              <div>
+                <Text fontSize="sm" pt="4">
+                  Location
+                </Text>
 
-            <Heading size="md" letterSpacing="-.2px" mt="2">
-              {job?.governorate}
-            </Heading>
+                <Heading size="md" letterSpacing="-.2px" mt="2">
+                  {job?.governorate}
+                </Heading>
+              </div>
 
-            <Text fontSize="sm" pt="4">
-              Career level
-            </Text>
+              <div>
+                <Text fontSize="sm" pt="4">
+                  Career level
+                </Text>
 
-            <Heading size="md" letterSpacing="-.2px" mt="2">
-              {job?.career_level}
-            </Heading>
+                <Heading size="md" letterSpacing="-.2px" mt="2">
+                  {job?.career_level}
+                </Heading>
+              </div>
+            </Stack>
 
             <Button
               onClick={user ? onOpen : null}
@@ -169,6 +149,11 @@ const Job = ({ job }) => {
             >
               Apply Now
             </Button>
+          </GridItem>
+          {/* parse job.description. Markdown -> Html */}
+          <GridItem>description here</GridItem>
+          <GridItem mt="20">
+            <SocialButtonGroup onCopy={onCopy} />
           </GridItem>
         </Grid>
       </Box>

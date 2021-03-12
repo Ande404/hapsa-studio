@@ -7,18 +7,18 @@ import { Nav } from '../components/Nav/Nav';
 
 const MdxWrapper = {
   h1: ({ children }) => (
-    <Heading fontWeight="bold" fontSize="3xl" textAlign="center">
+    <Heading fontWeight="bold" fontSize="3xl">
       {children}
     </Heading>
   ),
   h2: ({ children }) => (
-    <Heading fontSize="xl" mt="12" mb="6" textAlign="center">
+    <Heading fontSize="xl" mt="12" mb="6">
       {children}
     </Heading>
   ),
 
   p: ({ children }) => (
-    <Text mb={6} fontSize="18px" fontWeight="normal">
+    <Text mb={6} fontSize="18px" fontWeight="normal" letterSpacing="-.1px">
       {children}
     </Text>
   ),
@@ -26,25 +26,25 @@ const MdxWrapper = {
 const Index = ({ children, frontMatter }) => (
   <div>
     <Nav />
-    <Box mt="28">
+    <Box mt="16">
       <MDXProvider components={MdxWrapper}>
         <Flex
-          textAlign="center"
+          textAlign="left"
           flexDirection="column"
-          px={{ base: 4, md: 12, lg: '340px' }}
+          px={{ base: 4, md: 12, lg: '320px' }}
           margin="0 auto"
         >
-          <Heading color="rgb(92,52,226)" size="xl" letterSpacing="-1px" mb="4">
+          <Heading
+            color="rgb(92,52,226)"
+            size="xl"
+            letterSpacing="-1px"
+            mb="4"
+            textAlign="center"
+          >
             {frontMatter.title}
           </Heading>
-          <Flex
-            textAlign="center"
-            justify="center"
-            align="center"
-            direction="column"
-          >
+          <Flex mt="2" justify="center" align="center" direction="column">
             <Text fontSize="lg" textAlign="center">
-              {' '}
               {frontMatter.author}
             </Text>
             <Text mt="2" fontSize="sm" color="gray.600" textAlign="center">
@@ -52,7 +52,7 @@ const Index = ({ children, frontMatter }) => (
             </Text>
           </Flex>
 
-          <Divider my="12" />
+          <Divider my="10" />
 
           <Box textAlign="left" lineHeight="28px">
             {children}

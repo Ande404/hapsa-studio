@@ -1,7 +1,7 @@
 import nookies from 'nookies';
 import { Box, SimpleGrid, Heading } from '@chakra-ui/react';
-import { firebaseAdmin } from '../lib/firebase-admin';
-import { firebaseClient } from '../lib/firebase-client';
+import { firebaseAdmin } from '../firebase/admin';
+import { firebaseClient } from '../firebase/client';
 import { Nav } from '../components/Nav/Nav';
 import { StatCard } from '../components/StatCard';
 
@@ -18,14 +18,14 @@ export async function getServerSideProps(ctx) {
 
     return {
       props: {
-        data: 'user data - dashboard',
+        data: 'user data - Dashboard',
       },
     };
   } catch (err) {
     return {
       redirect: {
         permanent: false,
-        destination: '/login',
+        destination: '/register',
       },
       props: {},
     };
@@ -36,7 +36,7 @@ const Dashboard = ({ data }) => {
   return (
     <div>
       <Nav />
-      <Box px={{ base: '16px', md: '40px', lg: '160px' }} mt="20">
+      <Box px={{ base: '16px', md: '40px', lg: '320px' }} mt="12">
         <Heading size="md" letterSpacing="-.4px">
           Dashboard
         </Heading>
@@ -48,7 +48,7 @@ const Dashboard = ({ data }) => {
           columns={{ base: 1, md: 3 }}
           spacing="6"
           maxW="7xl"
-          bg="gray.50"
+          bg="gray.100"
           px={{ base: '6', md: '8' }}
         >
           {statData.map((stat, idx) => (

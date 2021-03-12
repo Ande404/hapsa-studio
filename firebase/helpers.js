@@ -33,3 +33,7 @@ export const formatUser = (user) => ({
     : user?.providerData,
   photoUrl: user?.photoURL,
 });
+
+export function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}

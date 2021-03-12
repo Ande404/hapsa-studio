@@ -1,11 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { FaFacebook, FaGoogle, FaTwitter } from 'react-icons/fa';
-import NextLink from 'next/link';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-
 import {
   Heading,
   Button,
@@ -21,76 +16,57 @@ import {
   InputGroup,
   VisuallyHidden,
   Text,
+  Stack,
 } from '@chakra-ui/react';
+import * as yup from 'yup';
+import NextLink from 'next/link';
+import { useForm } from '../hooks/useForm';
 import { useAuth } from '../context/auth';
 
-const schema = yup.object().shape({
-  email: yup.string().required().email(),
-  password: yup.string().min(8).max(32),
-});
+// const schema = yup.object().shape({
+//   email: yup.string().required().email(),
+//   password: yup.string().min(8).max(32),
+// });
 
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
+const initialValues = {
+  email: '',
+  password: '',
+};
 
-const Signup = () => {
-  const [signupStatus, setSignupStatus] = useState({});
+const Register = () => {
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+  } = useForm({
+    initialValues,
+    onSubmit: (values) => registerUser(values),
+  });
+
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
   const router = useRouter();
-  const { user, googleLogin, facebookLogin, twitterLogin, signUp } = useAuth();
+  const {
+    user,
+    googleLogin,
+    facebookLogin,
+    twitterLogin,
+    signIn,
+    signUp,
+  } = useAuth();
 
-  const { register, handleSubmit, errors, setError } = useForm({
-    resolver: yupResolver(schema),
-  });
+  const registerUser = async ({ values }) => {
+    if (values) {
+      const { email, password } = values;
+      console.log(email, password);
+      const signupRequest = await signUp(email, password);
 
-  const onSubmit = async (userData, e) => {
-    try {
-      const signupRequest = await signUp(userData.email, userData.password);
-
-      if (signupRequest?.code) {
-        switch (signupRequest.code) {
-          case 'auth/email-already-in-use':
-            setSignupStatus({
-              err: true,
-              msg: signupRequest.message,
-            });
-            break;
-          case 'auth/invalid-email':
-            setSignupStatus({
-              err: true,
-              msg: signupRequest.message,
-            });
-            break;
-          case 'auth/operation-not-allowed':
-            setSignupStatus({
-              err: true,
-              msg: signupRequest.message,
-            });
-            break;
-          case 'auth/weak-password':
-            setSignupStatus({
-              err: true,
-              msg: signupRequest.message,
-            });
-            break;
-          default:
-            break;
-        }
-        e.target.reset();
-      }
-      return;
-    } catch (error) {
-      console.log(error);
+      console.log(signupRequest);
     }
   };
-
-  useEffect(() => {
-    if (user) {
-      router.push('/job');
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
 
   return (
     <Box h="100vh" bg="gray.50">
@@ -105,11 +81,10 @@ const Signup = () => {
         >
           <Flex direction="row" align="center" justify="space-between">
             <Heading size="lg" letterSpacing="-.8px" mb="12">
-              Sign up
+              Get started
             </Heading>
-            <NextLink href="/login">
+            <NextLink href="/" passHref>
               <Link
-                href="/login"
                 ml="6"
                 fontWeight="semibold"
                 fontSize="md"
@@ -117,39 +92,33 @@ const Signup = () => {
                 color="gray.400"
                 mb="12"
               >
-                Log in
+                Home
               </Link>
             </NextLink>
           </Flex>
-
-          {signupStatus.err && <Text my="2">{signupStatus.msg}</Text>}
-
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit}>
             <FormControl id="email" isRequired>
               <FormLabel fontSize="md">Email address</FormLabel>
               <Input
-                ref={register({ required: true })}
+                value={values.email}
+                onChange={handleChange}
                 fontSize="sm"
-                rounded="none"
-                id="email"
+                rounded="sm"
                 type="email"
                 name="email"
                 placeholder="Email Address"
               />
-              {errors.email?.message && (
-                <Text fontSize="md" pt="4" textAlign="left">
-                  {capitalizeFirstLetter(errors.email?.message)}
-                </Text>
-              )}
             </FormControl>
             <FormControl id="password" isRequired mt="6">
               <FormLabel fontSize="md">Password</FormLabel>
               <InputGroup size="md">
                 <Input
-                  ref={register({ required: true })}
+                  onChange={handleChange}
+                  value={values.password}
                   fontSize="md"
-                  rounded="none"
+                  rounded="sm"
                   pr="4.5rem"
+                  minLength="8"
                   name="password"
                   type={show ? 'text' : 'password'}
                   placeholder="Enter password"
@@ -160,15 +129,9 @@ const Signup = () => {
                   </Button>
                 </InputRightElement>
               </InputGroup>
-              {errors.password?.message && (
-                <Text fontSize="md" pt="4" textAlign="left">
-                  {capitalizeFirstLetter(errors.password?.message)}
-                </Text>
-              )}
             </FormControl>
-
             <Button
-              rounded="none"
+              rounded="sm"
               type="submit"
               w="100%"
               mt="10"
@@ -178,24 +141,20 @@ const Signup = () => {
               }}
               color="white"
             >
-              Sign up
+              Continue
             </Button>
-            <Box mt="8">
-              <NextLink href="/login">
-                <Link>
-                  <Text size="sm" letterSpacing="-.4px">
-                    Already have an account? Log in
-                  </Text>
+            <Stack mt="8" fontWeight="semibold" size="sm" letterSpacing="-.4px">
+              <NextLink href="/signup" passHref>
+                <Link size="sm" letterSpacing="-.2px">
+                  Don't have an account? Sign up
                 </Link>
               </NextLink>
-              <NextLink href="/signup">
-                <Link>
-                  <Text size="md" letterSpacing="-.4px" mt="2">
-                    Trouble signing in?
-                  </Text>
+              <NextLink href="/signup" passHref>
+                <Link size="sm" letterSpacing="-.2px" mt="2">
+                  Trouble signing in?
                 </Link>
               </NextLink>
-            </Box>
+            </Stack>
           </form>
           <Box py="12">
             <hr style={{ border: '1px solid #edf2f7' }} />
@@ -208,7 +167,7 @@ const Signup = () => {
               color="currentColor"
               variant="outline"
               onClick={facebookLogin}
-              rounded="md"
+              rounded="sm"
             >
               <VisuallyHidden>Login with Facebook</VisuallyHidden>
               <FaFacebook />
@@ -236,4 +195,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Register;
