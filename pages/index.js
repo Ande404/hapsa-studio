@@ -6,6 +6,7 @@ import { Hero } from '../components/Hero/Hero';
 import Feature from '../components/Feature';
 import { ActiveJobsHero } from '../firebase/firestore';
 import { Footer } from '../components/Footer';
+import { Button } from '../components/Button/Button';
 
 export default function Home({ jobs }) {
   return (
@@ -15,6 +16,7 @@ export default function Home({ jobs }) {
       </Head>
       <Nav />
       <Hero jobs={jobs} />
+      <Button />
     </>
   );
 }

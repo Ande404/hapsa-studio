@@ -1,0 +1,28 @@
+.primary {
+  padding: 8px 18px;
+  background-color: var(--color-primary);
+  border-radius: 5px;
+  color: var(--color-gray-cyan-100);
+  letter-spacing: -.4px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.18s;
+
+  &:hover {
+    background-color: var(--color-dark-blue);
+  }
+
+  &--disabled {
+    cursor: auto;
+  }
+
+  &--outlined {
+    background: transparent;
+    color: red;
+  }
+
+  &--hawa {
+    color: red;
+  }
+
+}

@@ -1,6 +1,6 @@
 import { Box, Flex, SimpleGrid, Text } from '@chakra-ui/react';
 
-import { StatCard } from './StatCard';
+import { StatCard } from '../StatCard/StatCard';
 
 export const StatCardGroup = ({ stats }) => {
   const formmatedStat = formatStat(stats);

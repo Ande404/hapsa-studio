@@ -1,11 +1,12 @@
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
-import { Box, Flex, Button, Heading, Link, Stack } from '@chakra-ui/react';
+import { Box, Flex, Heading, Link, Stack } from '@chakra-ui/react';
 import { FiFeather, FiShield } from 'react-icons/fi';
 import { FaArrowRight } from 'react-icons/fa';
 import { useAuth } from '../../context/auth';
 import { AccountMenu } from '../AccountMenu';
 import { NavButton } from '../NavButton';
+import { Button } from '../Button/Button';
 
 const navLink = [
   {
@@ -80,19 +81,7 @@ export const Nav = () => {
       </Stack>
       <Box display={{ base: 'inherit', lg: 'inherit' }}>
         {!user?.uid ? (
-          <Button
-            size="sm"
-            color="gray.100"
-            bg="brand.900"
-            _hover={{
-              background: 'rgb(92,52,226, .7)',
-            }}
-            fontSize="14px"
-            rounded="sm"
-            onClick={() => router.push('/register')}
-          >
-            Sign up
-          </Button>
+          <Button onClick={() => router.push('/register')}>Sign up</Button>
         ) : (
           <Button
             size="sm"
@@ -112,58 +101,3 @@ export const Nav = () => {
     </Flex>
   );
 };
-
-{
-  /* {user?.uid && !isOnPage ? ( */
-}
-{
-  /*  <Box> */
-}
-{
-  /*    <AccountMenu user={user} signOut={signOut} /> */
-}
-{
-  /*  </Box> */
-}
-{
-  /* ) : user?.uid && router.pathname === '/' ? ( */
-}
-{
-  /*  <Button */
-}
-{
-  /*    size="sm" */
-}
-{
-  /*    bg="brand.900" */
-}
-{
-  /*    color="gray.100" */
-}
-{
-  /*    _hover={{ */
-}
-{
-  /*      background: 'gray.700', */
-}
-{
-  /*    }} */
-}
-{
-  /*    fontSize="14px" */
-}
-{
-  /*    rounded="sm" */
-}
-{
-  /*    onClick={() => router.push('/register')} */
-}
-{
-  /*  > */
-}
-{
-  /*    Go to dashboard */
-}
-{
-  /*  </Button> */
-}
