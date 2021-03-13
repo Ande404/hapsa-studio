@@ -26,7 +26,7 @@ const MdxWrapper = {
 const Index = ({ children, frontMatter }) => (
   <div>
     <Nav />
-    <Box mt="16">
+    <Box mt="32">
       <MDXProvider components={MdxWrapper}>
         <Flex
           textAlign="left"

@@ -29,7 +29,12 @@ const JobListing = ({ jobs }) => (
             {/*  i think next/link doesn't like the link to be nested */}
             <a>
               <Box px="4" py="6">
-                <Heading as="h3" size="lg" letterSpacing="-.8px">
+                <Heading
+                  as="h3"
+                  fontSize="22px"
+                  letterSpacing="-.8px"
+                  fontWeight="500"
+                >
                   {job.data.title}
                 </Heading>
 

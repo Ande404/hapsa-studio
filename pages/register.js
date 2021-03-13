@@ -80,13 +80,13 @@ const Register = () => {
           px="8"
         >
           <Flex direction="row" align="center" justify="space-between">
-            <Heading size="lg" letterSpacing="-.8px" mb="12">
+            <Heading size="lg" letterSpacing="-.8px" mb="12" fontWeight="500">
               Get started
             </Heading>
             <NextLink href="/" passHref>
               <Link
                 ml="6"
-                fontWeight="semibold"
+                fontWeight="500"
                 fontSize="md"
                 letterSpacing="-.8px"
                 color="gray.400"
@@ -98,8 +98,11 @@ const Register = () => {
           </Flex>
           <form onSubmit={handleSubmit}>
             <FormControl id="email" isRequired>
-              <FormLabel fontSize="md">Email address</FormLabel>
+              <FormLabel fontSize="md" fontWeight="400" letterSpacing="-.5px">
+                Email address
+              </FormLabel>
               <Input
+                fontWeight="500"
                 value={values.email}
                 onChange={handleChange}
                 fontSize="sm"
@@ -110,12 +113,15 @@ const Register = () => {
               />
             </FormControl>
             <FormControl id="password" isRequired mt="6">
-              <FormLabel fontSize="md">Password</FormLabel>
+              <FormLabel fontSize="md" fontWeight="400" letterSpacing="-.5px">
+                Password
+              </FormLabel>
               <InputGroup size="md">
                 <Input
+                  fontWeight="500"
                   onChange={handleChange}
                   value={values.password}
-                  fontSize="md"
+                  fontSize="sm"
                   rounded="sm"
                   pr="4.5rem"
                   minLength="8"
@@ -145,12 +151,12 @@ const Register = () => {
             </Button>
             <Stack mt="8" fontWeight="semibold" size="sm" letterSpacing="-.4px">
               <NextLink href="/signup" passHref>
-                <Link size="sm" letterSpacing="-.2px">
+                <Link size="sm" letterSpacing="-.2px" fontWeight="500">
                   Don't have an account? Sign up
                 </Link>
               </NextLink>
               <NextLink href="/signup" passHref>
-                <Link size="sm" letterSpacing="-.2px" mt="2">
+                <Link size="sm" letterSpacing="-.2px" mt="2" fontWeight="500">
                   Trouble signing in?
                 </Link>
               </NextLink>

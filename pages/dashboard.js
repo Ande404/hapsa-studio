@@ -1,24 +1,42 @@
 import nookies from 'nookies';
 import { Box, SimpleGrid, Heading } from '@chakra-ui/react';
 import { firebaseAdmin } from '../firebase/admin';
-import { firebaseClient } from '../firebase/client';
 import { Nav } from '../components/Nav/Nav';
-import { StatCard } from '../components/StatCard';
-
-const statData = [
-  { label: 'Submitted Applications', value: '19' },
-  { label: 'Response Rate', value: '56.87%' },
-  { label: 'Profile Views', value: '2,152' },
-];
+import { StatCardGroup } from '../components/StatCardGroup/StatCardGroup';
+import { Breadcrumb } from '../components/Breadcrumb/Breadcrumb';
 
 export async function getServerSideProps(ctx) {
   try {
     const cookies = nookies.get(ctx);
-    await firebaseAdmin.auth().verifyIdToken(cookies.token);
+    const { uid } = await firebaseAdmin.auth().verifyIdToken(cookies.token);
+
+    const jobs = [];
+
+    const applicationsSnapshot = await firebaseAdmin
+      .firestore()
+      .collection('users')
+      .doc(uid)
+      .collection('applications')
+      .get();
+
+    applicationsSnapshot.forEach((job) => {
+      jobs.push(job.data());
+    });
+
+    const stats = [
+      {
+        submitted_applications: jobs.length,
+      },
+      {
+        profile_views: 22,
+      },
+    ];
 
     return {
       props: {
-        data: 'user data - Dashboard',
+        data: {
+          stats,
+        },
       },
     };
   } catch (err) {
@@ -31,33 +49,24 @@ export async function getServerSideProps(ctx) {
     };
   }
 }
+
 const Dashboard = ({ data }) => {
-  console.log(data);
+  const { stats } = data;
+
   return (
     <div>
       <Nav />
-      <Box px={{ base: '16px', md: '40px', lg: '320px' }} mt="12">
-        <Heading size="md" letterSpacing="-.4px">
-          Dashboard
-        </Heading>
+      <Box px={{ base: '16px', md: '40px', lg: '320px' }} mt="20">
+        <Breadcrumb />
 
-        <SimpleGrid
-          as="section"
-          p="10"
-          mt="4"
-          columns={{ base: 1, md: 3 }}
-          spacing="6"
-          maxW="7xl"
-          bg="gray.100"
-          px={{ base: '6', md: '8' }}
-        >
-          {statData.map((stat, idx) => (
-            <StatCard key={idx} data={stat} />
-          ))}
-        </SimpleGrid>
+        <Box as="section" p="10" mt="4" bg="gray.50" rounded="md">
+          <StatCardGroup stats={stats} />
+          <Box p="8" bg="gray.200" rounded="md" mt="20" h="220px">
+            Placeholder box
+          </Box>
+        </Box>
       </Box>
     </div>
   );
 };
-
 export default Dashboard;

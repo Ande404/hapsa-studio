@@ -10,8 +10,8 @@ const colors = {
 };
 
 const fonts = {
-  heading: 'Manrope',
-  body: 'Manrope',
+  heading: 'Inter',
+  body: 'Inter',
 };
 
 export const customTheme = extendTheme({

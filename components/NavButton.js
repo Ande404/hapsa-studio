@@ -18,7 +18,7 @@ export const NavButton = () => {
             textDecoration: 'underline',
           }}
           rounded="sm"
-          onClick={() => router.push('/login')}
+          onClick={() => router.push('/register')}
         >
           Login
         </Link>
@@ -33,7 +33,7 @@ export const NavButton = () => {
         }}
         fontSize="14px"
         rounded="sm"
-        onClick={() => router.push('/signup')}
+        onClick={() => router.push('/register')}
       >
         Sign up
       </Button>

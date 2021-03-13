@@ -25,8 +25,8 @@ const Jobs = ({ jobs }) => (
   <div>
     <Nav />
     <Box px={{ base: '16px', md: '40px', lg: '320px' }} mt="20">
-      <Heading fontWeight="700" fontSize="22px" letterSpacing="-.8px" mb="6">
-        Jobs
+      <Heading fontWeight="600" fontSize="22px" letterSpacing="-.8px" mb="6">
+        Recently posted
       </Heading>
       <JobListing jobs={jobs} />
     </Box>

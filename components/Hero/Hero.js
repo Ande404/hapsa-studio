@@ -10,9 +10,10 @@ import {
   Center,
   Button,
   SimpleGrid,
+  Stack,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { Banner } from '../Banner';
+import { Banner } from '../Banner/Banner';
 import { HeroJobCard } from './HeroJobCard';
 
 export const Hero = ({ jobs }) => {
@@ -22,7 +23,6 @@ export const Hero = ({ jobs }) => {
       <SimpleGrid
         px={{ base: '16px', md: '40px', lg: '420px' }}
         rounded="none"
-        p="8"
         columns="1"
         spacing="12"
         justify="space-between"
@@ -41,11 +41,11 @@ export const Hero = ({ jobs }) => {
             <Heading
               size="2xl"
               letterSpacing="-1.6px"
-              fontWeight="800"
-              lineHeight="1.17"
+              fontWeight="500"
+              lineHeight="1.1"
               color="white"
             >
-              Tired of broken job forms? <br /> Simply connect with
+              Tired of broken job forms? <br /> Simply connect with{' '}
               <TextLoop>
                 <Text color="brand.900">agencies</Text>
                 <Text color="brand.900">recruiters</Text>
@@ -56,11 +56,11 @@ export const Hero = ({ jobs }) => {
               colo="white"
               my="12"
               fontSize="20px"
-              fontWeight="600"
+              fontWeight="500"
               letterSpacing="-.6px"
             >
               We simply find the right job for you and connect you with the
-              recruiter for that position. Nothing more ✌️
+              recruiter for that position - nothing more.️
             </Text>
 
             <Button
@@ -77,6 +77,15 @@ export const Hero = ({ jobs }) => {
               Browse open positions
             </Button>
           </Flex>
+          <Stack my="24" color="white" direction="column">
+            <Text color="brand.900" fontWeight="600">
+              Privacy
+            </Text>
+            <Heading mb="6" letterSpacing="-1px" fontWeight="500">
+              Minimal dashboard to get more information
+            </Heading>
+            <Box w="100%" h="320px" bg="gray.400" rounded="md" />
+          </Stack>
         </Box>
       </SimpleGrid>
     </Box>

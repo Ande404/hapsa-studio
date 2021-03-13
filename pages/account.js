@@ -4,7 +4,6 @@ import {
   Box,
   Flex,
   Link,
-  Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   Button,
@@ -17,6 +16,7 @@ import { firebaseClient } from '../firebase/client';
 import { Nav } from '../components/Nav/Nav';
 import { EmailAlert } from '../components/EmailAlert';
 import { firebaseAdmin } from '../firebase/admin';
+import { Breadcrumb } from '../components/Breadcrumb/Breadcrumb';
 
 export async function getServerSideProps(ctx) {
   try {
@@ -50,35 +50,17 @@ const Account = ({ user }) => {
   return (
     <>
       <Nav status={user} />
-      {!user.email_verified && <EmailAlert user={user} mt="20" />}
 
-      <Box px={{ base: '16px', md: '40px', lg: '160px' }}>
-        <Box h="100vh">
-          <Breadcrumb fontSize="sm" fontWeight="medium" mt="10">
-            <BreadcrumbItem isCurrentPage>
-              <NextLink href="/dashboard" passHref>
-                <BreadcrumbLink as={Link} _hover={{ textDecoration: 'none' }}>
-                  Dashboard
-                </BreadcrumbLink>
-              </NextLink>
-            </BreadcrumbItem>
-
-            <BreadcrumbItem isCurrentPage>
-              <NextLink href="/account" passHref>
-                <BreadcrumbLink as={Link} _hover={{ textDecoration: 'none' }}>
-                  Account
-                </BreadcrumbLink>
-              </NextLink>
-            </BreadcrumbItem>
-          </Breadcrumb>
-
+      <Box px={{ base: '16px', md: '40px', lg: '320px' }} mt="20">
+        {!user.email_verified && <EmailAlert user={user} mt="20" />}
+        <Box>
+          <Breadcrumb />
           <Flex>
             <Box
               mt="4"
-              bg="gray.50"
+              bg="gray.100"
               w="100%"
               p={{ base: 4, lg: 8 }}
-              h="100%"
               rounded="lg"
             >
               <Flex direction="row" mb="6">
@@ -116,7 +98,7 @@ const Account = ({ user }) => {
                   <Text
                     fontSize={{ base: 'md', md: '2xl' }}
                     letterSpacing="-.4px"
-                    fontWeight="700"
+                    fontWeight="600"
                     lineHeight="1.1"
                     my="2"
                   >
@@ -130,7 +112,9 @@ const Account = ({ user }) => {
                   onClick={logout}
                   bg="gray.900"
                   color="gray.100"
+                  fontWeight="500"
                   _hover={{ bg: 'gray.700' }}
+                  letterSpacing="-.6px"
                 >
                   Log out
                 </Button>

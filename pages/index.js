@@ -15,7 +15,6 @@ export default function Home({ jobs }) {
       </Head>
       <Nav />
       <Hero jobs={jobs} />
-      {/* <Feature /> */}
     </>
   );
 }

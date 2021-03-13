@@ -82,9 +82,14 @@ const Job = ({ job }) => {
         sendApplication={sendApplication}
       />
       <Box px={{ base: '16px', md: '40px', lg: '320px' }}>
-        <Grid mt="28" templateColumns={{ base: '1fr', lg: '1fr' }} gap="5">
+        <Grid mt="28" templateColumns={{ base: '1fr', lg: '1fr' }}>
           <GridItem rowSpan={2}>
-            <Heading letterSpacing="-1.2px">{job?.title}</Heading>
+            <Heading letterSpacing="-1.2px" fontWeight="500">
+              {job?.title}
+            </Heading>
+          </GridItem>
+          <GridItem>
+            <SocialButtonGroup onCopy={onCopy} />
           </GridItem>
           <GridItem rounded="lg" mt="10" mb="90px">
             <Image
@@ -93,42 +98,58 @@ const Job = ({ job }) => {
               src="https://logos-download.com/wp-content/uploads/2016/11/EA_logo_black.png"
               alt="some-alt"
             />
-            <Stack direction={['column', 'row']} spacing="42px">
+            <Stack direction={['column', 'row']} spacing="30px" mt="6">
               <div>
-                <Text fontSize="sm" mt="4">
-                  Recruiter
-                </Text>
-                <Heading size="md" letterSpacing="-.2px" mt="2">
+                <Text fontSize="sm">Recruiter</Text>
+                <Heading
+                  as="h3"
+                  size="md"
+                  letterSpacing="-.2px"
+                  mt="2"
+                  fontWeight="500"
+                >
                   {job?.recruiter}
                 </Heading>
               </div>
 
               <div>
-                <Text fontSize="sm" pt="4">
-                  Job Type
-                </Text>
+                <Text fontSize="sm">Job Type</Text>
 
-                <Heading size="md" letterSpacing="-.2px" mt="2">
+                <Heading
+                  as="h3"
+                  size="md"
+                  letterSpacing="-.2px"
+                  mt="2"
+                  fontWeight="500"
+                >
                   {job?.job_type}
                 </Heading>
               </div>
 
               <div>
-                <Text fontSize="sm" pt="4">
-                  Location
-                </Text>
+                <Text fontSize="sm">Location</Text>
 
-                <Heading size="md" letterSpacing="-.2px" mt="2">
+                <Heading
+                  as="h3"
+                  size="md"
+                  letterSpacing="-.2px"
+                  mt="2"
+                  fontWeight="500"
+                >
                   {job?.governorate}
                 </Heading>
               </div>
 
               <div>
-                <Text fontSize="sm" pt="4">
-                  Career level
-                </Text>
+                <Text fontSize="sm">Career level</Text>
 
-                <Heading size="md" letterSpacing="-.2px" mt="2">
+                <Heading
+                  as="h3"
+                  size="md"
+                  letterSpacing="-.2px"
+                  mt="2"
+                  fontWeight="500"
+                >
                   {job?.career_level}
                 </Heading>
               </div>
@@ -152,9 +173,6 @@ const Job = ({ job }) => {
           </GridItem>
           {/* parse job.description. Markdown -> Html */}
           <GridItem>description here</GridItem>
-          <GridItem mt="20">
-            <SocialButtonGroup onCopy={onCopy} />
-          </GridItem>
         </Grid>
       </Box>
     </div>
