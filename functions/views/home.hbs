@@ -1,0 +1,13 @@
+<div class="container mx-auto py-12 tracking-tight antialiased">
+  {{#if user}}
+    <h1 class='text-gray-900 font-bold text-3xl	'>{{user.name}}</h1>
+    <div class='mt-12'>
+      <p class='text-gray-500 font-medium'>Education</p>
+      <p class='text-gray-900 mt-2 text-md font-medium'>Manchester University, BS. Software Engineering</p>
+    </div>
+  {{else}}
+    <p class='text-blue-700 '>user not signed in</p>
+  {{/if}}
+</div>
+
+

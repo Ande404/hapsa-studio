@@ -22,11 +22,11 @@ import * as matter from 'gray-matter';
 
 import PropTypes from 'prop-types';
 import { parseCookies } from 'nookies';
-import { useAuth } from '../../context/auth';
-import { getAllJobId, getJobById } from '../../firebase/firestore';
-import { Nav } from '../../components/Nav/Nav';
-import JobModal from '../../components/JobModal';
-import { SocialButtonGroup } from '../../components/SocialButtonGroup/SocialButtonGroup';
+import { useAuth } from '../../../context/auth';
+import { getAllJobId, getJobById } from '../../../firebase/firestore';
+import { Nav } from '../../../components/Nav/Nav';
+import JobModal from '../../../components/JobModal';
+import { SocialButtonGroup } from '../../../components/SocialButtonGroup/SocialButtonGroup';
 
 const Job = ({ job }) => {
   const url =

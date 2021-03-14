@@ -12,11 +12,11 @@ import {
   Text,
 } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
-import { firebaseClient } from '../firebase/client';
-import { Nav } from '../components/Nav/Nav';
-import { EmailAlert } from '../components/EmailAlert';
-import { firebaseAdmin } from '../firebase/admin';
-import { Breadcrumb } from '../components/Breadcrumb/Breadcrumb';
+import { firebaseClient } from '../../firebase/client';
+import { Nav } from '../../components/Nav/Nav';
+import { EmailAlert } from '../../components/EmailAlert';
+import { firebaseAdmin } from '../../firebase/admin';
+import { Breadcrumb } from '../../components/Breadcrumb/Breadcrumb';
 
 export async function getServerSideProps(ctx) {
   try {

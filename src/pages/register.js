@@ -20,8 +20,8 @@ import {
 } from '@chakra-ui/react';
 import * as yup from 'yup';
 import NextLink from 'next/link';
-import { useForm } from '../hooks/useForm';
-import { useAuth } from '../context/auth';
+import { useForm } from '../../hooks/useForm';
+import { useAuth } from '../../context/auth';
 
 // const schema = yup.object().shape({
 //   email: yup.string().required().email(),

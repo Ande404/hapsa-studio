@@ -17,9 +17,9 @@ import {
 import PropTypes from 'prop-types';
 import superjson from 'superjson';
 import React from 'react';
-import { Nav } from '../../components/Nav/Nav';
-import { getAllJobId } from '../../firebase/firestore';
-import JobListing from '../../components/JobListing';
+import { Nav } from '../../../components/Nav/Nav';
+import { getAllJobId } from '../../../firebase/firestore';
+import JobListing from '../../../components/JobListing';
 
 const Jobs = ({ jobs }) => (
   <div>

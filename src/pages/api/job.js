@@ -3,10 +3,10 @@ import nc from 'next-connect';
 import morgan from 'morgan';
 import Cors from 'cors';
 import superjson from 'superjson';
-import { firebaseAdmin, firestore } from '../../firebase/admin';
-import { NanoId } from '../../firebase/helpers';
-import { schemaValidator } from '../../schema/validator';
-import { jobSchema } from '../../schema/job';
+import { firebaseAdmin, firestore } from '../../../firebase/admin';
+import { NanoId } from '../../../firebase/helpers';
+import { schemaValidator } from '../../../schema/validator';
+import { jobSchema } from '../../../schema/job';
 
 const cors = Cors({
   methods: ['GET', 'POST', 'HEAD', 'PUT'],

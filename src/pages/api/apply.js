@@ -2,10 +2,10 @@ import nc from 'next-connect';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import morgan from 'morgan';
 import Cors from 'cors';
-import { firebaseAdmin, firestore } from '../../firebase/admin';
-import { NanoId } from '../../firebase/helpers';
-import { schemaValidator } from '../../schema/validator';
-import { applicationSchema } from '../../schema/application';
+import { firebaseAdmin, firestore } from '../../../firebase/admin';
+import { NanoId } from '../../../firebase/helpers';
+import { schemaValidator } from '../../../schema/validator';
+import { applicationSchema } from '../../../schema/application';
 
 const cors = Cors({
   methods: ['GET', 'POST', 'HEAD', 'PUT'],
@@ -40,7 +40,7 @@ handler
     }
   })
   .use(async (req, res, next) => {
-    // Verify user is an applican
+    // Verify user is an applicant
     const user = await firebaseAdmin.auth().getUser(req.currentUser.uid);
 
     if (user?.customClaims?.recruiter) {

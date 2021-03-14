@@ -20,14 +20,14 @@ export const EmailAlert = ({ user, ...props }) => {
 
   return (
     <div>
-      <Box {...props} px={{ base: '0', md: '40px', lg: '160px' }} rounded="md">
+      <Box {...props} rounded="md">
         {!user.email_verified && (
           <Alert status="warning" fontWeight="semibold">
             <AlertIcon />
             <Text letterSpacing="-.1px">
               Please verify your email address through your
             </Text>
-            <Text textDecoration="underline" >
+            <Text textDecoration="underline">
               <Link
                 isExternal
                 // feels good to be a gangsta

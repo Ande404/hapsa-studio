@@ -1,8 +1,8 @@
 import React from 'react';
 import nookies from 'nookies';
 import { Box, Text, Heading } from '@chakra-ui/react';
-import { Nav } from '../components/Nav/Nav';
-import { firebaseAdmin } from '../firebase/admin';
+import { Nav } from '../../components/Nav/Nav';
+import { firebaseAdmin } from '../../firebase/admin';
 
 export async function getServerSideProps(ctx) {
   try {

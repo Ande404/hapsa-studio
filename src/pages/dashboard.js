@@ -1,9 +1,9 @@
 import nookies from 'nookies';
 import { Box, SimpleGrid, Heading } from '@chakra-ui/react';
-import { firebaseAdmin } from '../firebase/admin';
-import { Nav } from '../components/Nav/Nav';
-import { StatCardGroup } from '../components/StatCardGroup/StatCardGroup';
-import { Breadcrumb } from '../components/Breadcrumb/Breadcrumb';
+import { firebaseAdmin } from '../../firebase/admin';
+import { Nav } from '../../components/Nav/Nav';
+import { StatCardGroup } from '../../components/StatCardGroup/StatCardGroup';
+import { Breadcrumb } from '../../components/Breadcrumb/Breadcrumb';
 
 export async function getServerSideProps(ctx) {
   try {
