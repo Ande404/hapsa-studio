@@ -8,17 +8,15 @@ export const Footer = () => (
     <Box
       borderTop="1.5px solid #CBD5E0"
       as="footer"
-      mx={{ base: '16px', md: '40px', lg: '320px' }}
-      mt="140px"
+      px={{ base: '16px', md: '40px', lg: '320px' }}
+      pt="140px"
       py="4"
+      bg="black"
     >
       <NextLink href="/">
         <Link _hover={{ textDecor: 'none' }}>
           <Flex direction="row" align="center">
-            <FiFeather size="20" />{' '}
-            <Text pl="2" size="sm" letterSpacing="-.6px" fontWeight="semibold">
-              Hapsa
-            </Text>
+            <FiFeather size="20" color="white" />{' '}
           </Flex>
         </Link>
       </NextLink>

@@ -19,8 +19,9 @@ import { HeroJobCard } from './HeroJobCard';
 export const Hero = ({ jobs }) => {
   const router = useRouter();
   return (
-    <Box minHeight="100vh" bg="black" rounded="none" pt="20">
+    <Box rounded="none" mt="60px" bg="black">
       <SimpleGrid
+        py="12"
         px={{ base: '16px', md: '40px', lg: '420px' }}
         rounded="none"
         columns="1"
@@ -41,19 +42,18 @@ export const Hero = ({ jobs }) => {
             <Heading
               size="2xl"
               letterSpacing="-1.6px"
-              fontWeight="500"
+              fontWeight="600"
               lineHeight="1.1"
-              color="white"
             >
               Tired of broken job forms? <br /> Simply connect with{' '}
               <TextLoop>
-                <Text color="brand.900">agencies</Text>
-                <Text color="brand.900">recruiters</Text>
-                <Text color="brand.900">freelancers</Text>
+                <Text color="var(--color-primary)">agencies</Text>
+                <Text color="var(--color-primary)">recruiters</Text>
+                <Text color="var(--color-primary)">freelancers</Text>
               </TextLoop>
             </Heading>
             <Text
-              colo="white"
+              colo="black"
               my="12"
               fontSize="20px"
               fontWeight="500"
@@ -77,15 +77,6 @@ export const Hero = ({ jobs }) => {
               Browse open positions
             </Button>
           </Flex>
-          <Stack my="24" color="white" direction="column">
-            <Text color="brand.900" fontWeight="600">
-              Privacy
-            </Text>
-            <Heading mb="6" letterSpacing="-1px" fontWeight="500">
-              Minimal dashboard to get more information
-            </Heading>
-            <Box w="100%" h="320px" bg="gray.400" rounded="md" />
-          </Stack>
         </Box>
       </SimpleGrid>
     </Box>

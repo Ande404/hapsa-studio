@@ -52,6 +52,7 @@ export const Nav = () => {
       top="0px"
       zIndex="22"
       left="0px"
+      minH="60px"
       right="0px"
     >
       <Box>

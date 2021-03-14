@@ -69,6 +69,10 @@ handler
         });
       }
       req.validatedApplication = jobData;
+
+      req.validatedApplication.created_at = new Date();
+      req.validatedApplication.updated_at = new Date();
+
       next();
     } catch (error) {
       res.status(400).json({
@@ -77,6 +81,7 @@ handler
     }
   })
   .use(async (req, res, next) => {
+    // Check if already applied
     const { uid, jobId } = req.validatedApplication;
 
     const alreadyApplied = await firestore
@@ -87,6 +92,13 @@ handler
       .get();
 
     if (alreadyApplied.empty) {
+      const newApplication = await firestore
+        .collection('users')
+        .doc(uid)
+        .collection('applications')
+        .add({
+          jobId,
+        });
       next();
     } else {
       console.log('Already applied');
@@ -95,15 +107,13 @@ handler
   })
   .post(async (req, res) => {
     // Create new application
-    const { uid, jobId } = req.validatedApplication;
+    const newApplication = await firestore.collection('applications').add({
+      ...req.validatedApplication,
+    });
 
-    const newApplication = await firestore
-      .collection('users')
-      .doc(uid)
-      .collection('applications')
-      .add({
-        jobId,
-      });
+    // Update job's number of applicants
+    const updateJob = await firestore.collection('jobs');
+
     res.status(200).json({
       message: `Application submitted: ${newApplication.id}`,
     });

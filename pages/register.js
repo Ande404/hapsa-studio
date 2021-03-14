@@ -68,6 +68,12 @@ const Register = () => {
     }
   };
 
+  useEffect(() => {
+    if (user) {
+      router.push('/dashboard');
+    }
+  }, [user]);
+
   return (
     <Box h="100vh" bg="gray.50">
       <Center pt="12">
@@ -141,22 +147,17 @@ const Register = () => {
               type="submit"
               w="100%"
               mt="10"
-              bg="brand.900"
+              bg="var(--color-primary)"
               _hover={{
-                bg: 'rgb(90,42,200)',
+                bg: 'var(--color-dark-blue)',
               }}
               color="white"
             >
               Continue
             </Button>
-            <Stack mt="8" fontWeight="semibold" size="sm" letterSpacing="-.4px">
-              <NextLink href="/signup" passHref>
+            <Stack mt="8" size="sm" letterSpacing="-.4px">
+              <NextLink href="/" passHref>
                 <Link size="sm" letterSpacing="-.2px" fontWeight="500">
-                  Don't have an account? Sign up
-                </Link>
-              </NextLink>
-              <NextLink href="/signup" passHref>
-                <Link size="sm" letterSpacing="-.2px" mt="2" fontWeight="500">
                   Trouble signing in?
                 </Link>
               </NextLink>

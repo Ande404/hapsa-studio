@@ -1,4 +1,12 @@
-import { Box, Image, Text, Spacer, Stack } from '@chakra-ui/react';
+import {
+  Box,
+  Image,
+  Text,
+  Spacer,
+  Stack,
+  Heading,
+  SimpleGrid,
+} from '@chakra-ui/react';
 import { AtSignIcon } from '@chakra-ui/icons';
 import { FiFeather, FiShield } from 'react-icons/fi';
 
@@ -22,28 +30,19 @@ const cardsData = [
 ];
 const Feature = () => (
   <Box
-    mx={{ base: '16px', md: '40px', lg: '320px' }}
-    bg="brand.800"
-    h="220px"
-    my="20"
-    p="8"
-    rounded="lg"
+    pt="20"
+    px={{ base: '16px', md: '40px', lg: '420px' }}
+    bg="var(--color-black)"
   >
-    Graphics here
-    {/* <Stack direction={['column', 'column', 'row']} spacing="120px"> */}
-    {/*  {cardsData.map(({ icon, bg, header, info, img }) => ( */}
-    {/*    <Box key={header} rounded="sm" w="100%"> */}
-    {/*      /!* {icon} *!/ */}
-    {/*      <Text mt="5" fontWeight="700" color="rgb(100,25,221)"> */}
-    {/*        {header} */}
-    {/*      </Text> */}
-    {/*      <Box bg={bg} my="4" h="320px" w="100%" /> */}
-    {/*      <Text mt="2" fontWeight="500"> */}
-    {/*        {info} */}
-    {/*      </Text> */}
-    {/*    </Box> */}
-    {/*  ))} */}
-    {/* </Stack> */}
+    <Stack color="white" direction="column" py="12">
+      <Text color="var(--color-tertiary)" fontWeight="600">
+        Privacy
+      </Text>
+      <Heading mb="6" letterSpacing="-1px" fontWeight="500">
+        Minimal dashboard to get more information
+      </Heading>
+      <Box w="100%" h="320px" bg="gray.400" rounded="md" />
+    </Stack>
   </Box>
 );
 

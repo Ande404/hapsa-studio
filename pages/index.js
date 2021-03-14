@@ -16,7 +16,10 @@ export default function Home({ jobs }) {
       </Head>
       <Nav />
       <Hero jobs={jobs} />
-      <Button />
+      <Feature />
+      <Feature />
+      <Feature />
+      <Footer />
     </>
   );
 }
